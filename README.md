@@ -15,7 +15,7 @@ It may ask you to setup credentials for git. There are guides for this online, b
 
 ###### Step 2
 
-cd into the repository cs431_05_frontend and then cd into typscript-nodejs. Thehttps://github.com/tchopp/cs431_05_frontend.gitn run the following:
+cd into the repository cs431_05_frontend and then cd into typscript-nodejs. Then run the following:
 > npx ts-node index.ts
 
 The command line should print:
