@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 
-import "./loginForm.css"; //Style of login form
+import "./registrationForm.css"; //Style of login form
 
 //takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
-function LoginForm(url) {
+function RegistrationForm(url) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const weblink = url.name;
-  if (isAuthenticated) {
-    return <Navigate to={weblink} />;
-  }
 
-  // User Login info
+  // Current Existing User Login info
   const database = [
     //Needs to eventually be replaced with a hashmap/mySQL database
     {
@@ -30,8 +26,8 @@ function LoginForm(url) {
 
   //error messages for when user inputs invalid credentials
   const errors = {
-    username: "invalid username",
-    password: "invalid password",
+    username: "Username already exists",
+    password: "Password does not meet requirements",
   };
 
   //Event handler when user presses sign in buttom
@@ -44,20 +40,16 @@ function LoginForm(url) {
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
 
-    // Compare user info
     if (userData) {
-      if (userData.password !== password.value) {
-        // Invalid password
-        setErrorMessages({ name: "password", message: errors.password });
-      } else {
-        setIsAuthenticated(true);
-      }
-    } else {
-      // Username not found
       setErrorMessages({
         name: "username",
         message: errors.username,
       });
+    } else {
+      //if password doesnt meet minimum requirements setErrorMessages({ name: "password", message: errors.password });
+      //else
+      //create new user to add to database
+      setIsRegistered(true);
     }
   };
 
@@ -91,9 +83,14 @@ function LoginForm(url) {
   return (
     <div className="app">
       <div className="login-form">
-        <div className="title">Sign In</div>
-        {isAuthenticated ? (
-          <div>User is successfully logged in</div>
+        <div className="title">Registration Form</div>
+        {isRegistered ? (
+          <div>
+            <p>User account successfully created!</p>
+            <a className="Registration-link" href={weblink}>
+              Please click here to return to the login page.
+            </a>
+          </div>
         ) : (
           renderForm
         )}
@@ -102,4 +99,4 @@ function LoginForm(url) {
   );
 }
 
-export default LoginForm;
+export default RegistrationForm;
