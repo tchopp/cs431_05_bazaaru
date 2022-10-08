@@ -1,7 +1,11 @@
-To run website:
-cmd into website
-npm start
+CS431 project BazaaRu
 
-You should see a logo and a preliminary text message.
+Getting Started:
+To run the web-server please follow the instructions below:
+
+> cd into BazaaRU/FrontEndServer
+> npm start
+
+You should see a logo and a basic login page
 
 Let me know if there's any issues
