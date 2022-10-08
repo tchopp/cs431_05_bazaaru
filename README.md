@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 CS431 project BazaaRu
 
 Getting Started:
@@ -41,5 +41,4 @@ The page should display a message for you!
 After you're done, hit control+c in the command line to close the server.
 
 Please let me know if this worked for you or if it gave you any errors!
->>>>>>> 02c960a3c9cb33038afc81638e6445bae6902aa4
 
