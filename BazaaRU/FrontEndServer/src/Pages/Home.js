@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
+import {Post} from '../Components/Post/Post.js';
 
 //import { useHistory } from "react-router-dom";
 
@@ -12,6 +13,21 @@ function Home() {
         <p>Rutgers BazaaRU</p>
       </header>
       <p>-Insert Homepage Design here</p>
+      <h3>Featured Items/Services From This Week</h3>
+      <ul>
+      <li><Post postData={{username: 'yousof7984', 
+                                prod_name: 'Brown Suede Sofa',
+                                prod_image: 'http://www.eventsourcesolutions.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/r/brown_leather_and_microsuede_sectional.jpg', 
+                                prod_price: 35, 
+                                prod_category: 'furniture, delivery', 
+                                prod_desc: 'Used for one year. Has normal wear and tear'}} /></li>
+      <li><Post postData={{username: 'shajia1985', 
+                                prod_name: 'Groceries for Fiesta!',
+                                prod_image: 'https://static.vecteezy.com/system/resources/previews/000/273/542/original/online-food-order-concept-vector.jpg', 
+                                prod_price: 50, 
+                                prod_category: 'delivery', 
+                                prod_desc: 'Need 50 corn tortillas, 20 cans of black beans, and bag of rice before May 5th, 2022 for a party I\'m throwing'}} /></li>
+      </ul>
     </div>
   );
 }
