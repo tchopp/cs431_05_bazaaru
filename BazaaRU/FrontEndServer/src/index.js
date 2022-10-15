@@ -5,6 +5,8 @@ import "./index.css";
 import App from "./Pages/App";
 import Home from "./Pages/Home";
 import Registration from "./Pages/Registration";
+import About from "./Pages/About";
+import Catalog from "./Pages/Catalog";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,6 +16,8 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/homepage" element={<Home />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/homepage/about" element={<About />} />
+        <Route path="/homepage/catalog" element={<Catalog />} />
       </Routes>
     </Router>
   </React.StrictMode>

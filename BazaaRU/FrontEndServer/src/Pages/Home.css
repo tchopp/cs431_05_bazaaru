@@ -2,3 +2,11 @@
     height: 30vmin;
     pointer-events: none;
   }
+.Service-bar{
+  background-color: #778aae;
+  height: 40px;
+  display: flex;
+  flex-direction: right;
+  align-items: center;
+  justify-content: center;
+}

@@ -12,7 +12,7 @@ function LoginForm(url) {
 
   const weblink = url.name;
   if (isAuthenticated) {
-    return <Navigate to={weblink} />;
+    return <Navigate to={weblink} />; //replace with UseNavigate hook once account information is completed
   }
 
   // User Login info

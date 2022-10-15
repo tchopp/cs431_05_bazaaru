@@ -1,4 +1,6 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
 import {Post} from '../Components/Post/Post.js';
@@ -6,13 +8,42 @@ import {Post} from '../Components/Post/Post.js';
 //import { useHistory } from "react-router-dom";
 
 function Home() {
+  const styles = {
+    fontSize: 20,
+    marginRight: "20px",
+  };
+  const navigate = useNavigate();
+  function signOut() {
+    //console.log("pressed");
+    navigate("/");
+  }
+  function toCatalog() {
+    //console.log("pressed");
+    navigate("/homepage/catalog");
+  }
+  function toAbout() {
+    //console.log("pressed");
+    navigate("/homepage/about");
+  }
   return (
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Rutgers BazaaRU</p>
       </header>
+
       <p>-Insert Homepage Design here</p>
+      <header className="Service-bar">
+        <button style={styles} onClick={toAbout}>
+          About
+        </button>
+        <button style={styles} onClick={toCatalog}>
+          Product Catalog
+        </button>
+        <button style={styles} onClick={signOut}>
+          Sign Out
+        </button>
+      </header>
       <h3>Featured Items/Services From This Week</h3>
       <ul>
       <li><Post postData={{username: 'yousof7984', 
@@ -28,6 +59,7 @@ function Home() {
                                 prod_category: 'delivery', 
                                 prod_desc: 'Need 50 corn tortillas, 20 cans of black beans, and bag of rice before May 5th, 2022 for a party I\'m throwing'}} /></li>
       </ul>
+
     </div>
   );
 }
