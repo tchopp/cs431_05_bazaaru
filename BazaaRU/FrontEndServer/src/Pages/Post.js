@@ -37,6 +37,8 @@ const Post = () =>{
                     <option value="household">Household Items</option>
                     <option value="shoes">Shoes</option>
                 </select>
+
+                <button>Submit</button>
             </form>
         </div>
     );
