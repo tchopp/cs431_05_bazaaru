@@ -1,5 +1,5 @@
 
-#CS431 project BazaaRu
+# CS431 project BazaaRu
 
 Getting Started:
 To run the web-server please follow the instructions below:
