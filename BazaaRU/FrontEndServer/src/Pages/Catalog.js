@@ -2,16 +2,17 @@ import React from "react";
 import logo from "./profile.png"; //Need to replace image with project image
 
 //import { useHistory } from "react-router-dom";
+import {Catalog} from '../Components/Catalog/Catalog.js'
 
-function Catalog() {
+function CatalogPage() {
   return (
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>-insert catalog listing here</p>
+        <Catalog />
       </header>
     </div>
   );
 }
 
-export default Catalog;
+export default CatalogPage;
