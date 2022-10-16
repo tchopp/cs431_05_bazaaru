@@ -25,6 +25,11 @@ function Home() {
     //console.log("pressed");
     navigate("/homepage/about");
   }
+  function toPost() {
+    //console.log("pressed");
+    navigate("/homepage/createpost");
+  }
+
   return (
     <div>
       <header className="App-header">
@@ -39,6 +44,9 @@ function Home() {
         </button>
         <button style={styles} onClick={toCatalog}>
           Product Catalog
+        </button>
+        <button style={styles} onClick={toPost}>
+          Post Product
         </button>
         <button style={styles} onClick={signOut}>
           Sign Out

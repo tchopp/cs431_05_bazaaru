@@ -7,6 +7,8 @@ import Home from "./Pages/Home";
 import Registration from "./Pages/Registration";
 import About from "./Pages/About";
 import Catalog from "./Pages/Catalog";
+import Post from "./Pages/Post";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,6 +20,7 @@ root.render(
         <Route path="/registration" element={<Registration />} />
         <Route path="/homepage/about" element={<About />} />
         <Route path="/homepage/catalog" element={<Catalog />} />
+        <Route path="/homepage/createpost" element={<Post />} />
       </Routes>
     </Router>
   </React.StrictMode>
