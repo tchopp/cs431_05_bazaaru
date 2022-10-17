@@ -9,6 +9,7 @@ import About from "./Pages/About";
 import Catalog from "./Pages/Catalog";
 import Results from "./Pages/searchResults";
 import TestResults from "./Pages/searchResultsTest";
+import CreatePost from "./Pages/CreatePost";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +23,7 @@ root.render(
         <Route path="/homepage/catalog" element={<Catalog />} />
         <Route path="/homepage/results" element={<Results />} />
         <Route path="/homepage/results=Yousof" element={<TestResults />} />
+        <Route path="/homepage/createpost" element={<CretePost />} />
       </Routes>
     </Router>
   </React.StrictMode>
