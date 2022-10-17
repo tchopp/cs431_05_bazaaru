@@ -39,11 +39,14 @@ function LoginForm(url) {
     //Prevent page reload
     event.preventDefault();
 
-    var { username, password } = document.forms[0]; //grabs inputted information
+    var { username, password } = document.forms[0]; //grabs inputted information    
 
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
 
+    //Fetch request to test connection to the backend server
+    fetch('http://localhost:5000/login');
+	
     // Compare user info
     if (userData) {
       if (userData.password !== password.value) {

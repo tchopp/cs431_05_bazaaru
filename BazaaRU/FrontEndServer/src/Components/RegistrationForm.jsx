@@ -40,6 +40,9 @@ function RegistrationForm(url) {
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
 
+    //Fetch request for testing connecting to the backend server
+    fetch('http://localhost:5000/createAccount');
+
     if (userData) {
       setErrorMessages({
         name: "username",
