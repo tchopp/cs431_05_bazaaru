@@ -23,7 +23,7 @@ root.render(
         <Route path="/homepage/catalog" element={<Catalog />} />
         <Route path="/homepage/results" element={<Results />} />
         <Route path="/homepage/results=Yousof" element={<TestResults />} />
-        <Route path="/homepage/createpost" element={<CretePost />} />
+        <Route path="/homepage/createpost" element={<CreatePost />} />
       </Routes>
     </Router>
   </React.StrictMode>
