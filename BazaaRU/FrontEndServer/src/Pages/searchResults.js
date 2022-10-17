@@ -7,7 +7,7 @@ import {Results} from '../Components/Results/searchResults.js'
 function resultsList() {
   return (
     <div>
-      <header className="App-header">
+      <header  className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Results />
       </header>
