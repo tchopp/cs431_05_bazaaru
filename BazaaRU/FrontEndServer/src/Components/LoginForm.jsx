@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 
 import "./loginForm.css"; //Style of login form
@@ -8,16 +8,14 @@ import "./loginForm.css"; //Style of login form
 function LoginForm(url) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const weblink = url.name;
-  if (isAuthenticated) {
-    return <Navigate to={weblink} />; //replace with UseNavigate hook once account information is completed
-  }
+
+  const navigate = useNavigate();
 
   // User Login info
   const database = [
-    //Needs to eventually be replaced with a hashmap/mySQL database
+    //Needs to eventually be replaced with a hashmap/mySQL database.******************************8
     {
       username: "ac1",
       password: "pi",
@@ -39,21 +37,22 @@ function LoginForm(url) {
     //Prevent page reload
     event.preventDefault();
 
-    var { username, password } = document.forms[0]; //grabs inputted information    
+    var { username, password } = document.forms[0]; //grabs inputted information
 
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
 
     //Fetch request to test connection to the backend server
-    fetch('http://localhost:5000/login');
-	
+    // fetch("http://localhost:5000/login");
+
     // Compare user info
     if (userData) {
       if (userData.password !== password.value) {
         // Invalid password
         setErrorMessages({ name: "password", message: errors.password });
       } else {
-        setIsAuthenticated(true);
+        //replace the permission ID with userID*************************************************8
+        navigate(weblink, { state: { permID: 3 } });
       }
     } else {
       // Username not found
@@ -95,11 +94,7 @@ function LoginForm(url) {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isAuthenticated ? (
-          <div>User is successfully logged in</div>
-        ) : (
-          renderForm
-        )}
+        {renderForm}
       </div>
     </div>
   );

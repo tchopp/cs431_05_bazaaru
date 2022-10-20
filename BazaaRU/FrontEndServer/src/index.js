@@ -8,6 +8,8 @@ import Registration from "./Pages/Registration";
 import About from "./Pages/About";
 import Catalog from "./Pages/Catalog";
 import Results from "./Pages/searchResults";
+import Profile from "./Pages/Profile";
+import AccountList from "./Pages/AccountList";
 import TestResults from "./Pages/searchResultsTest";
 import CreatePost from "./Pages/CreatePost";
 
@@ -22,6 +24,8 @@ root.render(
         <Route path="/homepage/about" element={<About />} />
         <Route path="/homepage/catalog" element={<Catalog />} />
         <Route path="/homepage/results" element={<Results />} />
+        <Route path="/homepage/profile" element={<Profile />} />
+        <Route path="/homepage/accountList" element={<AccountList />} />
         <Route path="/homepage/results=Yousof" element={<TestResults />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />
       </Routes>

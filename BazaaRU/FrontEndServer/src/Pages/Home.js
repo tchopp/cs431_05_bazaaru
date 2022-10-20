@@ -1,6 +1,6 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
 import { Post } from "../Components/Post/Post.js";
@@ -13,6 +13,10 @@ function Home() {
     marginRight: "20px",
   };
   const navigate = useNavigate();
+  const { state } = useLocation();
+  //replace the permission ID with userID******************************88
+  const { permID } = state;
+  console.log("permID: ", permID);
   function signOut() {
     //console.log("pressed");
     navigate("/");
@@ -29,6 +33,12 @@ function Home() {
     //console.log("pressed");
     navigate("/homepage/createpost");
   }
+  function toProfile() {
+    navigate("/homepage/profile", { state });
+  }
+  function toAccountList() {
+    navigate("/homepage/accountList");
+  }
   function search() {
     //console.log("pressed");
     navigate("/homepage/results");
@@ -36,6 +46,7 @@ function Home() {
   function searchtest() {
     navigate("/homepage/results=Yousof");
   }
+
   return (
     <div>
       <header className="App-header">
@@ -43,12 +54,12 @@ function Home() {
         <p>Rutgers BazaaRU</p>
       </header>
       <header className="searchBar">
-        <div class="form-container">
-          <form class="form">
+        <div className="form-container">
+          <form className="form">
             <input
               id="search"
               type="text"
-              class="input"
+              className="input"
               placeholder="search..."
             />
             <button id="submit" onClick={search}>
@@ -70,6 +81,15 @@ function Home() {
         <button style={styles} onClick={toPost}>
           Create Posting
         </button>
+        <button style={styles} onClick={toProfile}>
+          Account Profile
+        </button>
+        {/*if admin account, render the admin view account button */}
+        {permID === 3 && (
+          <button style={styles} onClick={toAccountList}>
+            Account List
+          </button>
+        )}
         <button style={styles} onClick={signOut}>
           Sign Out
         </button>
