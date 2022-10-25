@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 
+//const baseURL = "https://cs431-05.cs.rutgers.edu/"
+
 import "./loginForm.css"; //Style of login form
+
+const baseURL = "https://cs431-05.cs.rutgers.edu:5000/"
 
 //takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
 function LoginForm(url) {
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
+  const [errorMessages, setErrorMessages, post, setPost] = useState({});
 
   const weblink = url.name;
 
@@ -44,6 +49,9 @@ function LoginForm(url) {
 
     //Fetch request to test connection to the backend server
     // fetch("http://localhost:5000/login");
+    axios.get('http://cs431-05.cs.rutgers.edu:5000/login').then((response) => {
+      setPost(response.data);
+    });
 
     // Compare user info
     if (userData) {

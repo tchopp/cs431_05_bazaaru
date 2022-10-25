@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = 5000;
 
 const mariadb = require('mariadb')
@@ -10,6 +11,7 @@ const pool = mariadb.createPool({
      connectionLimit: 5
 });
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/dbTest', async(req, res) => {
@@ -52,6 +54,7 @@ app.get('/login', (req, res) => {
 	//}
 	//res.send({ valid: 'false' });
 	console.log('login requested');
+	res.send({ received: 'true' })
 })
 
 app.get('/createAccount', (req, res) => {
