@@ -4,7 +4,7 @@ import './Post.css';
 
 
 export const Post = (props) => {
-    
+
 
 return (<ul>
             <li>Username: {props.postData.username}</li>
@@ -16,4 +16,3 @@ return (<ul>
             <li>-------------------------------</li>
         </ul>);
 };
-

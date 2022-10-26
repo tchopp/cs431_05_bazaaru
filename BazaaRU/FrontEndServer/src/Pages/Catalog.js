@@ -4,6 +4,7 @@ import logo from "./profile.png"; //Need to replace image with project image
 //import { useHistory } from "react-router-dom";
 import {Catalog} from '../Components/Catalog/Catalog.js'
 
+
 function CatalogPage() {
   return (
     <div>

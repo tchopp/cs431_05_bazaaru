@@ -13,7 +13,7 @@ function RegistrationForm(url) {
 
   // Current Existing User Login info
   const database = [
-    //Needs to eventually be replaced with a hashmap/mySQL database
+    //Needs to eventually be replaced with a hashmap/mySQL database***************************
     {
       username: "ac1",
       password: "pi",
@@ -39,6 +39,9 @@ function RegistrationForm(url) {
 
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
+
+    //Fetch request for testing connecting to the backend server
+    fetch("http://localhost:5000/createAccount");
 
     if (userData) {
       setErrorMessages({

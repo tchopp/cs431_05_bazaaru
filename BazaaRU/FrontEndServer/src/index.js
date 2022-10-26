@@ -7,6 +7,11 @@ import Home from "./Pages/Home";
 import Registration from "./Pages/Registration";
 import About from "./Pages/About";
 import Catalog from "./Pages/Catalog";
+import Results from "./Pages/searchResults";
+import Profile from "./Pages/Profile";
+import AccountList from "./Pages/AccountList";
+import TestResults from "./Pages/searchResultsTest";
+import CreatePost from "./Pages/CreatePost";
 import Post from "./Pages/Post";
 
 
@@ -20,7 +25,6 @@ root.render(
         <Route path="/registration" element={<Registration />} />
         <Route path="/homepage/about" element={<About />} />
         <Route path="/homepage/catalog" element={<Catalog />} />
-        <Route path="/homepage/createpost" element={<Post />} />
       </Routes>
     </Router>
   </React.StrictMode>

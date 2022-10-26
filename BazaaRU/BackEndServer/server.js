@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = 5000;
 
 const mariadb = require('mariadb')
@@ -9,6 +10,9 @@ const pool = mariadb.createPool({
      password: 'bazaaru2223',
      connectionLimit: 5
 });
+
+app.use(cors());
+app.use(express.json());
 
 app.get('/dbTest', async(req, res) => {
 	let conn;
@@ -24,23 +28,43 @@ app.get('/dbTest', async(req, res) => {
 	}
 })
 
-app.post('/loginReq', (req, res) => {
+app.get('/login', (req, res) => {
 	// Check req for valid input on username and password
-	var inputUsername = JSON.parse(req.body.Username);
-	var inputPassword = JSON.parse(req.body.Password);
-	//If input is good, check for valid login (correct username and password)
-	res.json({ login: 'false' });
-	//If login is good, we can let user login (for now will just return to the main page, however we need to eventually use a library to set a login cookie on the browser to maintain login with the backend)
-	res.json({ login: 'true' });
+	//try {
+	//	const {username, password} = req.body;
+	//	var inputPassword = JSON.parse(req.body.Password);
+		//If input is good, check for valid login (correct username and password)
+	//	res.json({ login: 'false' });
+		//If login is good, we can let user login (for now will just return to the main page, however we need to eventually use a library to set a login cookie on the browser to maintain login with the backend)
+	//	res.json({ login: 'true' });
+	//}
+	//catch(e) {
+	//	res.status(400).send(e.message)
+	//}
+
+	//FOR DEMO PURPOSES, THIS CURRENTLY DOES NOT QUERY
+	//const user = req.body.username;
+	//const pass = req.body.password;
+
+	//if (user === "ac1" || user === "ac2" ) {
+	//	if (pass === "ph" || pass === "phi") {
+	//		res.send({ valid: 'true' });
+	//	}
+	//	res.send({ valid: 'false' });
+	//}
+	//res.send({ valid: 'false' });
+	console.log('login requested');
+	res.send({ received: 'true' })
 })
 
-app.post('/createAccountReq', (req, res) => {
+app.get('/createAccount', (req, res) => {
 	//Check req for valid input
-	
-	//If input is good, send the account details PUT request to the database 
-	
+	//If input is good, send the account details PUT request to the database
 	//Once PUT is complete, send user notification
-	res.json({ created: 'true' })
+
+	//FOR DEMO PURPOSES, THIS CURRENTLY DOES NOT QUERY
+	console.log('account creation requested');
+	//res.send({ received: 'true' });
 })
 
 app.listen(port, () => {

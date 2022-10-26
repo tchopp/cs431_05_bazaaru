@@ -1,23 +1,26 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 
+//const baseURL = "https://cs431-05.cs.rutgers.edu/"
+
 import "./loginForm.css"; //Style of login form
+
+const baseURL = "https://cs431-05.cs.rutgers.edu:5000/"
 
 //takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
 function LoginForm(url) {
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [errorMessages, setErrorMessages, post, setPost] = useState({});
 
   const weblink = url.name;
-  if (isAuthenticated) {
-    return <Navigate to={weblink} />; //replace with UseNavigate hook once account information is completed
-  }
+
+  const navigate = useNavigate();
 
   // User Login info
   const database = [
-    //Needs to eventually be replaced with a hashmap/mySQL database
+    //Needs to eventually be replaced with a hashmap/mySQL database.******************************8
     {
       username: "ac1",
       password: "pi",
@@ -44,13 +47,20 @@ function LoginForm(url) {
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
 
+    //Fetch request to test connection to the backend server
+    // fetch("http://localhost:5000/login");
+    axios.get('http://cs431-05.cs.rutgers.edu:5000/login').then((response) => {
+      setPost(response.data);
+    });
+
     // Compare user info
     if (userData) {
       if (userData.password !== password.value) {
         // Invalid password
         setErrorMessages({ name: "password", message: errors.password });
       } else {
-        setIsAuthenticated(true);
+        //replace the permission ID with userID*************************************************8
+        navigate(weblink, { state: { permID: 3 } });
       }
     } else {
       // Username not found
@@ -92,11 +102,7 @@ function LoginForm(url) {
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
-        {isAuthenticated ? (
-          <div>User is successfully logged in</div>
-        ) : (
-          renderForm
-        )}
+        {renderForm}
       </div>
     </div>
   );
