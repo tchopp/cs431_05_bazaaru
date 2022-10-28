@@ -19,6 +19,7 @@ async function testDb() {
 }
 
 testDb();
+
 const mariadb = require('mariadb')
 const pool = mariadb.createPool({
      host: 'localhost', 
@@ -44,7 +45,7 @@ app.get('/dbTest', async(req, res) => {
 	}
 })
 
-app.get('/login', (req, res) => {
+app.get('/login', async (req, res) => {
 	// Check req for valid input on username and password
 	//try {
 	//	const {username, password} = req.body;
@@ -70,6 +71,8 @@ app.get('/login', (req, res) => {
 	//}
 	//res.send({ valid: 'false' });
 	console.log('login requested');
+	const results = await sequelize.query('SELECT * FROM accounts');
+	console.log(results);
 	res.send({ received: 'true' })
 })
 
