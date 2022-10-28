@@ -1,8 +1,24 @@
 const express = require('express');
+const Sequelize = require('sequelize');
 const app = express();
 const cors = require('cors');
 const port = 5000;
 
+const sequelize = new Sequelize('BazaaRu', 'expressAccount', 'bazaaru2223', {
+  host: 'localhost',
+  dialect: 'mariadb' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+});
+
+async function testDb() {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+
+testDb();
 const mariadb = require('mariadb')
 const pool = mariadb.createPool({
      host: 'localhost', 
@@ -65,6 +81,10 @@ app.get('/createAccount', (req, res) => {
 	//FOR DEMO PURPOSES, THIS CURRENTLY DOES NOT QUERY
 	console.log('account creation requested');
 	//res.send({ received: 'true' });
+})
+
+app.post('/createPost', (req, res) => {
+	//req.data.....
 })
 
 app.listen(port, () => {
