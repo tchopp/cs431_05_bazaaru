@@ -36,9 +36,17 @@ const Post = () => {
         //  type != 'clothing' || type != 'service' || type != 'household')
     
     const post = { title, description, price, type };
-    console.log(post);
 
-    //C2. Direct to a different page
+    //C2. Send the object to express server via axios
+    axios.post('cs431-05.cs.rutgers.edu:5000/createPost', { post })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    //C3. Direct to a different page
       navigate("/homepage");
       return <p1>You have sucessfully created a post!</p1>;
   };
