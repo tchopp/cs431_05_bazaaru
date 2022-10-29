@@ -1,6 +1,6 @@
 const express = require('express');
 const Sequelize = require('sequelize');
-const app = express();
+const app = express(); //creates an express application called app
 const cors = require('cors');
 const port = 5000;
 
@@ -52,7 +52,9 @@ app.get('/login', async (req, res) => {
 	//	var inputPassword = JSON.parse(req.body.Password);
 		//If input is good, check for valid login (correct username and password)
 	//	res.json({ login: 'false' });
-		//If login is good, we can let user login (for now will just return to the main page, however we need to eventually use a library to set a login cookie on the browser to maintain login with the backend)
+		//If login is good, we can let user login (for now will just return to the main page, however  
+		//we need to eventually use a library to set a login cookie on the browser to
+		// maintain login with the backend)
 	//	res.json({ login: 'true' });
 	//}
 	//catch(e) {
@@ -86,7 +88,11 @@ app.get('/createAccount', (req, res) => {
 	//res.send({ received: 'true' });
 })
 
-app.post('/createPost', (req, res) => {
+//SHAJIA
+//1. app.post is asking express to send some information to our database 
+//2. '/createPost' the path that I chose to identify my request
+//3. (req, res) is saying that the server is listening for a request (that I will send) and responding
+app.post('/createPost', (req, res) => { 
 	//req.data.....
 })
 
