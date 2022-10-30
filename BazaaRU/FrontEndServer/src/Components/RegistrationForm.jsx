@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 
 import "./registrationForm.css"; //Style of login form
 
@@ -40,8 +41,10 @@ function RegistrationForm(url) {
     // Find user login info
     const userData = database.find((user) => user.username === username.value);
 
-    //Fetch request for testing connecting to the backend server
-    fetch("http://localhost:5000/createAccount");
+    const formInput = { uName: username.value, pWord: password.value };
+
+    axios.put('http://cs431-05.cs.rutgers.edu:5005/createAccount', formInput).
+      then((response) => { console.log(response.data); }); 
 
     if (userData) {
       setErrorMessages({

@@ -2,7 +2,7 @@ const express = require('express');
 const Sequelize = require('sequelize');
 const app = express(); //creates an express application called app
 const cors = require('cors');
-const port = 5000;
+const port = 5005;
 
 const sequelize = new Sequelize('BazaaRu', 'expressAccount', 'bazaaru2223', {
   host: 'localhost',
@@ -45,47 +45,32 @@ app.get('/dbTest', async(req, res) => {
 	}
 })
 
-app.get('/login', async (req, res) => {
-	// Check req for valid input on username and password
-	//try {
-	//	const {username, password} = req.body;
-	//	var inputPassword = JSON.parse(req.body.Password);
-		//If input is good, check for valid login (correct username and password)
-	//	res.json({ login: 'false' });
-		//If login is good, we can let user login (for now will just return to the main page, however  
-		//we need to eventually use a library to set a login cookie on the browser to
-		// maintain login with the backend)
-	//	res.json({ login: 'true' });
-	//}
-	//catch(e) {
-	//	res.status(400).send(e.message)
-	//}
-
-	//FOR DEMO PURPOSES, THIS CURRENTLY DOES NOT QUERY
-	//const user = req.body.username;
-	//const pass = req.body.password;
-
-	//if (user === "ac1" || user === "ac2" ) {
-	//	if (pass === "ph" || pass === "phi") {
-	//		res.send({ valid: 'true' });
-	//	}
-	//	res.send({ valid: 'false' });
-	//}
-	//res.send({ valid: 'false' });
+app.post('/login', async (req, res) => {
+	// This is currently missing input sanitization and case checking
+	// Need to add case for missing username, missing password (may be better done in front end code) 
 	console.log('login requested');
-	const results = await sequelize.query('SELECT * FROM accounts');
+	console.log(req.body);
+	const userInputUsername = req.body.uName;
+	console.log(userInputUsername);
+	const results = await sequelize.query("SELECT * FROM accounts WHERE username='" + userInputUsername + "'");
 	console.log(results);
-	res.send({ received: 'true' })
+	if (results[0][0].password === req.body.pWord) {
+		res.send({ received: 'true'});
+		return;
+	}
+	res.send({ received: 'false' })
 })
 
-app.get('/createAccount', (req, res) => {
-	//Check req for valid input
-	//If input is good, send the account details PUT request to the database
-	//Once PUT is complete, send user notification
-
-	//FOR DEMO PURPOSES, THIS CURRENTLY DOES NOT QUERY
+app.put('/createAccount', async (req, res) => {
+	// Needs input sanitization and checking
+	// Currently does not check for existing account
 	console.log('account creation requested');
-	//res.send({ received: 'true' });
+	console.log(req.body);
+	const userInputUsername = req.body.uName;
+	const userInputPassword = req.body.pWord;
+	const results = await sequelize.query("INSERT INTO accounts (username, password) VALUES (" + '"' + userInputUsername +  '", "' + userInputPassword + '");');
+	console.log(results);
+	res.send({ received: 'true' });
 })
 
 //SHAJIA
