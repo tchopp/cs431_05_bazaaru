@@ -45,6 +45,8 @@ app.get('/dbTest', async(req, res) => {
 	}
 })
 
+// ACCOUNT-RELATED ROUTES
+// NEEDS: ROUTE FOR LOGOUT, DELETING ACCOUNTS
 app.post('/login', async (req, res) => {
 	// This is currently missing input sanitization and case checking
 	// Need to add case for missing username, missing password (may be better done in front end code) 
@@ -73,15 +75,17 @@ app.put('/createAccount', async (req, res) => {
 	res.send({ received: 'true' });
 })
 
-app.get('/catalog/:rowID', async (req,res) => {
+// CATALOG-RELATED ROUTES
+// NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
+app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
 	console.log(req.params);
 	const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";");
-	res.send(results[0]);
+	res.send(results[0][0]);
 })
 
-app.get('/catalog/:keyword-:rowID', async (req,res) => { //get cs431-05.cs.rutgers.edu:5000/catalog/apple-1
+app.get('/catalog/:keyword-:rowID', async (req,res) => {    // The query needs to be updated so that it sorts as above, and searches for items LIKE the keyword. 
         console.log(req.params);
-        const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID +>
+        const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";"); //get cs431-05.cs.rutgers.edu:5000/catalog/apple-1
         res.send(results[0][0]);
 })
 
