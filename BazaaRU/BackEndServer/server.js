@@ -63,7 +63,7 @@ app.put('/createAccount', async (req, res) => {
 
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
-app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
+/*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
 	console.log(req.params);
 	const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";");
 	res.send(results[0][0]);
@@ -73,7 +73,7 @@ app.get('/catalog/:keyword-:rowID', async (req,res) => {    // The query needs t
         console.log(req.params);
         const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";"); //get cs431-05.cs.rutgers.edu:5000/catalog/apple-1
         res.send(results[0][0]);
-})
+})*/
 
 //SHAJIA
 //1. app.post is asking express to send some information to our database 
@@ -93,6 +93,29 @@ app.post('/createPost', async(req, res) => {
 	"','" + title + "'," + price + ",'" + type + "','" + description + "');");
 	//C. Send response to react
 
+})
+
+app.get('/catalog', async(req,res) => {
+	sequelize.query("SELECT post_id FROM item_catalog ORDER BY post_id DESC LIMIT 5;").then((response) => {
+		res.send(response);
+	 });
+	
+})
+
+app.get('/catalogweek', async(req,res) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE  YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) ORDER BY post_id DESC LIMIT 5;").then((response) => {
+		res.send(response);
+	 });
+	
+})
+
+app.get('/catalog/:postID', async(req,res) => {
+	console.log(req.params);
+	 sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.postID + "").then((response) => {
+		console.log("SELECT * FROM item_catalog WHERE post_id=" + req.params.postID + "")
+		res.send(response);
+	 });
+	
 })
 
 app.listen(port, () => {
