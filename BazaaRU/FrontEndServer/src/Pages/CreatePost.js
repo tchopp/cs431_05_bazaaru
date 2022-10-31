@@ -4,6 +4,7 @@
 //3. Create an object to be sent 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./CreatePost.css";
 import{ useState } from "react";
 import axios from 'axios';
@@ -11,16 +12,20 @@ import axios from 'axios';
 
 const Post = () => {
 //A. Create container to hold info for each part of the post:
-  //A1: Title holder: 
+  //A1: extract user id 
+  const {userID}  =  useLocation(); 
+  console.log("userid is: ", userID);
+
+  //A2: Title holder: 
   const[title, setTitle] = useState('');
   
-  //A2: Description holder: 
+  //A3: Description holder: 
   const[description, setDescription] = useState('');
 
-  //A3: Price holder: 
+  //A4: Price holder: 
   const[price, setPrice] = useState('');
 
-  //A4: Type holder: 
+  //A5: Type holder: 
   const[type, setType]= useState('Miscellaneous');
 
 //B. Allow for the page to be navigated elsewhere upon submission
@@ -34,11 +39,14 @@ const Post = () => {
       //C1.1 if the value of type is not one of the types send an error to the user
         // if(type != 'misc' || type != 'shoes' || type != 'accessories' ||
         //  type != 'clothing' || type != 'service' || type != 'household')
-    
-    const post = { title, description, price, type };
-
+  
     //C2. Send the object to express server via axios
-    axios.post('cs431-05.cs.rutgers.edu:5000/createPost', { post })
+    axios.post('cs431-05.cs.rutgers.edu:5000/createPost', { 
+      postTitle: title, 
+      postDescription: description,
+      postPrice: price, 
+      postType: type,
+      postUserID: userID  })
     .then(function (response) {
       console.log(response);
     })

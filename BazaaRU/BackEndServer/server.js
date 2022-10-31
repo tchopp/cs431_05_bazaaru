@@ -93,8 +93,18 @@ app.get('/catalog/:keyword-:rowID', async (req,res) => {    // The query needs t
 //1. app.post is asking express to send some information to our database 
 //2. '/createPost' the path that I chose to identify my request
 //3. (req, res) is saying that the server is listening for a request (that I will send) and responding
-app.post('/createPost', (req, res) => { 
-	//req.data.....
+app.post('/createPost', async(req, res) => { 
+	//A. Collect data from body of request received
+	const title = req.body.postTitle;
+	const description = req.body.postDescription;
+	const price = req.body.postPrice;
+	const type = req.body.postType;
+	const userid = req.body.postUserID;
+	//B. Send to database
+	//replace with my stuff
+	//const responseDB = await sequelize.query("INSERT INTO posts (username, password) VALUES (" + '"' + userInputUsername +  '", "' + userInputPassword + '");');
+	//C. Send response to react
+
 })
 
 app.listen(port, () => {

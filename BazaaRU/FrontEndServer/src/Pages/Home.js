@@ -31,7 +31,7 @@ function Home() {
   }
   function toPost() {
     //console.log("pressed");
-    navigate("/homepage/createpost");
+    navigate("/homepage/createpost", { permID });
   }
   function toProfile() {
     navigate("/homepage/profile", { state });
