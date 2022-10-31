@@ -31,20 +31,6 @@ const pool = mariadb.createPool({
 app.use(cors());
 app.use(express.json());
 
-app.get('/dbTest', async(req, res) => {
-	let conn;
-	try{
-		conn = await pool.getConnection();
-		const rows = await conn.query("SELECT password FROM BazaaRu.accounts WHERE username='ac1'");
-		console.log(rows);
-		const jsonS = JSON.stringify(rows);
-		res.writeHead(200, {'Content-Type': 'text/html'});
-		res.end(jsonS);
-	}
-	catch(e){
-	}
-})
-
 // ACCOUNT-RELATED ROUTES
 // NEEDS: ROUTE FOR LOGOUT, DELETING ACCOUNTS
 app.post('/login', async (req, res) => {
