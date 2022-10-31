@@ -102,7 +102,9 @@ app.post('/createPost', async(req, res) => {
 	const userid = req.body.postUserID;
 	//B. Send to database
 	//replace with my stuff
-	//const responseDB = await sequelize.query("INSERT INTO posts (username, password) VALUES (" + '"' + userInputUsername +  '", "' + userInputPassword + '");');
+	const responseDB = await sequelize.query
+	("INSERT INTO item_catalog (username, product, price, category, description) VALUES ('"+ userid+ 
+	"','" + title + "'," + price + ",'" + type + "','" + description + "');");
 	//C. Send response to react
 
 })
