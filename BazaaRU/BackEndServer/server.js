@@ -73,6 +73,18 @@ app.put('/createAccount', async (req, res) => {
 	res.send({ received: 'true' });
 })
 
+app.get('/catalog/:rowID', async (req,res) => {
+	console.log(req.params);
+	const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";");
+	res.send(results[0]);
+})
+
+app.get('/catalog/:keyword-:rowID', async (req,res) => { //get cs431-05.cs.rutgers.edu:5000/catalog/apple-1
+        console.log(req.params);
+        const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID +>
+        res.send(results[0][0]);
+})
+
 //SHAJIA
 //1. app.post is asking express to send some information to our database 
 //2. '/createPost' the path that I chose to identify my request
