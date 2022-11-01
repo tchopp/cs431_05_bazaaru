@@ -13,8 +13,8 @@ import axios from 'axios';
 const Post = () => {
 //A. Create container to hold info for each part of the post:
   //A1: extract user id 
-  const {userID}  =  useLocation(); 
-  console.log("userid is: ", userID);
+  // const {userID}  =  useLocation(); 
+  // console.log("userid is: ", userID);
 
   //A2: Title holder: 
   const[title, setTitle] = useState('');
@@ -41,12 +41,12 @@ const Post = () => {
         //  type != 'clothing' || type != 'service' || type != 'household')
   
     //C2. Send the object to express server via axios
-    axios.post('cs431-05.cs.rutgers.edu:5000/createPost', { 
+      axios.post('http://cs431-05.cs.rutgers.edu:5005/createPost',{ 
       postTitle: title, 
       postDescription: description,
       postPrice: price, 
-      postType: type,
-      postUserID: userID  })
+      postType: type})
+      //postUserID: userID  })
     .then(function (response) {
       console.log(response);
     })
@@ -54,8 +54,14 @@ const Post = () => {
       console.log(error);
     });
 
-    //C3. Direct to a different page
-      navigate("/homepage");
+    //C3. Make sure variables were captured
+    console.log(price);
+    console.log(title);
+    console.log(description);
+    console.log(type);
+
+    //C4. Direct to a different page
+      navigate("/homepage", { state: { permID: 3 } });
       return <p1>You have sucessfully created a post!</p1>;
   };
 
