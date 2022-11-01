@@ -93,7 +93,8 @@ app.post('/createPost', async(req, res) => {
 	const description = req.body.postDescription;
 	const price = req.body.postPrice;
 	const type = req.body.postType;
-	const userid = req.body.postUserID;
+	res.send("success");
+	//const userid = req.body.postUserID;
 	//B. Send to database
 	//replace with my stuff
 	const responseDB = await sequelize.query
