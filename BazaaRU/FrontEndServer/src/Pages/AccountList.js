@@ -1,5 +1,6 @@
 import logo from "./profile.png"; //Need to replace image with project image
 import Account from "../Components/Account";
+import AccountDelete from "../Components/AccountDelete"
 //This is the default view/ Login page to get into the actual BazaaRU Homepage
 function AccountList() {
   return (
@@ -10,6 +11,7 @@ function AccountList() {
       </header>
       {/*Create function to list all accounts in the sql database ******************************/}
       <Account userID={"1"}></Account>
+      <AccountDelete></AccountDelete>
       <div></div>
     </div>
   );

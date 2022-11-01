@@ -15,19 +15,6 @@ function LoginForm(url) {
 
   const navigate = useNavigate();
 
-  // User Login info
-  const database = [
-    //Needs to eventually be replaced with a hashmap/mySQL database.******************************8
-    {
-      username: "ac1",
-      password: "pi",
-    },
-    {
-      username: "ac2",
-      password: "phi",
-    },
-  ];
-
   //error messages for when user inputs invalid credentials
   const errors = {
     username: "invalid username",
@@ -41,9 +28,6 @@ function LoginForm(url) {
 
     var { username, password } = document.forms[0]; //grabs inputted information
 
-    // Find user login info
-    const userData = database.find((user) => user.username === username.value);
-
     const formInput = { uName: username.value, pWord: password.value};
 
     //Axios post request
@@ -52,22 +36,32 @@ function LoginForm(url) {
    
     console.log(post.received);
 
-    // Compare user info
-    if (userData) {
-      if (userData.password !== password.value) {
-        // Invalid password
-        setErrorMessages({ name: "password", message: errors.password });
-      } else {
-        //replace the permission ID with userID*************************************************8
-        navigate(weblink, { state: { permID: 3 } });
-      }
+    if (post.received) {
+      navigate(weblink, { state: { permID: 3, username: username.value } } )
     } else {
-      // Username not found
-      setErrorMessages({
+        // Username not found
+        setErrorMessages({
         name: "username",
         message: errors.username,
       });
     }
+
+    // Compare user info
+    //if (userData) {
+    //  if (userData.password !== password.value) {
+    //    // Invalid password
+    //    setErrorMessages({ name: "password", message: errors.password });
+    //  } else {
+    //    //replace the permission ID with userID*************************************************8
+    //    navigate(weblink, { state: { permID: 3 } });
+    //  }
+    //} else {
+    //  // Username not found
+    //  setErrorMessages({
+    //    name: "username",
+    //    message: errors.username,
+    //  });
+    //}
   };
 
   // Generate JSX code for error message
