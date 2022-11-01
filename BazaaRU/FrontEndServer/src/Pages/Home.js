@@ -39,13 +39,17 @@ function Home() {
   function toAccountList() {
     navigate("/homepage/accountList");
   }
-  function search() {
-    //console.log("pressed");
-    navigate("/homepage/results");
-  }
-  function searchtest() {
-    navigate("/homepage/results=Yousof");
-  }
+  const[keyword, setKeyword] = useState('');
+
+  
+  const handleSubmit = (e) => {
+     e.preventDefault();
+
+    //C2. Send the object to express server via axios
+
+    //C3. Direct to a different page
+    navigate("/homepage/results", { state: {keyword} });
+  };
 
   return (
     <div>
@@ -53,22 +57,18 @@ function Home() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Rutgers BazaaRU</p>
       </header>
-      <header className="searchBar">
-        <div className="form-container">
-          <form className="form">
-            <input
-              id="search"
-              type="text"
-              className="input"
-              placeholder="search..."
-            />
-            <button id="submit" onClick={search}>
-              submit
-            </button>
-            <button id="clear" onClick={searchtest}>
-              clear
-            </button>
-          </form>
+     </header>
+      <header className = "searchBar">
+        <div class="form-container">
+        <form class="form" onSubmit={handleSubmit}>
+        <input id="search"
+        type="text"
+        class="input"
+        placeholder="search..."
+        value = {keyword}
+        onChange= {(e) => setKeyword(e.target.value)}/>
+        <button>Submit</button>
+        </form>
         </div>
       </header>
       <header className="Service-bar">
