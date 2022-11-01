@@ -61,6 +61,14 @@ app.put('/createAccount', async (req, res) => {
 	res.send({ received: 'true' });
 })
 
+app.put('/deleteAccount', async (req,res) => {
+	console.log('account deletion requested');
+	console.log(req.body);
+	const userInputUsername = req.body.uName;
+	console.log(userInputUsername);
+	//const results = await sequelize.query("")
+})
+
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
 /*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
