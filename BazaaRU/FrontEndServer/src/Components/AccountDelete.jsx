@@ -20,7 +20,7 @@ function AccountDelete() {
     const formInput = { uName: username.value };
 
     //Axios put request
-    axios.put('http://cs431-05.cs.rutgers.edu:5005/deleteAccount', formInput);
+    axios.put('http://cs431-05.cs.rutgers.edu:5000/deleteAccount', formInput);
 
   };
 

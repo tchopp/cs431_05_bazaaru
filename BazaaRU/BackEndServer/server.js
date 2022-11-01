@@ -2,7 +2,7 @@ const express = require('express');
 const Sequelize = require('sequelize');
 const app = express(); //creates an express application called app
 const cors = require('cors');
-const port = 5005;
+const port = 5000;
 
 const sequelize = new Sequelize('BazaaRu', 'expressAccount', 'bazaaru2223', {
   host: 'localhost',
@@ -121,7 +121,7 @@ app.get('/catalogweek', async(req,res) => {
 app.get('/catalog/:postID', async(req,res) => {
 	console.log(req.params);
 	 sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.postID + "").then((response) => {
-		console.log("SELECT * FROM item_catalog WHERE post_id=" + req.params.postID + "")
+		console.log("SELECT * FROM item_catalog WHERE post_id='" + req.params.postID + "'")
 		res.send(response);
 	 });
 	

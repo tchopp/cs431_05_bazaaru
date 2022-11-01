@@ -43,7 +43,7 @@ function RegistrationForm(url) {
 
     const formInput = { uName: username.value, pWord: password.value };
 
-    axios.put('http://cs431-05.cs.rutgers.edu:5005/createAccount', formInput).
+    axios.put('http://cs431-05.cs.rutgers.edu:5000/createAccount', formInput).
       then((response) => { console.log(response.data); }); 
 
     if (userData) {

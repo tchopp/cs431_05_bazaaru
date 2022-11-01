@@ -31,7 +31,7 @@ function LoginForm(url) {
     const formInput = { uName: username.value, pWord: password.value};
 
     //Axios post request
-    axios.post('http://cs431-05.cs.rutgers.edu:5005/login', formInput).
+    axios.post('http://cs431-05.cs.rutgers.edu:5000/login', formInput).
       then((response) => { console.log(response.data); setPost(response.data); });
    
     console.log(post.received);

@@ -41,7 +41,7 @@ const Post = () => {
         //  type != 'clothing' || type != 'service' || type != 'household')
   
     //C2. Send the object to express server via axios
-      axios.post('http://cs431-05.cs.rutgers.edu:5005/createPost',{ 
+      axios.post('http://cs431-05.cs.rutgers.edu:5000/createPost',{ 
       postTitle: title, 
       postDescription: description,
       postPrice: price, 
