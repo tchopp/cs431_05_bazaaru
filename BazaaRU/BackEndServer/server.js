@@ -129,4 +129,12 @@ app.get('/catalog/:postID', async(req,res) => {
 
 app.listen(port, () => {
 	console.log(`Server listening on http://localhost:${port}`)
+	
 })
+
+app.get('/results/:postKW', async(req,res) => {
+	console.log(req.params);
+	 sequelize.query("SELECT * FROM item_catalog WHERE product LIKE 'G%'").then((response) => {
+		console.log("SELECT * FROM item_catalog WHERE product LIKE 'G%'")
+		res.send(response);
+	 });
