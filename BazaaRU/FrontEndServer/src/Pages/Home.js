@@ -5,6 +5,7 @@ import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
 import { Post } from "../Components/Post/Post.js";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
+import SearchBar from '../Components/Search/SearchBar';
 //import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -39,17 +40,6 @@ function Home() {
   function toAccountList() {
     navigate("/homepage/accountList");
   }
-  const[keyword, setKeyword] = useState('');
-
-  
-  const handleSubmit = (e) => {
-     e.preventDefault();
-
-    //C2. Send the object to express server via axios
-
-    //C3. Direct to a different page
-    navigate("/homepage/results", { state: {keyword} });
-  };
 
   return (
     <div>
@@ -57,19 +47,7 @@ function Home() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Rutgers BazaaRU</p>
       </header>
-      <header className = "searchBar">
-        <div class="form-container">
-        <form class="form" onSubmit={handleSubmit}>
-        <input id="search"
-        type="text"
-        class="input"
-        placeholder="search..."
-        value = {keyword}
-        onChange= {(e) => setKeyword(e.target.value)}/>
-        <button>Submit</button>
-        </form>
-        </div>
-      </header>
+      <SearchBar></SearchBar>
       <header className="Service-bar">
         <button style={styles} onClick={toAbout}>
           About
