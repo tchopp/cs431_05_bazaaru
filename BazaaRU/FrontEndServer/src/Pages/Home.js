@@ -39,7 +39,7 @@ function Home() {
   function toAccountList() {
     navigate("/homepage/accountList");
   }
-  const[keyword, setKeyword] = useState('');
+  const {keyword} = "";
 
   
   const handleSubmit = (e) => {
