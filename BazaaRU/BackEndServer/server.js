@@ -138,3 +138,4 @@ app.get('/results/:postKW', async(req,res) => {
 		console.log("SELECT * FROM item_catalog WHERE product LIKE 'G%'")
 		res.send(response);
 	 });
+})
