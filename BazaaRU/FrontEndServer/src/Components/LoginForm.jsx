@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, setState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
@@ -9,7 +9,7 @@ import "./loginForm.css"; //Style of login form
 function LoginForm(url) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
-  const [post, setPost] = React.useState(null);
+  var post = 'false';
 
   const weblink = url.name;
 
@@ -17,12 +17,37 @@ function LoginForm(url) {
 
   //error messages for when user inputs invalid credentials
   const errors = {
-    username: "invalid username",
-    password: "invalid password",
+    login: "invalid username/password"
   };
 
+  function verifyLogin(username) {
+    console.log("from login: ", post);
+    if (post === 'true') {
+      console.log("succeeded");
+      navigate(weblink, { state: { username: username.value } } )
+    } else {
+        console.log("failed");
+        // Username not found
+        setErrorMessages({
+        name: "username",
+        message: errors.login,
+      });
+    }
+  }
+
+  async function getLogin(formInput, username) {
+    await axios.post('http://cs431-05.cs.rutgers.edu:5000/login', formInput).
+      then( (response) => { 
+        //setPost(response.data.received, verifyLogin(username)); 
+        post = response.data.received;
+        console.log("response: ", response.data); 
+      });
+    console.log("post val post call 1: ", post);
+    verifyLogin(username);
+  }
+
   //Event handler when user presses sign in buttom
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     //Prevent page reload
     event.preventDefault();
 
@@ -30,38 +55,12 @@ function LoginForm(url) {
 
     const formInput = { uName: username.value, pWord: password.value};
 
-    //Axios post request
-    axios.post('http://cs431-05.cs.rutgers.edu:5000/login', formInput).
-      then((response) => { console.log(response.data); setPost(response.data); });
+    console.log("post val pre call: ", post);
    
-    console.log(post.received);
+    await getLogin(formInput, username.value);
 
-    if (post.received) {
-      navigate(weblink, { state: { permID: 3, username: username.value } } )
-    } else {
-        // Username not found
-        setErrorMessages({
-        name: "username",
-        message: errors.username,
-      });
-    }
+    console.log("post val post call 2: ", post);
 
-    // Compare user info
-    //if (userData) {
-    //  if (userData.password !== password.value) {
-    //    // Invalid password
-    //    setErrorMessages({ name: "password", message: errors.password });
-    //  } else {
-    //    //replace the permission ID with userID*************************************************8
-    //    navigate(weblink, { state: { permID: 3 } });
-    //  }
-    //} else {
-    //  // Username not found
-    //  setErrorMessages({
-    //    name: "username",
-    //    message: errors.username,
-    //  });
-    //}
   };
 
   // Generate JSX code for error message
