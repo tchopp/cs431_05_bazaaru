@@ -57,7 +57,6 @@ function Home() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Rutgers BazaaRU</p>
       </header>
-     </header>
       <header className = "searchBar">
         <div class="form-container">
         <form class="form" onSubmit={handleSubmit}>
