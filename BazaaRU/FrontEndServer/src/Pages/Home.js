@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import logo from "./profile.png"; //Need to replace image with project image
@@ -39,7 +39,7 @@ function Home() {
   function toAccountList() {
     navigate("/homepage/accountList");
   }
-  const {keyword} = "";
+  const[keyword, setKeyword] = useState('');
 
   
   const handleSubmit = (e) => {
