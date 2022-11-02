@@ -7,7 +7,7 @@ import axios from "axios";
 export const CatalogWeekly = () => {
 
 // 10 (-1) post_ids for first render
-const [posts,setPosts] = useState([0,0]);
+const [posts,setPosts] = useState([0]);
 
 
 
