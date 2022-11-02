@@ -24,7 +24,7 @@ function LoginForm(url) {
     console.log("from login: ", post);
     if (post === 'true') {
       console.log("succeeded");
-      navigate(weblink, { state: { username: username.value } } )
+      navigate(weblink, { state: { username: username } } )
     } else {
         console.log("failed");
         // Username not found
