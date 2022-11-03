@@ -6,6 +6,7 @@ import "./Home.css";
 import { Post } from "../Components/Post/Post.js";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
 import SearchBar from '../Components/Search/SearchBar';
+import Cookies from 'js-cookie';
 //import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -18,6 +19,8 @@ function Home() {
   //replace the permission ID with userID******************************88
   console.log(state);
   const { username } = state;
+  const userName = Cookies.get('userName');
+  console.log('username2: ', userName);
   console.log("username: ", username);
   const permID = 3;
   function signOut() {
@@ -26,6 +29,7 @@ function Home() {
   }
   function toCatalog() {
     //console.log("pressed");
+    Cookies.remove('userName', {path: '/', domain: 'rutgers.edu'});
     navigate("/homepage/catalog");
   }
   function toAbout() {

@@ -2,6 +2,7 @@ const express = require('express');
 const Sequelize = require('sequelize');
 const app = express(); //creates an express application called app
 const cors = require('cors');
+//const cookieParser = require('cookie-parser');
 const port = 5000;
 
 const sequelize = new Sequelize('BazaaRu', 'expressAccount', 'bazaaru2223', {
@@ -30,6 +31,7 @@ const pool = mariadb.createPool({
 
 app.use(cors());
 app.use(express.json());
+//app.use(cookieParser());
 
 // ACCOUNT-RELATED ROUTES
 // NEEDS: ROUTE FOR LOGOUT, DELETING ACCOUNTS
@@ -43,6 +45,7 @@ app.post('/login', async (req, res) => {
 	const results = await sequelize.query("SELECT * FROM accounts WHERE username='" + userInputUsername + "'");
 	console.log(results);
 	if (results[0][0].password === req.body.pWord) {
+		//res.cookie('userData', req.body.uName);
 		res.send({ received: 'true'});
 		return;
 	}

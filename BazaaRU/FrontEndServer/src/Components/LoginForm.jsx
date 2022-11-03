@@ -2,6 +2,7 @@ import React, { useState, setState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
+import Cookies from 'js-cookie';  
 
 import "./loginForm.css"; //Style of login form
 
@@ -23,6 +24,7 @@ function LoginForm(url) {
   function verifyLogin(username) {
     console.log("from login: ", post);
     if (post === 'true') {
+      Cookies.set('userName', username);
       console.log("succeeded");
       navigate(weblink, { state: { username: username } } )
     } else {
