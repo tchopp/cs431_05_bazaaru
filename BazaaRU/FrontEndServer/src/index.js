@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile";
 import AccountList from "./Pages/AccountList";
 import TestResults from "./Pages/searchResultsTest";
 import CreatePost from "./Pages/CreatePost";
+import PurchaseHistory from "./Pages/Transactions";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,6 +26,10 @@ root.render(
         <Route path="/homepage/catalog" element={<Catalog />} />
         <Route path="/homepage/results" element={<Results />} />
         <Route path="/homepage/profile" element={<Profile />} />
+        <Route
+          path="/homepage/profile/transactions"
+          element={<PurchaseHistory />}
+        />
         <Route path="/homepage/accountList" element={<AccountList />} />
         <Route path="/homepage/results=Yousof" element={<TestResults />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />
