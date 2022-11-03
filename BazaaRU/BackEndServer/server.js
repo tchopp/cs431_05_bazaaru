@@ -94,12 +94,22 @@ app.post('/createPost', async(req, res) => {
 	const price = req.body.postPrice;
 	const type = req.body.postType;
 	res.send("success");
-	//const userid = req.body.postUserID;
+	const userid = req.body.postUserID;
 	//B. Send to database
 	//replace with my stuff
-	const responseDB = await sequelize.query
-	("INSERT INTO item_catalog (username, product, price, category, description) VALUES ('"+ userid+ 
-	"','" + title + "'," + price + ",'" + type + "','" + description + "');");
+	console.log("create post requested")
+	const response = await sequelize.query("SELECT MAX(post_id) AS MAX_IND FROM item_catalog;");
+	console.log(response);
+	const curMax = response[0][0].MAX_IND;
+	console.log(curMax);
+	const nextMax = curMax + 1;
+	console.log(nextMax);
+	//const response2 = await sequelize.query("SELECT CURRENT_TIMESTAMP AS CURDATE;");
+	const response2 = await sequelize.query("SELECT NOW() AS CURTIME;");
+	console.log(response2);
+	const currentTime = response2[0][0].CURTIME;
+	const responseDB = await sequelize.query("INSERT INTO item_catalog (post_id, createdat, username, product, image_url, price, category, description) VALUES (" +  nextMax + ", NOW() ,'" + userid + "','" + title + "', 'https://www.alimentarium.org/sites/default/files/media/image/2017-02/AL027-01_pomme_de_terre_0_0.jpg', " + price + ",'" + type + "','" + description + "');");
+	//const responseDB = await sequelize.query("INSERT INTO item_catalog (post_id, createdat, username, product, image_url, price, category, description) VALUES (${nextMax}, '')")
 	//C. Send response to react
 
 })

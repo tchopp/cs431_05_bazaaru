@@ -16,8 +16,10 @@ function Home() {
   const navigate = useNavigate();
   const { state } = useLocation();
   //replace the permission ID with userID******************************88
-  const { permID } = state;
-  console.log("permID: ", permID);
+  console.log(state);
+  const { username } = state;
+  console.log("username: ", username);
+  const permID = 3;
   function signOut() {
     //console.log("pressed");
     navigate("/");
@@ -32,10 +34,10 @@ function Home() {
   }
   function toPost() {
     //console.log("pressed");
-    navigate("/homepage/createpost", { permID });
+    navigate("/homepage/createpost", { state: { username: username } });
   }
   function toProfile() {
-    navigate("/homepage/profile", { state });
+    navigate("/homepage/profile", { state: { username: username } });
   }
   function toAccountList() {
     navigate("/homepage/accountList");

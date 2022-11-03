@@ -12,9 +12,12 @@ import axios from 'axios';
 
 const Post = () => {
 //A. Create container to hold info for each part of the post:
-  //A1: extract user id 
-  // const {userID}  =  useLocation(); 
+  //A1: extract user id
+   const { state }  =  useLocation();
+   const { username } = state;
   // console.log("userid is: ", userID);
+  const userID = username;
+  console.log(userID);
 
   //A2: Title holder: 
   const[title, setTitle] = useState('');
@@ -45,8 +48,8 @@ const Post = () => {
       postTitle: title, 
       postDescription: description,
       postPrice: price, 
-      postType: type})
-      //postUserID: userID  })
+      postType: type,
+      postUserID: userID  })
     .then(function (response) {
       console.log(response);
     })

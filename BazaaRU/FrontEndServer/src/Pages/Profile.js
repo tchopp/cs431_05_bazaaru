@@ -5,10 +5,11 @@ import Account from "../Components/Account";
 //This is the default view/ Login page to get into the actual BazaaRU Homepage
 function Profile() {
   const { state } = useLocation();
-  const { permID } = state;
+  const { username } = state;
+  const permID = 3;
   //replace the permission ID with userID*****************************
   //console.log("state: ", state);
-  console.log("userId:", permID);
+  console.log("userId:", username);
 
   return (
     <div className="App">
