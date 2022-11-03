@@ -17,7 +17,7 @@ function Profile() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Account Profile</p>
       </header>
-      <Account userID={permID}></Account>
+      <Account userID={permID} username={username}></Account>
       <button>Purchase History</button>
     </div>
   );
