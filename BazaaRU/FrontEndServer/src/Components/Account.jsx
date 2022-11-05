@@ -1,10 +1,9 @@
 import ReactDOM from "react-dom";
 import "./Account.css";
-import axios from 'axios';
+import axios from "axios";
 
 function Account(props) {
   //Given userID, returns the account information for that userID
-  const userID = props.userID;
   const username = props.username;
   //console.log("userID: ", props);
   console.log("username: ", username);
@@ -12,14 +11,15 @@ function Account(props) {
   var permID = "";
 
   const reqData = { username: username };
-  axios.post('http://cs431-05.cs.rutgers.edu:5000/accountRank', reqData).
-    then( (response) => {
+  axios
+    .post("http://cs431-05.cs.rutgers.edu:5000/accountRank", reqData)
+    .then((response) => {
       console.log(response);
       permID = response.data.permID;
     });
 
   function returnString(string) {
-    console.log('returnString: ', username);
+    console.log("returnString: ", username);
     return string;
   }
 

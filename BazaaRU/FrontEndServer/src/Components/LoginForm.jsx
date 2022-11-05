@@ -2,7 +2,7 @@ import React, { useState, setState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
-import Cookies from 'js-cookie';  
+import Cookies from "js-cookie";
 
 import "./loginForm.css"; //Style of login form
 
@@ -10,7 +10,7 @@ import "./loginForm.css"; //Style of login form
 function LoginForm(url) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
-  var post = 'false';
+  var post = "false";
 
   const weblink = url.name;
 
@@ -18,19 +18,19 @@ function LoginForm(url) {
 
   //error messages for when user inputs invalid credentials
   const errors = {
-    login: "invalid username/password"
+    login: "invalid username/password",
   };
 
   function verifyLogin(username) {
     console.log("from login: ", post);
-    if (post === 'true') {
-      Cookies.set('userName', username);
+    if (post === "true") {
+      Cookies.set("userName", username);
       console.log("succeeded");
-      navigate(weblink, { state: { username: username } } )
+      navigate(weblink, { state: { username: username } });
     } else {
-        console.log("failed");
-        // Username not found
-        setErrorMessages({
+      console.log("failed");
+      // Username not found
+      setErrorMessages({
         name: "username",
         message: errors.login,
       });
@@ -38,11 +38,12 @@ function LoginForm(url) {
   }
 
   async function getLogin(formInput, username) {
-    await axios.post('http://cs431-05.cs.rutgers.edu:5000/login', formInput).
-      then( (response) => { 
-        //setPost(response.data.received, verifyLogin(username)); 
+    await axios
+      .post("http://cs431-05.cs.rutgers.edu:5000/login", formInput)
+      .then((response) => {
+        //setPost(response.data.received, verifyLogin(username));
         post = response.data.received;
-        console.log("response: ", response.data); 
+        console.log("response: ", response.data);
       });
     console.log("post val post call 1: ", post);
     verifyLogin(username);
@@ -55,14 +56,13 @@ function LoginForm(url) {
 
     var { username, password } = document.forms[0]; //grabs inputted information
 
-    const formInput = { uName: username.value, pWord: password.value};
+    const formInput = { uName: username.value, pWord: password.value };
 
     console.log("post val pre call: ", post);
-   
+
     await getLogin(formInput, username.value);
 
     console.log("post val post call 2: ", post);
-
   };
 
   // Generate JSX code for error message

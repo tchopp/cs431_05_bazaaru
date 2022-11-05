@@ -1,0 +1,7 @@
+.transaction_item {
+    margin-top: 10px;
+    flex-direction: right;
+    align-items: center;
+    justify-content: left;
+
+  }

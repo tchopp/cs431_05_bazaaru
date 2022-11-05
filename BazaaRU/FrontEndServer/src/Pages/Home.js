@@ -1,12 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
-import { Post } from "../Components/Post/Post.js";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
-import SearchBar from '../Components/Search/SearchBar';
-import Cookies from 'js-cookie';
+import SearchBar from "../Components/Search/SearchBar";
+import Cookies from "js-cookie";
 //import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -19,8 +18,8 @@ function Home() {
   //replace the permission ID with userID******************************88
   console.log(state);
   const { username } = state;
-  const userName = Cookies.get('userName');
-  console.log('username2: ', userName);
+  const userName = Cookies.get("userName");
+  console.log("username2: ", userName);
   console.log("username: ", username);
   const permID = 3;
   function signOut() {
@@ -29,7 +28,7 @@ function Home() {
   }
   function toCatalog() {
     //console.log("pressed");
-    Cookies.remove('userName', {path: '/', domain: 'rutgers.edu'});
+    Cookies.remove("userName", { path: "/", domain: "rutgers.edu" });
     navigate("/homepage/catalog");
   }
   function toAbout() {
@@ -41,7 +40,7 @@ function Home() {
     navigate("/homepage/createpost", { state: { username: username } });
   }
   function toProfile() {
-    navigate("/homepage/profile", { state: { username: username } });
+    navigate("/homepage/profile");
   }
   function toAccountList() {
     navigate("/homepage/accountList");
@@ -78,7 +77,7 @@ function Home() {
         </button>
       </header>
       <h3>Featured Items/Services From This Week</h3>
-      <CatalogWeekly />
+      <CatalogWeekly></CatalogWeekly>
     </div>
   );
 }

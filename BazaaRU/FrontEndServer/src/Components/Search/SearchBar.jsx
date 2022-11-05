@@ -7,7 +7,6 @@ import "./SearchBar.css"; //Style of login form
 
 //takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
 function SearchBar() {
-
   const navigate = useNavigate();
 
   //Event handler when user presses sign in buttom
@@ -20,8 +19,7 @@ function SearchBar() {
 
     console.log(keywordValue);
 
-    navigate("/homepage/results:${keywordValue}", {keywordValue});
-
+    navigate("/homepage/results:${keywordValue}", { keywordValue });
   };
 
   // JSX code for login form
@@ -29,6 +27,7 @@ function SearchBar() {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
+          <label>Search Bar </label>
           <input type="text" name="keyword" required />
         </div>
         <div className="button-container">
@@ -40,9 +39,7 @@ function SearchBar() {
 
   return (
     <div className="app">
-      <div className="search-form">
-        {renderForm}
-      </div>
+      <div className="search-form">{renderForm}</div>
     </div>
   );
 }
