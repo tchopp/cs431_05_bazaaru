@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
 import axios from "axios";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Post = (props) => {
   const [postData, setPostData] = useState({
@@ -13,6 +14,7 @@ export const Post = (props) => {
     description:
       "A description of the product. Product is cool and fun and exciting and amazing.",
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -36,17 +38,19 @@ export const Post = (props) => {
       });
   }, [props.post_id]);
 
-  return (
-    <ul>
-      <li>{postData.username}</li>
-      <li>{postData.product}</li>
-      <li>
-        <img src={postData.image_url} />
-      </li>
-      <li>${postData.price}</li>
-      <li>{postData.category}</li>
-      <li>{postData.description}</li>
-      <li>-------------------------------</li>
-    </ul>
-  );
+
+const toPostDetails = () => {
+    navigate('/homepage/postdets',{state: {postData: postData, post_id: props.post_id}});
+}
+
+return (<ul onClick={toPostDetails}>
+            <li>{postData.username}</li>
+            <li>{postData.product}</li>
+            <li><img src={postData.image_url}/></li>
+            <li>${postData.price}</li>
+            <li>{postData.category}</li>
+            <li>{postData.description}</li>
+            <li>-------------------------------</li>
+        </ul>);
 };
+
