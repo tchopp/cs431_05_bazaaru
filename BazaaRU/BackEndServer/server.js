@@ -52,6 +52,42 @@ app.post('/login', async (req, res) => {
 	res.send({ received: 'false' })
 })
 
+app.post('/buy', async(req, res) => { 
+    //A. Collect data from body of request received
+    const transaction_id = req.body.transaction_id;
+    const post_id = req.body.post_id;
+    const buyer_username = req.body.buyer_username;
+    const seller_username = req.body.seller_username;
+    const date_purchased = req.body.date_purchased;
+    res.send("success");
+    //const userid = req.body.postUserID;
+    //B. Send to database
+    //replace with my stuff
+    const responseDB = await sequelize.query("INSERT INTO transactions SET transaction_id = " + transaction_id + ", post_id = " + post_id + ", buyer_username = '" + buyer_username + "', seller_username = '" + seller_username + "', date_purchased = '" + date_purchased + "';");
+    //C. Send response to react
+
+})
+
+app.post('/prod_update', async(req, res) => { 
+    //A. Collect data from body of request received
+    const post_id = req.body.post_id;
+    res.send("success");
+    //const userid = req.body.postUserID;
+    //B. Send to database
+    //replace with my stuff
+    const responseDB = await sequelize.query("UPDATE item_catalog SET been_purchased = 1 WHERE post_id = " + post_id + ";");
+    //C. Send response to react
+
+})
+
+app.get('/transactionID', async(req,res) => {
+    sequelize.query("SELECT MAX(transaction_id) AS ID FROM transactions;").then((response) => {
+        res.send(response);
+     });
+    
+})
+
+
 app.put('/createAccount', async (req, res) => {
 	// Needs input sanitization and checking
 	// Currently does not check for existing account
@@ -128,14 +164,14 @@ app.post('/createPost', async(req, res) => {
 })
 
 app.get('/catalog', async(req,res) => {
-	sequelize.query("SELECT post_id FROM item_catalog ORDER BY post_id DESC LIMIT 5;").then((response) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 ORDER BY post_id;").then((response) => {
 		res.send(response);
 	 });
 	
 })
 
 app.get('/catalogweek', async(req,res) => {
-	sequelize.query("SELECT post_id FROM item_catalog WHERE  YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) ORDER BY post_id DESC LIMIT 5;").then((response) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 AND YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) ORDER BY post_id;").then((response) => {
 		res.send(response);
 	 });
 	
@@ -143,8 +179,8 @@ app.get('/catalogweek', async(req,res) => {
 
 app.get('/catalog/:postID', async(req,res) => {
 	console.log(req.params);
-	 sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.postID + "").then((response) => {
-		console.log("SELECT * FROM item_catalog WHERE post_id='" + req.params.postID + "'")
+	 sequelize.query("SELECT * FROM item_catalog WHERE post_id = " + req.params.postID + " AND been_purchased = 0;").then((response) => {
+		console.log("SELECT * FROM item_catalog WHERE post_id = " + req.params.postID + " AND been_purchased = 0;")
 		res.send(response);
 	 });
 	

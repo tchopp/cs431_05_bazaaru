@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile";
 import AccountList from "./Pages/AccountList";
 import TestResults from "./Pages/searchResultsTest";
 import CreatePost from "./Pages/CreatePost";
+import PostDetails from "./Pages/PostDetails";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,6 +29,7 @@ root.render(
         <Route path="/homepage/accountList" element={<AccountList />} />
         <Route path="/homepage/results=Yousof" element={<TestResults />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />
+        <Route path="/homepage/postdets" element={<PostDetails />} />
       </Routes>
     </Router>
   </React.StrictMode>
