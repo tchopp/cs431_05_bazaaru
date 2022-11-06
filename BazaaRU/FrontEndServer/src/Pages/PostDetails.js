@@ -26,10 +26,10 @@ const PostDetails = () => {
                 seller_username: location.state.postData.username,
                 date_purchased: date_purchased
             }).then(() => {
-                axios.post('http://cs431-05.cs.rutgers.edu:5000/prod_update',{
+                axios.post('http://cs431-05.cs.rutgers.edu:5000/prod_update_user_buy',{
                     post_id: location.state.post_id
                 }).then(() => {
-                    navigate('/homepage/catalog');
+                    axios.post('http://cs431-05.cs.rutgers.edu:5000/currency_update_user_buy',{username: buyer_username, price: location.state.postData.price}).then(()=>{navigate('/homepage/catalog');});
                 });
             });
         });

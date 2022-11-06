@@ -68,7 +68,7 @@ app.post('/buy', async(req, res) => {
 
 })
 
-app.post('/prod_update', async(req, res) => { 
+app.post('/prod_update_user_buy', async(req, res) => { 
     //A. Collect data from body of request received
     const post_id = req.body.post_id;
     res.send("success");
@@ -80,11 +80,37 @@ app.post('/prod_update', async(req, res) => {
 
 })
 
+app.post('/currency_update_user_buy', async(req, res) => { 
+    //A. Collect data from body of request received
+	const username = req.body.username;
+    const price = req.body.price;
+    res.send("success");
+    //const userid = req.body.postUserID;
+    //B. Send to database
+    //replace with my stuff
+    const responseDB = await sequelize.query("UPDATE accounts SET acc_balance = acc_balance - " + price + " WHERE username = '" + username + "';");
+    //C. Send response to react
+
+})
+
 app.get('/transactionID', async(req,res) => {
     sequelize.query("SELECT MAX(transaction_id) AS ID FROM transactions;").then((response) => {
         res.send(response);
      });
     
+})
+
+app.post('/currency_update', async(req, res) => { 
+    //A. Collect data from body of request received
+	const user_id = req.body.user_id;
+    const price = req.body.price;
+    res.send("success");
+    //const userid = req.body.postUserID;
+    //B. Send to database
+    //replace with my stuff
+    const responseDB = await sequelize.query("UPDATE accounts SET acc_balance = 1 WHERE post_id = " + post_id + ";");
+    //C. Send response to react
+
 })
 
 
