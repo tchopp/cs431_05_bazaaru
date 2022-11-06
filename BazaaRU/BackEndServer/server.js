@@ -224,3 +224,17 @@ app.get('/results/:postKW', async(req,res) => {
 		res.send(response);
 	 });
 })
+
+app.post('/updateBalance', async(req,res)=>{
+	//Collect informationneeded to update account balance
+	const update = req.body.updateAmount;
+	console.log(update);
+	const usersid= re.body.userName;
+	console.log(usersid);
+	res.send("sucessfully collected information for updating")
+
+	//Need to make sure about the userid
+	//Is userid the integer primary? and is that what cookies is holding? 
+	//const currentBalance = await sequelize.query("SELECT acc_balance AS BALANCE FROM accounts WHERE userid = '" + usersid + "');");
+
+})

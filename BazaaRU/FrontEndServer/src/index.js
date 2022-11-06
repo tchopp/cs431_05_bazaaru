@@ -14,6 +14,7 @@ import TestResults from "./Pages/searchResultsTest";
 import CreatePost from "./Pages/CreatePost";
 import PostDetails from "./Pages/PostDetails";
 import PurchaseHistory from "./Pages/Transactions";
+import UpdateBalance from "./Pages/UpdateBalance";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -32,6 +33,7 @@ root.render(
           path="/homepage/profile/transactions"
           element={<PurchaseHistory />}
         />
+        <Route path = "homepage/profile/updatebalance" element={<UpdateBalance/>}/>
         <Route path="/homepage/accountList" element={<AccountList />} />
         <Route path="/homepage/results=Yousof" element={<TestResults />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />

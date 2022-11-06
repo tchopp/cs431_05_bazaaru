@@ -17,6 +17,9 @@ function Profile() {
   function toPurchaseHistory() {
     navigate("/homepage/profile/transactions");
   }
+  function toAddBalance(){
+    navigate("/homepage/profile/updatebalance");
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -26,6 +29,9 @@ function Profile() {
       <Account username={username}></Account>
       <button style={styles} onClick={toPurchaseHistory}>
         Purchase History
+      </button>
+      <button style={styles} onClick={toAddBalance}>
+        Update Account Balance
       </button>
     </div>
   );
