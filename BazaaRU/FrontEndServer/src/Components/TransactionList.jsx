@@ -32,7 +32,8 @@ function TransactionList() {
   function cancelProduct() {
     //If user put a product up and wishes to cancel it
     //Remove Item from catalog appropriately
-    //Update transaction state appropriately
+    //Update transaction state appropriately (Probably just remove product from catalog as it appears transaction is only created for purchased products.
+    //Aka query from product catalog
     //console.log("pressed");
   }
 
