@@ -23,7 +23,7 @@ export const Catalog = () => {
   return (
     <ul>
       {posts.map((id) => (
-        <li>
+        <li key={id}>
           <Post post_id={id} />
         </li>
       ))}
