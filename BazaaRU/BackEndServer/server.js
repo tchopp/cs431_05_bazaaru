@@ -52,6 +52,13 @@ app.post('/login', async (req, res) => {
 	res.send({ received: 'false' })
 })
 
+app.get('/accountList', async (req, res) => {
+	console.log('account list requested');
+	const results = await sequelize.query("SELECT username, permID FROM accounts;");
+	console.log(results[0]);
+	res.send(results[0]);
+})
+
 app.post('/buy', async(req, res) => { 
     //A. Collect data from body of request received
     const transaction_id = req.body.transaction_id;

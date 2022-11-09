@@ -2,6 +2,7 @@ import logo from "./profile.png"; //Need to replace image with project image
 import Account from "../Components/Account";
 import AccountDelete from "../Components/AccountDelete";
 import Cookies from "js-cookie";
+import AccountsList from "../Components/AccountList";
 
 //This is the default view/ Login page to get into the actual BazaaRU Homepage
 function AccountList() {
@@ -12,7 +13,7 @@ function AccountList() {
         <p>User Account Listing</p>
       </header>
       {/*Create function to list all accounts in the sql database ******************************/}
-      <Account username={"ac1"}></Account>
+      <AccountsList></AccountsList>
       <AccountDelete></AccountDelete>
       <div></div>
     </div>

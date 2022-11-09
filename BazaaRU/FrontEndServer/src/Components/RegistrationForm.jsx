@@ -12,24 +12,12 @@ function RegistrationForm(url) {
 
   const weblink = url.name;
 
-  // Current Existing User Login info
-  const database = [
-    //Needs to eventually be replaced with a hashmap/mySQL database***************************
-    {
-      username: "ac1",
-      password: "pi",
-    },
-    {
-      username: "ac2",
-      password: "phi",
-    },
-  ];
-
   //error messages for when user inputs invalid credentials
   const errors = {
-    username: "Username already exists",
-    password: "Password does not meet requirements",
+    login: "invalid username/password"
   };
+
+  var post = 'false';
 
   //Event handler when user presses sign in buttom
   const handleSubmit = (event) => {
@@ -38,26 +26,11 @@ function RegistrationForm(url) {
 
     var { username, password } = document.forms[0]; //grabs inputted information
 
-    // Find user login info
-    const userData = database.find((user) => user.username === username.value);
-
     const formInput = { uName: username.value, pWord: password.value };
 
     axios.put('http://cs431-05.cs.rutgers.edu:5000/createAccount', formInput).
       then((response) => { console.log(response.data); }); 
-
-    if (userData) {
-      setErrorMessages({
-        name: "username",
-        message: errors.username,
-      });
-    } else {
-      //if password doesnt meet minimum requirements setErrorMessages({ name: "password", message: errors.password });
-      //else
-      //create new user to add to database
-      setIsRegistered(true);
-    }
-  };
+};
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
