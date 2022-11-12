@@ -240,10 +240,20 @@ app.listen(port, () => {
 
 app.get('/results/:postKW', async(req,res) => {
 	console.log(req.params);
-	 sequelize.query("SELECT * FROM item_catalog WHERE product LIKE 'G%'").then((response) => {
-		console.log("SELECT * FROM item_catalog WHERE product LIKE 'G%'")
+	 sequelize.query("SELECT * FROM item_catalog WHERE (product LIKE '%" + req.params.postKW + "%' OR description LIKE '%" + req.params.postKW + "%') AND been_purchased = 0;").then((response) => {
+		console.log("SELECT * FROM item_catalog WHERE (product LIKE '%" + req.params.postKW + "%' OR description LIKE '%" + req.params.postKW + "%') AND been_purchased = 0;")
 		res.send(response);
 	 });
+	
+})
+
+app.post('/transactionCancel', async(req, res) => { 
+	console.log(req.params);
+	 sequelize.query("DELETE FROM item_catalog WHERE post_id = " + req.body.postID + " AND been_purchased = 0;").then((response) => {
+		console.log("DELETE FROM item_catalog WHERE post_id = " + req.body.postID + " AND been_purchased = 0;")
+		res.send(response);
+	});
+
 })
 
 
