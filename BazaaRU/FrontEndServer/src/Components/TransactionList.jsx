@@ -35,6 +35,14 @@ function TransactionList() {
     //Update transaction state appropriately (Probably just remove product from catalog as it appears transaction is only created for purchased products.
     //Aka query from product catalog
     //console.log("pressed");
+    axios.post('http://cs431-05.cs.rutgers.edu:5000/transactionCancel/',{ 
+      postID: transactionInformation2.postID  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   function refundProduct() {
