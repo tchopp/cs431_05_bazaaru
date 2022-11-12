@@ -151,6 +151,20 @@ app.post('/accountRank', async (req,res) => {
 	res.send({ permID: results[0][0].permID });
 })
 
+app.post('/updateBalance', async(req,res)=>{
+	//Collect informationneeded to update account balance
+	const update = req.body.updateAmount;
+	console.log(update);
+	const usersid= re.body.userName;
+	console.log(usersid);
+	res.send("sucessfully collected information for updating")
+
+	//Need to make sure about the userid
+	//Is userid- the integer primarykey? and is that what cookies is holding? 
+	//const currentBalance = await sequelize.query("SELECT acc_balance AS BALANCE FROM accounts WHERE userid = '" + usersid + "');");
+
+})
+
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
 /*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
@@ -232,16 +246,4 @@ app.get('/results/:postKW', async(req,res) => {
 	 });
 })
 
-app.post('/updateBalance', async(req,res)=>{
-	//Collect informationneeded to update account balance
-	const update = req.body.updateAmount;
-	console.log(update);
-	const usersid= re.body.userName;
-	console.log(usersid);
-	res.send("sucessfully collected information for updating")
 
-	//Need to make sure about the userid
-	//Is userid the integer primary? and is that what cookies is holding? 
-	//const currentBalance = await sequelize.query("SELECT acc_balance AS BALANCE FROM accounts WHERE userid = '" + usersid + "');");
-
-})
