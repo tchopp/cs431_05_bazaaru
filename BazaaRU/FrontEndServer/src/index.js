@@ -35,7 +35,6 @@ root.render(
         />
         <Route path = "homepage/profile/updatebalance" element={<UpdateBalance/>}/>
         <Route path="/homepage/accountList" element={<AccountList />} />
-        <Route path="/homepage/results=Yousof" element={<TestResults />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />
         <Route path="/homepage/postdets" element={<PostDetails />} />
       </Routes>
