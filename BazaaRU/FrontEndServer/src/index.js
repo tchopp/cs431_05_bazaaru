@@ -10,7 +10,6 @@ import Catalog from "./Pages/Catalog";
 import Results from "./Pages/searchResults";
 import Profile from "./Pages/Profile";
 import AccountList from "./Pages/AccountList";
-import TestResults from "./Pages/searchResultsTest";
 import CreatePost from "./Pages/CreatePost";
 import PostDetails from "./Pages/PostDetails";
 import PurchaseHistory from "./Pages/Transactions";
