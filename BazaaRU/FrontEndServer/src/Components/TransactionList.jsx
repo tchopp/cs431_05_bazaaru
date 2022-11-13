@@ -29,14 +29,14 @@ function TransactionList() {
   //Axios call is needed to get the transactionID, postID, and other information from backend and displayed here
   //The above is a hard-coded example
 
-  function cancelProduct() {
+  function cancelProduct(pID) {
     //If user put a product up and wishes to cancel it
     //Remove Item from catalog appropriately
     //Update transaction state appropriately (Probably just remove product from catalog as it appears transaction is only created for purchased products.
     //Aka query from product catalog
     //console.log("pressed");
     axios.post('http://cs431-05.cs.rutgers.edu:5000/transactionCancel/',{ 
-      postID: transactionInformation2.postID  })
+      postID: pID  })
     .then(function (response) {
       console.log(response);
     })
