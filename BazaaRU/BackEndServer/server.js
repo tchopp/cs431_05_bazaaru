@@ -155,13 +155,10 @@ app.post('/updateBalance', async(req,res)=>{
 	//Collect informationneeded to update account balance
 	const update = req.body.updateAmount;
 	console.log(update);
-	const usersid= re.body.userName;
+	const usersid= req.body.userName;
 	console.log(usersid);
-	res.send("sucessfully collected information for updating")
-
-	//Need to make sure about the userid
-	//Is userid- the integer primarykey? and is that what cookies is holding? 
-	//const currentBalance = await sequelize.query("SELECT acc_balance AS BALANCE FROM accounts WHERE userid = '" + usersid + "');");
+	const DBResponse = await sequelize.query("UPDATE accounts SET acc_balance= acc_balance+" + update + " WHERE username = '" + usersid + "';");
+	res.send(DBResponse);
 
 })
 
@@ -205,9 +202,6 @@ app.post('/createPost', async(req, res) => {
 	console.log(response2);
 	const currentTime = response2[0][0].CURTIME;
 	const responseDB = await sequelize.query("INSERT INTO item_catalog (post_id, createdat, username, product, image_url, price, category, description) VALUES (" +  nextMax + ", NOW() ,'" + userid + "','" + title + "', 'https://www.alimentarium.org/sites/default/files/media/image/2017-02/AL027-01_pomme_de_terre_0_0.jpg', " + price + ",'" + type + "','" + description + "');");
-	//const responseDB = await sequelize.query("INSERT INTO item_catalog (post_id, createdat, username, product, image_url, price, category, description) VALUES (${nextMax}, '')")
-	//C. Send response to react
-
 })
 
 app.get('/catalog', async(req,res) => {
