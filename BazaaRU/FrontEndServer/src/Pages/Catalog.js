@@ -10,8 +10,8 @@ function CatalogPage() {
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Catalog />
       </header>
+      <Catalog />
     </div>
   );
 }
