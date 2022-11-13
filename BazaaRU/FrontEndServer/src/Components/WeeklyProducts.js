@@ -30,5 +30,5 @@ useEffect(()=>{axios.get('http://cs431-05.cs.rutgers.edu:5000/catalogweek').then
 
 
 
-return (<ul>{posts.map(id => <li><Post post_id={id}/></li>)}</ul>);
+return (<ul>{posts.map(id => <li key={id}><Post post_id={id}/></li>)}</ul>);
 };

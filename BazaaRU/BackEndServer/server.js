@@ -21,7 +21,8 @@ async function testDb() {
 
 testDb();
 
-const mariadb = require('mariadb')
+const mariadb = require('mariadb');
+const { response } = require('express');
 const pool = mariadb.createPool({
      host: 'localhost', 
      user:'expressAccount', 
@@ -73,6 +74,22 @@ app.post('/buy', async(req, res) => {
     const responseDB = await sequelize.query("INSERT INTO transactions SET transaction_id = " + transaction_id + ", post_id = " + post_id + ", buyer_username = '" + buyer_username + "', seller_username = '" + seller_username + "', date_purchased = '" + date_purchased + "';");
     //C. Send response to react
 
+})
+
+app.post('/currency_update_seller_prodsold', async(req,res) => {
+	const responseDB = await sequelize.query("UPDATE accounts SET acc_balance = acc_balance + " + req.body.update_amount + " WHERE username = '" + req.body.username + "';");
+})
+
+app.post('/check_currency', async(req,res) => {
+	const acc_balance = await sequelize.query("SELECT acc_balance FROM accounts WHERE username = '" + req.body.username + "';");
+	const response_to_send = {transaction_possible: true};
+	if (acc_balance[0][0].acc_balance >= req.body.prod_price) {
+		res.send(response_to_send);
+	}
+	else {
+		response_to_send.transaction_possible = false; 
+		res.send(response_to_send);
+	}
 })
 
 app.post('/prod_update_user_buy', async(req, res) => { 
