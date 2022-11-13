@@ -7,9 +7,11 @@ export const Catalog = () => {
   const [posts, setPosts] = useState([0]);
 
   useEffect(() => {
+    console.log('useeffect ran!! yes!!');
     axios
-      .get("http://cs431-05.cs.rutgers.edu:5000/catalog")
+      .get('http://cs431-05.cs.rutgers.edu:5000/catalog')
       .then((response) => {
+        console.log('axios call too');
         const ids = [];
         for (let i = 0; i < response.data[0].length; i++) {
           ids.push(response.data[0][i].post_id);

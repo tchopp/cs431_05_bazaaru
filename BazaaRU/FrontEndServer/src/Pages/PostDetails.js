@@ -15,6 +15,7 @@ const PostDetails = () => {
         console.log(response0.data)
         if (response0.data.transaction_possible) {
             axios.get('http://cs431-05.cs.rutgers.edu:5000/transactionID').then((response) => {
+                console.log('hey1');
             let transaction_id; 
             let buyer_username = Cookies.get('userName');
             let date_purchased = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -31,11 +32,19 @@ const PostDetails = () => {
                 seller_username: location.state.postData.username,
                 date_purchased: date_purchased
             }).then(() => {
+                console.log('hey2');
                 axios.post('http://cs431-05.cs.rutgers.edu:5000/prod_update_user_buy',{
                     post_id: location.state.post_id
                 }).then(() => {
-                    axios.post('http://cs431-05.cs.rutgers.edu:5000/currency_update_user_buy',{username: buyer_username, price: location.state.postData.price}).then(()=>{
-                        axios.post('http://cs431-05.cs.rutgers.edu:5000/currency_update_seller_prodsold',{username: location.state.postData.username, update_amount: location.state.postData.price}).then(() => {navigate('/homepage/catalog');});
+                    console.log('hey3');
+                    axios.post('http://cs431-05.cs.rutgers.edu:5000/currency_update_user_buy',{username: buyer_username, price: location.state.postData.price})
+                    .then(()=>{
+                        console.log('hey4');
+                        axios.post('http://cs431-05.cs.rutgers.edu:5000/currency_update_seller_prodsold',{username: location.state.postData.username, update_amount: location.state.postData.price})
+                        .then(() => {
+                            console.log('hey5');
+                            navigate('/homepage/catalog');
+                        });
                     });
                 });
             });

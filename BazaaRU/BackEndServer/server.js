@@ -77,6 +77,7 @@ app.post('/buy', async(req, res) => {
 })
 
 app.post('/currency_update_seller_prodsold', async(req,res) => {
+	res.send("success");
 	const responseDB = await sequelize.query("UPDATE accounts SET acc_balance = acc_balance + " + req.body.update_amount + " WHERE username = '" + req.body.username + "';");
 })
 
@@ -222,14 +223,14 @@ app.post('/createPost', async(req, res) => {
 })
 
 app.get('/catalog', async(req,res) => {
-	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 ORDER BY post_id;").then((response) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 ORDER BY post_id DESC;").then((response) => {
 		res.send(response);
 	 });
 	
 })
 
 app.get('/catalogweek', async(req,res) => {
-	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 AND YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) ORDER BY post_id;").then((response) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 AND YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) ORDER BY post_id DESC;").then((response) => {
 		res.send(response);
 	 });
 	
