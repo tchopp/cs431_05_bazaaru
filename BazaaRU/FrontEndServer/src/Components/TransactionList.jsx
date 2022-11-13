@@ -54,7 +54,7 @@ function TransactionList() {
   return (
     <div className="app">
       <div className="transaction_item">
-        {/*Replace hardcoded with list of transaction items.This can be done using map. You can refer to component catalog.js for reference*/}
+        {/*Replace hardcoded with list of transaction items.This can be done using map. You can refer to component catalog.js or the accountlist chris made for reference. Please use the transaction component as it is linked with the button.*/}
         <Transaction
           transactionInformation={transactionInformation}
           onCancel={cancelProduct}
