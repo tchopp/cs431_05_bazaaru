@@ -34,7 +34,7 @@ function Transaction(props) {
         {/*You can choose what information you want passed to the method. 
         Just pass the arg of your choice and modify it on TransactionList.jsx. IE: props.onCancel(information) */}
         {username === buyer_username && (
-          <button style={styles} onClick={props.onRefund}>
+          <button style={styles} onClick={props.onRefund(postID)}>
             Refund Product
           </button>
         )}
