@@ -27,7 +27,7 @@ function Transaction(props) {
         <p>Seller = {seller_username}</p>
         <p>Transaction Date = {transaction_date}</p>
         {username === seller_username && (
-          <button style={styles} onClick={props.onCancel}>
+          <button style={styles} onClick={props.onCancel(postID)}>
             Cancel Product
           </button>
         )}
