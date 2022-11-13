@@ -268,4 +268,18 @@ app.post('/transactionCancel', async(req, res) => {
 
 })
 
-
+app.post('/transactionRefund', async (req, res) => {
+       console.log('refund requested');
+       const postID = req.body.postID;
+       const results = sequelize.query("SELECT * FROM transactions WHERE post_id = " + postID + ";");
+       const results2 = sequelize.query("SELECT * FROM item_catalog WHERE post_id = " + postID + ";");
+       const value = results2[0][0].price;
+       const buyer = results[0][0].buyer_username;
+       const seller = results[0][0].seller_username;
+       //Add value back to buyers account
+       sequelize.query("UPDATE accounts SET acc_balance = acc_balance + " + value + " WHERE username = " + buyer + ";");
+       //Remove value from sellers account
+       sequelize.query("UPDATE accounts SET acc_balance = acc_balance - " + value + " WHERE username = " + seller + ";");
+       sequelize.query("UPDATE item_catalog SET been_purchased = 0 WHERE post_id = " + postID + ";");
+       sequelize.query("DELETE FROM transactions WHERE post_id = " + postID + ";");
+})

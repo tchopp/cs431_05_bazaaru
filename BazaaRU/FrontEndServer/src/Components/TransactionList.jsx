@@ -45,12 +45,15 @@ function TransactionList() {
     });
   }
 
-  function refundProduct() {
+  function refundProduct(pID) {
     //If user bought a product and wishes to refund
     //Refund buyer the price of product. Move the product back to catalog.
     //Update transaction state appropriately
     //console.log("pressed");
+    axios.post('http://cs431-05.cs.rutgers.edu:5000/transactionRefund', 
+	{ postID: pID });
   }
+
   return (
     <div className="app">
       <div className="transaction_item">
