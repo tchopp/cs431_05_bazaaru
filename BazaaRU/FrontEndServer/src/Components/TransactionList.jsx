@@ -35,6 +35,14 @@ function TransactionList() {
     //Update transaction state appropriately (Probably just remove product from catalog as it appears transaction is only created for purchased products.
     //Aka query from product catalog
     //console.log("pressed");
+    axios.post('http://cs431-05.cs.rutgers.edu:5000/transactionCancel/',{ 
+      postID: transactionInformation2.postID  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   function refundProduct() {
@@ -46,7 +54,7 @@ function TransactionList() {
   return (
     <div className="app">
       <div className="transaction_item">
-        {/*Replace hardcoded with list of transaction items.This can be done using map. You can refer to component catalog.js for reference*/}
+        {/*Replace hardcoded with list of transaction items.This can be done using map. You can refer to component catalog.js or the accountlist chris made for reference. Please use the transaction component as it is linked with the button.*/}
         <Transaction
           transactionInformation={transactionInformation}
           onCancel={cancelProduct}

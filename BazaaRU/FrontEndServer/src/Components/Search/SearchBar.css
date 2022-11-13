@@ -1,8 +1,8 @@
 .app {
     font-family: sans-serif;
-    display: inline;
+    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: normal;
     flex-direction: row;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -20,7 +20,7 @@ input[type="submit"] {
     margin-top: 0px;
     margin-bottom: 0px;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 20px;
     background: #852ebe;
     border: 1px solid #852ebe;
     color: #fff;
@@ -32,24 +32,22 @@ input[type="submit"]:hover {
 }
   
 .button-container {
-    display: flex;
+    display: inline-block;
     justify-content: center;
 }
   
 .search-form {
     background-color: white;
-    padding: 2rem;
+    padding: 1rem;
 }
   
-
 .list-container {
     display: flex;
 }
-  
-  
+
 .input-container {
-    display: inline;
-    flex-direction: row;
+    display: inline-block;
+    flex-direction: column;
     gap: 10px;
-    margin: 15px;
+    margin: 015px;
 }
