@@ -222,15 +222,15 @@ app.post('/createPost', async(req, res) => {
 	const responseDB = await sequelize.query("INSERT INTO item_catalog (post_id, createdat, username, product, image_url, price, category, description) VALUES (" +  nextMax + ", NOW() ,'" + userid + "','" + title + "', 'https://www.alimentarium.org/sites/default/files/media/image/2017-02/AL027-01_pomme_de_terre_0_0.jpg', " + price + ",'" + type + "','" + description + "');");
 })
 
-app.get('/catalog', async(req,res) => {
-	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 ORDER BY post_id DESC;").then((response) => {
+app.post('/catalog', async(req,res) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 AND username != '" + req.body.username +"' ORDER BY post_id DESC;").then((response) => {
 		res.send(response);
 	 });
 	
 })
 
-app.get('/catalogweek', async(req,res) => {
-	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 AND YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) ORDER BY post_id DESC;").then((response) => {
+app.post('/catalogweek', async(req,res) => {
+	sequelize.query("SELECT post_id FROM item_catalog WHERE been_purchased = 0 AND YEARWEEK(createdat, 1) = YEARWEEK(CURDATE(), 1) AND username != '" + req.body.username +"' ORDER BY post_id DESC;").then((response) => {
 		res.send(response);
 	 });
 	
