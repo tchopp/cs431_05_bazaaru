@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Post } from "../Post/Post.js";
 import axios from "axios";
+import './Catalog.css'
+import Cookies from "js-cookie";
 
 export const Catalog = () => {
   // 10 (-1) post_ids for first render
@@ -9,7 +11,7 @@ export const Catalog = () => {
   useEffect(() => {
     console.log('useeffect ran!! yes!!');
     axios
-      .get('http://cs431-05.cs.rutgers.edu:5000/catalog')
+      .post('http://cs431-05.cs.rutgers.edu:5000/catalog',{username:Cookies.get('userName')})
       .then((response) => {
         console.log('axios call too');
         const ids = [];

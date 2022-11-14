@@ -43,7 +43,7 @@ const toPostDetails = () => {
     navigate('/homepage/postdets',{state: {postData: postData, post_id: props.post_id}});
 }
 
-return (<ul onClick={toPostDetails}>
+return (<div className="post"><ul onClick={toPostDetails}>
             <li>{postData.username}</li>
             <li>{postData.product}</li>
             <li><img src={postData.image_url}/></li>
@@ -51,6 +51,7 @@ return (<ul onClick={toPostDetails}>
             <li>{postData.category}</li>
             <li>{postData.description}</li>
             <li>-------------------------------</li>
-        </ul>);
+        </ul>
+        </div>);
 };
 
