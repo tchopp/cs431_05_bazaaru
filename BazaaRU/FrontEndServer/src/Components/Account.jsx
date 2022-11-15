@@ -25,9 +25,9 @@ function Account(props) {
 
   return (
     <div className="Style">
-      {/*Account information will be gathered from back-end using the User ID passed to Account */}
+      {/*Account information will be gathered from back-end using the User ID passed to Account. Might remove Account registered if we don't wanna keep dates */}
       <p>Account Name: {returnString(username)}</p>
-      <p>Account Registered: not yet implemented</p>
+      <p>Account Registered: not yet implemented</p>  
       <p>User Account: {returnString(permID)}</p>
     </div>
   );
