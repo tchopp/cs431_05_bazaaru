@@ -15,7 +15,7 @@ import PostDetails from "./Pages/PostDetails";
 import PurchaseHistory from "./Pages/Transactions";
 import UpdateBalance from "./Pages/UpdateBalance";
 
-
+//SS fixed
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

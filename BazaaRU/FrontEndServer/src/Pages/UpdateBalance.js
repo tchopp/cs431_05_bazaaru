@@ -1,9 +1,11 @@
 import Cookies from "js-cookie";
+import React from "react";
+import{ useState } from "react";
 import "./UpdateBalance.css";
 import logo from "./profile.png"; //Need to replace image with project image
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-
+//Un tiempo mas
 const UpdateBalance = () => {
     const navigate = useNavigate();
     //Username holder
