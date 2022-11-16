@@ -8,7 +8,7 @@ function Profile() {
   const navigate = useNavigate();
   const username = Cookies.get("userName");
 
-  console.log("userId:", username);
+  //console.log("userId:", username);
 
   const styles = {
     fontSize: 20,
@@ -17,7 +17,7 @@ function Profile() {
   function toPurchaseHistory() {
     navigate("/homepage/profile/transactions");
   }
-  function toAddBalance(){
+  function toAddBalance() {
     navigate("/homepage/profile/updatebalance");
   }
   return (

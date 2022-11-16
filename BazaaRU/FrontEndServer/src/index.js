@@ -14,8 +14,9 @@ import CreatePost from "./Pages/CreatePost";
 import PostDetails from "./Pages/PostDetails";
 import PurchaseHistory from "./Pages/Transactions";
 import UpdateBalance from "./Pages/UpdateBalance";
+import Complaint from "./Pages/Complaint";
+import UserContacts from "./Pages/UserContacts";
 
-//SS fixed
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -32,10 +33,15 @@ root.render(
           path="/homepage/profile/transactions"
           element={<PurchaseHistory />}
         />
-        <Route path = "/homepage/profile/updatebalance" element={<UpdateBalance/>}/>
+        <Route
+          path="/homepage/profile/updatebalance"
+          element={<UpdateBalance />}
+        />
         <Route path="/homepage/accountList" element={<AccountList />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />
         <Route path="/homepage/postdets" element={<PostDetails />} />
+        <Route path="/homepage/contact" element={<Complaint />} />
+        <Route path="/homepage/userContacts" element={<UserContacts />} />
       </Routes>
     </Router>
   </React.StrictMode>

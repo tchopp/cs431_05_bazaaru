@@ -27,14 +27,14 @@ function Transaction(props) {
         <p>Seller = {seller_username}</p>
         <p>Transaction Date = {transaction_date}</p>
         {username === seller_username && (
-          <button style={styles} onClick={props.onCancel(postID)}>
+          <button style={styles} onClick={() => props.onCancel(postID)}>
             Cancel Product
           </button>
         )}
         {/*You can choose what information you want passed to the method. 
         Just pass the arg of your choice and modify it on TransactionList.jsx. IE: props.onCancel(information) */}
         {username === buyer_username && (
-          <button style={styles} onClick={props.onRefund(postID)}>
+          <button style={styles} onClick={() => props.onRefund(postID)}>
             Refund Product
           </button>
         )}
