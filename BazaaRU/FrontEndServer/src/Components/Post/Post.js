@@ -40,7 +40,7 @@ export const Post = (props) => {
 
 
 const toPostDetails = () => {
-    navigate('/homepage/postdets',{state: {postData: postData, post_id: props.post_id}});
+    navigate('/homepage/postdets/'+props.post_id);
 }
 
 return (<div className="post"><ul onClick={toPostDetails}>

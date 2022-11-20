@@ -39,9 +39,11 @@ root.render(
         />
         <Route path="/homepage/accountList" element={<AccountList />} />
         <Route path="/homepage/createpost" element={<CreatePost />} />
-        <Route path="/homepage/postdets" element={<PostDetails />} />
+
+        <Route path="/homepage/postdets/:post_id" element={<PostDetails />} />
         <Route path="/homepage/contact" element={<Complaint />} />
         <Route path="/homepage/userContacts" element={<UserContacts />} />
+
       </Routes>
     </Router>
   </React.StrictMode>
