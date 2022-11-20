@@ -53,9 +53,7 @@ function LoginForm(url) {
   const handleSubmit = async (event) => {
     //Prevent page reload
     event.preventDefault();
-
     var { username, password } = document.forms[0]; //grabs inputted information
-
     const formInput = { uName: username.value, pWord: password.value };
 
     console.log("post val pre call: ", post);

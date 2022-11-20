@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import logo from "./profile.png"; //Need to replace image with project image
@@ -6,6 +7,7 @@ import "./Home.css";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
 import SearchBar from "../Components/Search/SearchBar";
 import Cookies from "js-cookie";
+import axios from "axios";
 //import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -13,15 +15,20 @@ function Home() {
     fontSize: 20,
     marginRight: "20px",
   };
+  //const [isLoading, setLoading] = useState(true);
+  const [permID, setPermID] = useState("");
+  const username = Cookies.get("userName");
+  const reqData = { username: username };
+  useEffect(() => {
+    axios
+      .post("http://cs431-05.cs.rutgers.edu:5000/accountRank", reqData)
+      .then((response) => {
+        //setLoading("false");
+        setPermID(response.data.permID);
+      });
+  });
   const navigate = useNavigate();
-  const { state } = useLocation();
-  //replace the permission ID with userID******************************88
-  console.log(state);
-  const { username } = state;
-  const userName = Cookies.get("userName");
-  console.log("username2: ", userName);
-  console.log("username: ", username);
-  const permID = 3;
+  //console.log(permID);
   function signOut() {
     //console.log("pressed");
     navigate("/");
@@ -37,7 +44,7 @@ function Home() {
   }
   function toPost() {
     //console.log("pressed");
-    navigate("/homepage/createpost", { state: { username: username } });
+    navigate("/homepage/createpost");
   }
   function toProfile() {
     navigate("/homepage/profile");
@@ -45,7 +52,12 @@ function Home() {
   function toAccountList() {
     navigate("/homepage/accountList");
   }
-
+  function toContactList() {
+    navigate("/homepage/userContacts");
+  }
+  // if (isLoading) {
+  //   return <div className="App">Loading...</div>;
+  // }
   return (
     <div>
       <header className="App-header">
@@ -66,10 +78,15 @@ function Home() {
         <button style={styles} onClick={toProfile}>
           Account Profile
         </button>
-        {/*if admin account, render the admin view account button */}
-        {permID === 3 && (
+        {/*if admin/mod account, render the admin view account button and user contacts/requests */}
+        {(permID === 3 || permID === 2) && (
           <button style={styles} onClick={toAccountList}>
             Account List
+          </button>
+        )}
+        {(permID === 3 || permID === 2) && (
+          <button style={styles} onClick={toContactList}>
+            User Contacts
           </button>
         )}
         <button style={styles} onClick={signOut}>
@@ -78,6 +95,9 @@ function Home() {
       </header>
       <h3>Featured Items/Services From This Week</h3>
       <CatalogWeekly></CatalogWeekly>
+      <a className="Contact-link" href="/homepage/contact">
+        Issues? Complaints? Contact an administrator.
+      </a>
     </div>
   );
 }

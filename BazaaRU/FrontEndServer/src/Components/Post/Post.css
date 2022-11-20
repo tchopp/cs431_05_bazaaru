@@ -6,3 +6,7 @@ img {
 li {
     list-style-type: none;
 }
+
+.post:hover {
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { Navigate,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import './PostDetails.css';
 
 const PostDetails = () => {
     const params = useParams();
@@ -18,6 +19,7 @@ const PostDetails = () => {
           "A description of the product. Product is cool and fun and exciting and amazing.",
       });
     const [buyable,setBuyable] = useState(true);
+    const [purchased, setPurchased] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const handleClick = ({target}) => {
@@ -54,7 +56,9 @@ const PostDetails = () => {
                         axios.post('http://cs431-05.cs.rutgers.edu:5000/currency_update_seller_prodsold',{username: postData.username, update_amount: postData.price})
                         .then(() => {
                             console.log('hey5');
-                            navigate('/homepage/catalog');
+                            setPurchased(true);
+                            setTimeout(()=>{navigate('/homepage/catalog');},2000);
+                            
                         });
                     });
                 });
@@ -95,7 +99,8 @@ const PostDetails = () => {
       }, []);
 
     return (
-    <div>
+    <div className='postdets'>
+        {purchased && <p>Purchase successful! Redirecting you back to the Catalog...</p>}
         {!buyable && <p>Do not have the funds.</p>}
     <ul>
         <li>{postData.username}</li>
