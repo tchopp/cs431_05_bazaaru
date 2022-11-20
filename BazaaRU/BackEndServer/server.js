@@ -179,14 +179,15 @@ app.post("/currency_update", async (req, res) => {
 app.post("/findBalance", async(req,res)=>{
   //A. Get username from request received
   const username = req.body.username;
+  console.log("Account balance requested");
   console.log(username);
   //B. Send query for Balance
   const results = await sequelize.query(
     "SELECT acc_balance FROM accounts WHERE username = '" + username + "';"
   );
-  console.log(results[0][0]);
+  console.log(results);
   //C. Return balance to frontend 
-  res.send(results[0][0]);
+  res.send({acc_balance: results[0][0].acc_balance});
 });
 
 app.put("/createAccount", async (req, res) => {
