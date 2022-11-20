@@ -176,6 +176,19 @@ app.post("/currency_update", async (req, res) => {
   //C. Send response to react
 });
 
+app.post("/findBalance", async(req,res)=>{
+  //A. Get username from request received
+  const username = req.body.username;
+  console.log(username);
+  //B. Send query for Balance
+  const results = await sequelize.query(
+    "SELECT acc_balance FROM accounts WHERE username = '" + username + "';"
+  );
+  console.log(results[0][0]);
+  //C. Return balance to frontend 
+  res.send(results[0][0]);
+});
+
 app.put("/createAccount", async (req, res) => {
   // Needs input sanitization and checking
   // Currently does not check for existing account
