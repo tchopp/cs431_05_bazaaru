@@ -7,12 +7,16 @@ import Cookies from "js-cookie";
 export const Catalog = () => {
   // 10 (-1) post_ids for first render
   const [posts, setPosts] = useState([0]);
+  const [isEmpty, setIsEmpty] = useState(false);
     useEffect(() => {
     console.log('useeffect ran!! yes!!');
     axios
       .post('http://cs431-05.cs.rutgers.edu:5000/catalog',{username:Cookies.get('userName')})
       .then((response) => {
         console.log('axios call too');
+        if (response.data[0].length === 0) {
+          setIsEmpty(true);
+        }
         const ids = [];
         for (let i = 0; i < response.data[0].length; i++) {
           ids.push(response.data[0][i].post_id);
@@ -24,6 +28,8 @@ export const Catalog = () => {
   }, []);
 
   return (
+    <div>
+    {isEmpty && <p>Sorry, looks like there are no results</p>}
     <ul>
       {posts.map((id) => (
         <li key={id}>
@@ -31,5 +37,6 @@ export const Catalog = () => {
         </li>
       ))}
     </ul>
+    </div>
   );
 };
