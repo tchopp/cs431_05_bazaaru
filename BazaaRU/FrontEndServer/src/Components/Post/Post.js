@@ -17,12 +17,13 @@ export const Post = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://cs431-05.cs.rutgers.edu:5000/catalog/" + props.post_id)
-      .then((response) => {
+    if (props.post_id !== 0) {
+      axios
+        .get("http://cs431-05.cs.rutgers.edu:5000/catalog/" + props.post_id)
+        .then((response) => {
         //const data = [];
-        console.log(response.data[0]);
-        if (response.data[0].length !== 0) {
+          console.log(response.data[0]);
+        
           setPostData({
             username: response.data[0][0].username,
             product: response.data[0][0].product,
@@ -31,11 +32,13 @@ export const Post = (props) => {
             category: response.data[0][0].category,
             description: response.data[0][0].description,
           });
-        }
+        
 
         //setPosts(ids);
         //console.log(posts);
       });
+    }
+      
   }, [props.post_id]);
 
 
