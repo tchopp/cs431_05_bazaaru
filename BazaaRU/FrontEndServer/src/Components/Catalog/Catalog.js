@@ -5,7 +5,7 @@ import axios from "axios";
 export const Catalog = () => {
   // 10 (-1) post_ids for first render
   const [posts, setPosts] = useState([0]);
-
+  
   useEffect(() => {
     console.log('useeffect ran!! yes!!');
     axios

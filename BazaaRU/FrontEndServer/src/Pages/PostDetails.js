@@ -73,6 +73,7 @@ const PostDetails = () => {
     }
 
     useEffect(() => {
+      if (params.post_id !== 0) {
         axios
           .get("http://cs431-05.cs.rutgers.edu:5000/catalog/" + params.post_id)
           .then((response) => {
@@ -92,6 +93,7 @@ const PostDetails = () => {
             //setPosts(ids);
             //console.log(posts);
           });
+        }
       }, []);
 
     return (
