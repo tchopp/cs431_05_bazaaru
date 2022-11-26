@@ -12,8 +12,17 @@ import Profile from "./Pages/Profile";
 import AccountList from "./Pages/AccountList";
 import TestResults from "./Pages/searchResultsTest";
 import CreatePost from "./Pages/CreatePost";
+<<<<<<< Updated upstream
 import Post from "./Pages/Post";
 
+=======
+import PostDetails from "./Pages/PostDetails";
+import PurchaseHistory from "./Pages/Transactions";
+import UpdateBalance from "./Pages/UpdateBalance";
+import Complaint from "./Pages/Complaint";
+import UserContacts from "./Pages/UserContacts";
+import PublicProfile from "./Pages/PublicProfile";
+>>>>>>> Stashed changes
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,6 +34,27 @@ root.render(
         <Route path="/registration" element={<Registration />} />
         <Route path="/homepage/about" element={<About />} />
         <Route path="/homepage/catalog" element={<Catalog />} />
+<<<<<<< Updated upstream
+=======
+        <Route path="/homepage/results" element={<Results />} />
+        <Route path="/homepage/profile" element={<Profile />} />
+        <Route
+          path="/homepage/profile/transactions"
+          element={<PurchaseHistory />}
+        />
+        <Route
+          path="/homepage/profile/updatebalance"
+          element={<UpdateBalance />}
+        />
+        <Route path="/homepage/accountList" element={<AccountList />} />
+        <Route path="/homepage/createpost" element={<CreatePost />} />
+
+        <Route path="/homepage/postdets/:post_id" element={<PostDetails />} />
+        <Route path="/homepage/publicprofile/:acc_id" element={<PublicProfile />} />
+        <Route path="/homepage/contact" element={<Complaint />} />
+        <Route path="/homepage/userContacts" element={<UserContacts />} />
+
+>>>>>>> Stashed changes
       </Routes>
     </Router>
   </React.StrictMode>
