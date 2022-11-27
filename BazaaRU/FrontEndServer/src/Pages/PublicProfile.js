@@ -6,7 +6,7 @@ import {useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import WriteReviews from "../Components/Review/WriteReview";
-import ReadReviews from "../Components/Review/WriteReviews";
+import ReadReviews from "../Components/Review/ReadReviews";
 
 const PublicProfile = () => {
    //1. Get username of subject to set up page 

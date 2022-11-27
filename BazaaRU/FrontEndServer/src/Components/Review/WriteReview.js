@@ -84,7 +84,7 @@ const WriteReview = (props) =>{
           min="0"
           max = "5"
           required
-          value={price}
+          value={rating}
           onChange={(e) => setRating(e.target.value)}
         />
         </form>
