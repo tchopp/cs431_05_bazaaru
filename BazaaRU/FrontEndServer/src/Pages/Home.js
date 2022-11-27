@@ -35,7 +35,6 @@ function Home() {
   }
   function toCatalog() {
     //console.log("pressed");
-    Cookies.remove("userName", { path: "/", domain: "rutgers.edu" });
     navigate("/homepage/catalog");
   }
   function toAbout() {
