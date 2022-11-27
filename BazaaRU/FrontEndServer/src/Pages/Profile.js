@@ -26,7 +26,7 @@ function Profile() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Account Profile</p>
       </header>
-      <Account username={username}></Account>
+      <Account></Account>
       <button style={styles} onClick={toPurchaseHistory}>
         Purchase History
       </button>
