@@ -422,3 +422,46 @@ app.post("/transactionRefund", async (req, res) => {
   );
   sequelize.query("DELETE FROM transactions WHERE post_id = " + postID + ";");
 });
+
+
+//REVIEW RELATED ROUTES
+
+//1.To check if a person made a purchase with someone else
+app.post("/check_for_purchase", async (req, res) => {
+  console.log("Checking to see if the person tyring to write a review made a purchase...");
+  const reviewer = req.body.writerUN;
+  console.log("The person trying to write the review is: "+ {reviewer});
+  const reviewee = req.body.subjectUN;
+  console.log("The person they are trying to write the review n is: " + {reviewee});
+  const response = await sequelize.query(
+    "SELECT transaction_id FROM transactions WHERE buyer_username = '" + reviewer + "' && seller_username = '" + 
+    reviewee + "';"
+  );
+  if (
+    !(typeof response[0][0] === "undefined")) {
+    console.log("There was a transaction");
+    res.send(true);
+  } else{
+    console.log("There were no transactions");
+    res.send(false);
+  }
+});
+
+//2. Write the damn review 
+app.post("/make_review", async (req, res) => {
+  console.log("Working on making a review now!");
+  const reviewer = req.body.writerUN;
+  console.log("The person trying to write the review is: "+ {reviewer});
+  const reviewee = req.body.subjectUN;
+  console.log("The person they are trying to write the review n is: " + {reviewee});
+  const acc_review = req.body.review;
+  console.log(acc_review);
+  const rating = req.body.rating;
+  console.log(rating);
+  const response = await sequelize.query(
+    "INSERT INTO reviews (writer_usnm, subject_usnm, acc_review, num_rating) VALUES('" + reviewer+ "','" + 
+    reviewee + "','" + acc_review + "'," + rating + ");"
+  );
+  console.log(response);
+  res.send("success");
+});

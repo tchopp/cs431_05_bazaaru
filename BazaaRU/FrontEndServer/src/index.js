@@ -42,6 +42,7 @@ root.render(
         <Route path="/homepage/createpost" element={<CreatePost />} />
 
         <Route path="/homepage/postdets/:post_id" element={<PostDetails />} />
+        <Route path="/homepage/publicprofile/:ACuser" element={<PublicProfile />} />
         <Route path="/homepage/contact" element={<Complaint />} />
         <Route path="/homepage/userContacts" element={<UserContacts />} />
 
