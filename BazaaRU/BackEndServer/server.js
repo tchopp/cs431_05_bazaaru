@@ -245,6 +245,42 @@ app.post("/updateBalance", async (req, res) => {
   res.send(DBResponse);
 });
 
+app.get("/getAccount/:acID", async (req, res) => {
+  console.log(req.params);
+  sequelize
+    .query(
+      "SELECT * FROM accounts WHERE userID = " +
+        req.params.acID +
+        ";"
+    )
+    .then((response) => {
+      console.log(
+        "SELECT * FROM accounts WHERE userID = " +
+          req.params.acID +
+          ";"
+      );
+      res.send(response);
+    });
+});
+
+app.get("/ACresults/:acKW", async (req, res) => {
+  console.log(req.params);
+  sequelize
+    .query(
+      "SELECT * FROM accounts WHERE username LIKE '%" +
+        req.params.acKW +
+        "%';"
+    )
+    .then((response) => {
+      console.log(
+      "SELECT * FROM accounts WHERE username LIKE '%" +
+        req.params.acKW +
+        "%';"
+      );
+      res.send(response);
+    });
+});
+
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
 /*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
