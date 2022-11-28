@@ -8,6 +8,7 @@ import Registration from "./Pages/Registration";
 import About from "./Pages/About";
 import Catalog from "./Pages/Catalog";
 import Results from "./Pages/searchResults";
+import ACResults from "./Pages/ACSearchResults";
 import Profile from "./Pages/Profile";
 import AccountList from "./Pages/AccountList";
 import CreatePost from "./Pages/CreatePost";
