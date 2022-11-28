@@ -29,6 +29,7 @@ root.render(
         <Route path="/homepage/about" element={<About />} />
         <Route path="/homepage/catalog" element={<Catalog />} />
         <Route path="/homepage/results" element={<Results />} />
+        <Route path="/homepage/ACresults" element={<ACResults />} />
         <Route path="/homepage/profile" element={<Profile />} />
         <Route
           path="/homepage/profile/transactions"
