@@ -64,7 +64,7 @@ app.get("/accountList", async (req, res) => {
   const results = await sequelize.query(
     "SELECT username, permID FROM accounts;"
   );
-  console.log(results[0]);
+  //console.log(results[0]);
   res.send(results[0]);
 });
 
@@ -214,7 +214,21 @@ app.put("/deleteAccount", async (req, res) => {
   console.log(req.body);
   const userInputUsername = req.body.uName;
   console.log(userInputUsername);
-  //const results = await sequelize.query("")
+  const results = await sequelize.query("DELETE FROM accounts WHERE username=" + '"' + userInputUsername + '";' );
+});
+
+app.post("/promoteAccount", async (req,res) => {
+  console.log("account promote req");
+  console.log(req.body);
+  const userInputUsername = req.body.uName;
+  const results = await sequelize.query("UPDATE accounts SET permID=2 WHERE username=" + '"' + userInputUsername + '";');
+});
+
+app.post("/demoteAccount", async (req,res) => {
+  console.log("account demote req");
+  console.log(req.body);
+  const userInputUsername = req.body.uName;
+  const results = await sequelize.query("UPDATE accounts SET permID=1 WHERE username=" + '"' + userInputUsername + '";');
 });
 
 app.post("/accountRank", async (req, res) => {
@@ -421,4 +435,39 @@ app.post("/transactionRefund", async (req, res) => {
     "UPDATE item_catalog SET been_purchased = 0 WHERE post_id = " + postID + ";"
   );
   sequelize.query("DELETE FROM transactions WHERE post_id = " + postID + ";");
+});
+
+
+app.post("/addComplaint", async (req,res) => {
+  console.log("complaint req");
+  console.log(req.body);
+  const userInputUsername = req.body.uName;
+  const complaintType = req.body.cType;
+  const complaintDesc = req.body.cDesc;
+  const result = sequelize.query("INSERT INTO complaints (username, type, description) VALUES (" + '"' + userInputUsername + '", ' + '"' + complaintType + '", ' + '"' + complaintDesc + '"' + ");");
+  console.log(result[0]);
+});
+
+app.get("/complaintList", async (req,res) => {
+  //console.log("complaint list requested");
+  const results = await sequelize.query(
+    "SELECT * FROM complaints;"
+  );
+  //console.log(results[0]);
+  res.send(results[0]);
+});
+
+app.post("/deleteComplaint", async (req,res) => {
+  console.log("complaint delete req");
+  console.log(req.body);
+  const complaintID = req.body.cID;
+  const results = sequelize.query("DELETE FROM complaints WHERE complaintID=" + '"' + complaintID + '";');
+});
+
+app.post("/getTransactions", async (req,res) => {
+  console.log("transactions requested");
+  console.log(req.body);
+  const userInputUsername = req.body.uName;
+  const results = sequelize.query("SELECT * FROM transactions WHERE buyer_username=" + '"' + userInputUsername + '" OR seller_username=' + '"' + userInputUsername + '";');
+  res.send(results[0]);
 });

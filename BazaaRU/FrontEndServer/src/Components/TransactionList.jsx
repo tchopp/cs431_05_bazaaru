@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Transaction from "./Transaction";
 
-function TransactionList() {
+export const TransactionList = (props) => {
+  const [transactionData, setTransactionData] = useState([
+    { transaction_id: "1", post_id: "1", buyer_username: "default", seller_username: "default", transaction_date: "00-00-00" },
+  ]);
   const username = Cookies.get("userName");
   //transaction_id, post_id, buyer_username, seller_username, transaction_date
+  
+  useEffect(() => {
+    axios
+      .post("http://cs431-05.cs.rutgers.edu:5000/getTransactions", { uName: username })
+      .then((response) => {
+        console.log(response.data);
+        setTransactionData(response.data);
+    });
+  });
+
   const transactionInformation = {
     transactionID: 1,
     postID: 1,
@@ -48,22 +61,13 @@ function TransactionList() {
   return (
     <div className="app">
       <div className="transaction_item">
-        {/*Replace hardcoded with list of transaction items.This can be done using map. 
-        You can refer to component catalog.js or the accountlist chris made for reference. 
-        Please use the transaction component as it is linked with the button.
-        An example would be making an axios call and storing the information into a variable called transactionInformation.
-        Then pass that information to each transaction componenent using map.
-        */}
-        <Transaction
-          transactionInformation={transactionInformation}
-          onCancel={cancelProduct}
-          onRefund={refundProduct}
-        ></Transaction>
-        <Transaction
-          transactionInformation={transactionInformation2}
-          onCancel={cancelProduct}
-          onRefund={refundProduct}
-        ></Transaction>
+        <ul>
+	  {transactionData.map((item) => (
+	    <li key={item.transaction_id}>
+	      <Transaction transactionInformation={item} onCancel={cancelProduct} onRefund={refundProduct}></Transaction>
+	    </li>
+	  ))}
+	</ul>
       </div>
     </div>
   );

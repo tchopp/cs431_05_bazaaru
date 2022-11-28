@@ -16,7 +16,6 @@ import PurchaseHistory from "./Pages/Transactions";
 import UpdateBalance from "./Pages/UpdateBalance";
 import Complaint from "./Pages/Complaint";
 import UserContacts from "./Pages/UserContacts";
-import PublicProfile from "./Pages/PublicProfile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
