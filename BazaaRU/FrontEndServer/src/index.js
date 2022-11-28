@@ -18,6 +18,7 @@ import UpdateBalance from "./Pages/UpdateBalance";
 import Complaint from "./Pages/Complaint";
 import UserContacts from "./Pages/UserContacts";
 import PublicProfile from "./Pages/PublicProfile";
+import ProfileTest from "./Pages/ProfileTest";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,6 +33,7 @@ root.render(
         <Route path="/homepage/results" element={<Results />} />
         <Route path="/homepage/ACresults" element={<ACResults />} />
         <Route path="/homepage/profile" element={<Profile />} />
+        <Route path="/homepage/profile/profiletest" element={<ProfileTest />} />
         <Route
           path="/homepage/profile/transactions"
           element={<PurchaseHistory />}
@@ -44,7 +46,7 @@ root.render(
         <Route path="/homepage/createpost" element={<CreatePost />} />
 
         <Route path="/homepage/postdets/:post_id" element={<PostDetails />} />
-        <Route path="/homepage/publicprofile/:ACuser" element={<PublicProfile />} />
+        <Route path="/homepage/publicprofile/:reviewee" element={<PublicProfile />} />
         <Route path="/homepage/contact" element={<Complaint />} />
         <Route path="/homepage/userContacts" element={<UserContacts />} />
 
