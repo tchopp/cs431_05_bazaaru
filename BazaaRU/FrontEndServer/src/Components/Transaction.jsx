@@ -9,7 +9,7 @@ function Transaction(props) {
     fontSize: 20,
     marginRight: "20px",
   };
-  const transactionID = props.transactionInformation.transactionID;
+  const transactionID = props.transactionInformation.transaction_id;
   const postID = props.transactionInformation.postID;
   const buyer_username = props.transactionInformation.buyer_username;
   const seller_username = props.transactionInformation.seller_username;

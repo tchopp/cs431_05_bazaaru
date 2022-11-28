@@ -468,6 +468,7 @@ app.post("/getTransactions", async (req,res) => {
   console.log("transactions requested");
   console.log(req.body);
   const userInputUsername = req.body.uName;
-  const results = sequelize.query("SELECT * FROM transactions WHERE buyer_username=" + '"' + userInputUsername + '" OR seller_username=' + '"' + userInputUsername + '";');
+  const results = await sequelize.query("SELECT * FROM transactions WHERE buyer_username=" + '"' + userInputUsername + '" OR seller_username=' + '"' + userInputUsername + '";');
+  console.log(results[0]);
   res.send(results[0]);
 });
