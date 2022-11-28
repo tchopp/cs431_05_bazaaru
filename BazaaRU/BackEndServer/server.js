@@ -478,7 +478,7 @@ app.post("/get_reviews", async (req,res)=>{
   res.send(response);
 });
 
-//Get all the damn review 
+//Get all the damn reviews 
 app.get("/reviews/:rid", async (req, res) => {
   console.log(req.params);
   sequelize
