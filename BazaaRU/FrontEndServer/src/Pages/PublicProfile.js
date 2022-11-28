@@ -11,7 +11,7 @@ import ReadReviews from "../Components/Review/ReadReviews";
 const PublicProfile = () => {
    //1. Get username of subject to set up page 
    const params = useParams();
-   const subject = params.ACuser;
+   const subject = params.ACData.username;
    console.log(subject);
    //2. Get username of writer
    const username = Cookies.get("userName");

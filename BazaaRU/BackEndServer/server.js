@@ -434,7 +434,7 @@ app.post("/check_for_purchase", async (req, res) => {
   const reviewee = req.body.subjectUN;
   console.log("The person they are trying to write the review n is: " + {reviewee});
   const response = await sequelize.query(
-    "SELECT transaction_id FROM transactions WHERE buyer_username = '" + reviewer + "' && seller_username = '" + 
+    "SELECT transaction_id FROM transactions WHERE buyer_username = '" + reviewer + "' AND seller_username = '" + 
     reviewee + "';"
   );
   if (
@@ -465,3 +465,33 @@ app.post("/make_review", async (req, res) => {
   console.log(response);
   res.send("success");
 });
+
+//Get RID for All the reviews
+app.post("/get_reviews", async (req,res)=>{
+  console.log("Getting all the reviews for the given username now");
+  //Log the username
+  const username = req.body.username;
+  console.log("username we are looking for is" + username);
+  const response = await sequelize.query(
+    "SELECT rid, FROM reviews WHERE subject_usnm = '" + username + "';"
+  ); 
+  res.send(response);
+});
+
+//Get all the damn review 
+app.get("/reviews/:rid", async (req, res) => {
+  console.log(req.params);
+  sequelize
+    .query(
+      "SELECT * FROM reviews WHERE rid = " +
+        req.params.rid + ";"
+    )
+    .then((response) => {
+      console.log(
+        "SELECT * FROM reviews WHERE rid = " +
+        req.params.rid + ";"
+      );
+      res.send(response);
+    });
+});
+
