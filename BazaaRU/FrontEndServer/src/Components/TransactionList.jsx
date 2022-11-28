@@ -19,24 +19,7 @@ export const TransactionList = (props) => {
         setTransactionData(response.data);
     });
   });
-
-  const transactionInformation = {
-    transactionID: 1,
-    postID: 1,
-    buyer_username: "ac1",
-    seller_username: "test",
-    transaction_date: "00/00/00",
-  };
-  const transactionInformation2 = {
-    transactionID: 2,
-    postID: 2,
-    buyer_username: "N/A",
-    seller_username: "ac1",
-    transaction_date: "00/00/00",
-  };
-  //Axios call is needed to get the transactionID, postID, and other information from backend and displayed here
-  //The above is a hard-coded example
-
+	
   function cancelProduct(pID) {
     console.log("pressed");
     axios
