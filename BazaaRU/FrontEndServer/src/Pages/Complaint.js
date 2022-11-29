@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./Complaint.css";
+import axios from "axios";
 
 //This is the default view/ Login page to get into the actual BazaaRU Homepage
 function Complaint() {
@@ -14,9 +15,11 @@ function Complaint() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //Note: Need Axios call to database to store {type} of request, {description}, complaint number, and username {name} into a database
     console.log(type);
     console.log(description);
+    console.log(name);
+    const complaintInfo = { uName:name, cType:type, cDesc:description }
+    axios.post("http://cs431-05.cs.rutgers.edu:5000/addComplaint", complaintInfo)
     navigate("/homepage");
   };
 

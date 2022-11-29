@@ -14,7 +14,6 @@ function AccountList() {
       </header>
       {/*Create function to list all accounts in the sql database ******************************/}
       <AccountsList></AccountsList>
-      <AccountDelete></AccountDelete>
       <div></div>
     </div>
   );

@@ -1,6 +1,7 @@
 import logo from "./profile.png"; //Need to replace image with project image
 import Complaint from "../Components/Complaint";
 import { useState } from "react";
+import ComplaintList from "../Components/ComplaintList";
 
 //This is the default view/ Login page to get into the actual BazaaRU Homepage
 function UserContacts() {
@@ -34,14 +35,7 @@ function UserContacts() {
       </div>
       {/*Display all of the user requests from database here. There is a complaint component if needed. Example listed. 
       Need to map complaint as did for transaction or you can use your own implementation*/}
-      <Complaint complaintInformation={complaintInformation}></Complaint>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Delete ComplaintID:
-          <input type="text" name="ComplaintID" onChange={handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <ComplaintList></ComplaintList>
     </div>
   );
 }
