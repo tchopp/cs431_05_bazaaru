@@ -6,6 +6,7 @@ import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
 import SearchBar from "../Components/Search/SearchBar";
+import ACSearchBar from "../Components/Accounts/ACSearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -36,7 +37,6 @@ function Home() {
   }
   function toCatalog() {
     //console.log("pressed");
-    Cookies.remove("userName", { path: "/", domain: "rutgers.edu" });
     navigate("/homepage/catalog");
   }
   function toMessages() {
@@ -70,6 +70,7 @@ function Home() {
         <p>Rutgers BazaaRU</p>
       </header>
       <SearchBar></SearchBar>
+      <ACSearchBar></ACSearchBar>
       <header className="Service-bar">
         <button style={styles} onClick={toAbout}>
           About

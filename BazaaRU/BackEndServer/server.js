@@ -356,6 +356,42 @@ app.post("/updateBalance", async (req, res) => {
   res.send(DBResponse);
 });
 
+app.get("/getAccount/:acID", async (req, res) => {
+  console.log(req.params);
+  sequelize
+    .query(
+      "SELECT * FROM accounts WHERE userID = " +
+        req.params.acID +
+        ";"
+    )
+    .then((response) => {
+      console.log(
+        "SELECT * FROM accounts WHERE userID = " +
+          req.params.acID +
+          ";"
+      );
+      res.send(response);
+    });
+});
+
+app.get("/ACresults/:acKW", async (req, res) => {
+  console.log(req.params);
+  sequelize
+    .query(
+      "SELECT * FROM accounts WHERE username LIKE '%" +
+        req.params.acKW +
+        "%';"
+    )
+    .then((response) => {
+      console.log(
+      "SELECT * FROM accounts WHERE username LIKE '%" +
+        req.params.acKW +
+        "%';"
+      );
+      res.send(response);
+    });
+});
+
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
 /*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
@@ -533,3 +569,76 @@ app.post("/transactionRefund", async (req, res) => {
   );
   sequelize.query("DELETE FROM transactions WHERE post_id = " + postID + ";");
 });
+
+
+//REVIEW RELATED ROUTES
+
+//1.To check if a person made a purchase with someone else
+app.post("/check_for_purchase", async (req, res) => {
+  console.log("Checking to see if the person tyring to write a review made a purchase...");
+  const reviewer = req.body.writerUN;
+  console.log("The person trying to write the review is: "+ {reviewer});
+  const reviewee = req.body.subjectUN;
+  console.log("The person they are trying to write the review n is: " + {reviewee});
+  const response = await sequelize.query(
+    "SELECT transaction_id FROM transactions WHERE buyer_username = '" + reviewer + "' AND seller_username = '" + 
+    reviewee + "';"
+  );
+  if (
+    !(typeof response[0][0] === "undefined")) {
+    console.log("There was a transaction");
+    res.send(true);
+  } else{
+    console.log("There were no transactions");
+    res.send(false);
+  }
+});
+
+//2. Write the damn review 
+app.post("/make_review", async (req, res) => {
+  console.log("Working on making a review now!");
+  const reviewer = req.body.writerUN;
+  console.log("The person trying to write the review is: "+ {reviewer});
+  const reviewee = req.body.subjectUN;
+  console.log("The person they are trying to write the review n is: " + {reviewee});
+  const acc_review = req.body.review;
+  console.log(acc_review);
+  const rating = req.body.rating;
+  console.log(rating);
+  const response = await sequelize.query(
+    "INSERT INTO reviews (writer_usnm, subject_usnm, acc_review, num_rating) VALUES('" + reviewer+ "','" + 
+    reviewee + "','" + acc_review + "'," + rating + ");"
+  );
+  console.log(response);
+  res.send("success");
+});
+
+//Get RID for All the reviews
+app.post("/get_reviews", async (req,res)=>{
+  console.log("Getting all the reviews for the given username now");
+  //Log the username
+  const username = req.body.username;
+  console.log("username we are looking for is" + username);
+  const response = await sequelize.query(
+    "SELECT rid, FROM reviews WHERE subject_usnm = '" + username + "';"
+  ); 
+  res.send(response);
+});
+
+//Get all the damn reviews 
+app.get("/reviews/:rid", async (req, res) => {
+  console.log(req.params);
+  sequelize
+    .query(
+      "SELECT * FROM reviews WHERE rid = " +
+        req.params.rid + ";"
+    )
+    .then((response) => {
+      console.log(
+        "SELECT * FROM reviews WHERE rid = " +
+        req.params.rid + ";"
+      );
+      res.send(response);
+    });
+});
+
