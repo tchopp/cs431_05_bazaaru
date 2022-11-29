@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 import "./Post.css";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import { Box, Card, Link, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const StyledProductImg = styled('img')({
+  top: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  position: 'absolute',
+});
 
 export const Post = (props) => {
-  const [postData, setPostData] = useState({
-    username: "user",
-    product: "product",
-    image_url:
-      "https://trackmobile.com/wp-content/uploads/2021/04/photo-unavailable.png",
-    price: -1,
-    category: "category",
-    description:
-      "A description of the product. Product is cool and fun and exciting and amazing.",
-  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [postData, setPostData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +36,8 @@ export const Post = (props) => {
             category: response.data[0][0].category,
             description: response.data[0][0].description,
           });
-        
+          setIsLoading(false);
+          
 
         //setPosts(ids);
         //console.log(posts);
@@ -42,19 +47,39 @@ export const Post = (props) => {
   }, [props.post_id]);
 
 
-const toPostDetails = () => {
-    navigate('/homepage/postdets/'+props.post_id);
-}
 
-return (<div className="post"><ul onClick={toPostDetails}>
-            <li>{postData.username}</li>
-            <li>{postData.product}</li>
-            <li><img src={postData.image_url}/></li>
-            <li>${postData.price}</li>
-            <li>{postData.category}</li>
-            <li>{postData.description}</li>
-            <li>-------------------------------</li>
-        </ul>
-        </div>);
+return (
+  <div>
+  {!isLoading && <Link href={"/homepage/postdets/"+props.post_id} underline="none"><Card>
+      <Box sx={{ pt: '100%', position: 'relative' }}>
+       
+      
+        
+        <StyledProductImg alt={postData.product} src={postData.image_url} />
+      </Box>
+
+      <Stack spacing={2} sx={{ p: 3 }}>
+      <Typography variant="subtitle2" noWrap>
+            {postData.username}
+          </Typography>
+
+          <Typography variant="subtitle2" noWrap>
+            {postData.product}
+          </Typography>
+       
+
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <Typography variant="subtitle1">
+            ${postData.price}
+          </Typography>
+        </Stack>
+      </Stack>
+    </Card></Link>}
+{isLoading && <Stack spacing={1}>
+
+      <Skeleton variant="rectangular" width={210} height={60} />
+      <Skeleton variant="rounded" width={210} height={60} />
+    </Stack>}
+</div>);
 };
 

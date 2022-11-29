@@ -9,6 +9,7 @@ import SearchBar from "../Components/Search/SearchBar";
 import ACSearchBar from "../Components/Accounts/ACSearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
+
 //import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -37,6 +38,10 @@ function Home() {
   function toCatalog() {
     //console.log("pressed");
     navigate("/homepage/catalog");
+  }
+  function toMessages() {
+    //console.log("pressed");
+    navigate("/homepage/messages");
   }
   function toAbout() {
     //console.log("pressed");
@@ -73,6 +78,9 @@ function Home() {
         <button style={styles} onClick={toCatalog}>
           Product Catalog
         </button>
+        <button style={styles} onClick={toMessages}>
+            Messages
+          </button>
         <button style={styles} onClick={toPost}>
           Create Posting
         </button>

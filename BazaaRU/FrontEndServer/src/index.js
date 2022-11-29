@@ -6,7 +6,7 @@ import App from "./Pages/App";
 import Home from "./Pages/Home";
 import Registration from "./Pages/Registration";
 import About from "./Pages/About";
-import Catalog from "./Pages/Catalog";
+import Catalog from "./Components/Catalog/Catalog";
 import Results from "./Pages/searchResults";
 import ACResults from "./Pages/ACSearchResults";
 import Profile from "./Pages/Profile";
@@ -17,8 +17,10 @@ import PurchaseHistory from "./Pages/Transactions";
 import UpdateBalance from "./Pages/UpdateBalance";
 import Complaint from "./Pages/Complaint";
 import UserContacts from "./Pages/UserContacts";
+import Messages from "./Components/Messages";
 import PublicProfile from "./Pages/PublicProfile";
 import ProfileTest from "./Pages/ProfileTest";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -49,6 +51,7 @@ root.render(
         <Route path="/homepage/publicprofile/:reviewee" element={<PublicProfile />} />
         <Route path="/homepage/contact" element={<Complaint />} />
         <Route path="/homepage/userContacts" element={<UserContacts />} />
+        <Route path="/homepage/messages" element={<Messages />} />
 
       </Routes>
     </Router>
