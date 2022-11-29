@@ -2,6 +2,7 @@ const express = require("express");
 const Sequelize = require("sequelize");
 const app = express(); //creates an express application called app
 const cors = require("cors");
+const nodemailer = require("nodemailer");
 //const cookieParser = require('cookie-parser');
 const port = 5000;
 
@@ -21,6 +22,29 @@ async function testDb() {
 }
 
 testDb();
+
+const transporter = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: "bazaaru.proj@gmail.com",
+    pass: "edbpsfmqukthvzda"
+  }
+});
+
+const testMailOptions = {
+  from: 'bazaaru.proj@gmail.com',
+  to: 'ctc111@scarletmail.rutgers.edu',
+  subject: 'Bazaaru Test Email',
+  text: 'Backend server start test email'
+};
+
+transporter.sendMail(testMailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
 
 const mariadb = require("mariadb");
 const { response } = require("express");
@@ -308,15 +332,39 @@ app.put("/createAccount", async (req, res) => {
   console.log(req.body);
   const userInputUsername = req.body.uName;
   const userInputPassword = req.body.pWord;
+  const userInputEmail = req.body.email;
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 6; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
   const results = await sequelize.query(
-    "INSERT INTO accounts (username, password) VALUES (" +
+    "INSERT INTO pending_accounts (rand_string, username, password, email) VALUES (" +
       '"' +
+      result +
+      '", "' +
       userInputUsername +
       '", "' +
       userInputPassword +
+      '", "' +
+      userInputEmail +
       '");'
   );
   console.log(results);
+  const mailOptions = {
+    from: 'bazaaru.proj@gmail.com',
+    to: userInputEmail,
+    subject: 'Bazaaru Account Create Dev Test Email',
+    text: result
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
   res.send({ received: "true" });
 });
 

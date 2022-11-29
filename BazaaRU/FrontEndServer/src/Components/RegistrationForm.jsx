@@ -24,9 +24,9 @@ function RegistrationForm(url) {
     //Prevent page reload
     event.preventDefault();
 
-    var { username, password } = document.forms[0]; //grabs inputted information
+    var { username, password, mail } = document.forms[0]; //grabs inputted information
 
-    const formInput = { uName: username.value, pWord: password.value };
+    const formInput = { uName: username.value, pWord: password.value, email: mail.value };
 
     axios.put('http://cs431-05.cs.rutgers.edu:5000/createAccount', formInput).
       then((response) => { console.log(response.data); }); 
@@ -50,6 +50,11 @@ function RegistrationForm(url) {
         <div className="input-container">
           <label>Password </label>
           <input type="password" name="password" required />
+          {renderErrorMessage("password")}
+        </div>
+        <div className="input-container">
+          <label>Email </label>
+          <input type="text" name="mail" required />
           {renderErrorMessage("password")}
         </div>
         <div className="button-container">
