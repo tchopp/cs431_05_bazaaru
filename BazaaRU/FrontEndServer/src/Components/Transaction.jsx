@@ -10,10 +10,10 @@ function Transaction(props) {
     marginRight: "20px",
   };
   const transactionID = props.transactionInformation.transaction_id;
-  const postID = props.transactionInformation.postID;
+  const postID = props.transactionInformation.post_id;
   const buyer_username = props.transactionInformation.buyer_username;
   const seller_username = props.transactionInformation.seller_username;
-  const transaction_date = props.transactionInformation.transaction_date;
+  const transaction_date = props.transactionInformation.date_purchased;
   //console.log("props", props);
   //   console.log("TransInfo", props.transactionInformation);
   //   console.log("TransID", props.transactionInformation.transactionID);
