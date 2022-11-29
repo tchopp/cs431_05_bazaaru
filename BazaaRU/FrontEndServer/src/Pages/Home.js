@@ -6,8 +6,10 @@ import logo from "./profile.png"; //Need to replace image with project image
 import "./Home.css";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
 import SearchBar from "../Components/Search/SearchBar";
+import ACSearchBar from "../Components/Accounts/ACSearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
+
 //import { useHistory } from "react-router-dom";
 
 function Home() {
@@ -37,6 +39,10 @@ function Home() {
     //console.log("pressed");
     navigate("/homepage/catalog");
   }
+  function toMessages() {
+    //console.log("pressed");
+    navigate("/homepage/messages");
+  }
   function toAbout() {
     //console.log("pressed");
     navigate("/homepage/about");
@@ -64,6 +70,7 @@ function Home() {
         <p>Rutgers BazaaRU</p>
       </header>
       <SearchBar></SearchBar>
+      <ACSearchBar></ACSearchBar>
       <header className="Service-bar">
         <button style={styles} onClick={toAbout}>
           About
@@ -71,6 +78,9 @@ function Home() {
         <button style={styles} onClick={toCatalog}>
           Product Catalog
         </button>
+        <button style={styles} onClick={toMessages}>
+            Messages
+          </button>
         <button style={styles} onClick={toPost}>
           Create Posting
         </button>

@@ -1,0 +1,12 @@
+img {
+    height: 100px;
+    width: 100px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.post:hover {
+    cursor: pointer;
+}
