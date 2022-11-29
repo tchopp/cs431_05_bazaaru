@@ -72,59 +72,100 @@ app.post("/buy", async (req, res) => {
   //A. Collect data from body of request received
   const transaction_id = req.body.transaction_id;
   const post_id = req.body.post_id;
+  const price = req.body.price;
   const buyer_username = req.body.buyer_username;
   const seller_username = req.body.seller_username;
   const date_purchased = req.body.date_purchased;
-  res.send("success");
-  //const userid = req.body.postUserID;
-  //B. Send to database
-  //replace with my stuff
-  const responseDB = await sequelize.query(
-    "INSERT INTO transactions SET transaction_id = " +
-      transaction_id +
-      ", post_id = " +
-      post_id +
-      ", buyer_username = '" +
-      buyer_username +
-      "', seller_username = '" +
-      seller_username +
-      "', date_purchased = '" +
-      date_purchased +
-      "';"
-  );
-  //C. Send response to react
-});
+  if (
+    typeof post_id === 'number' &&
+    typeof price === 'number' &&
+    typeof buyer_username === 'string' &&
+    typeof seller_username === 'string' &&
+    typeof date_purchased === 'string') {
 
-app.post("/currency_update_seller_prodsold", async (req, res) => {
-  res.send("success");
-  const responseDB = await sequelize.query(
-    "UPDATE accounts SET acc_balance = acc_balance + " +
-      req.body.update_amount +
-      " WHERE username = '" +
-      req.body.username +
-      "';"
-  );
-});
+       
 
-app.post("/check_currency", async (req, res) => {
-  const acc_balance = await sequelize.query(
-    "SELECT acc_balance FROM accounts WHERE username = '" +
-      req.body.username +
-      "';"
-  );
-  const response_to_send = { transaction_possible: true };
-  if (acc_balance[0][0].acc_balance >= req.body.prod_price) {
-    res.send(response_to_send);
-  } else {
-    response_to_send.transaction_possible = false;
-    res.send(response_to_send);
-  }
-});
+        const responseDB0 = sequelize.query("SELECT MAX(transaction_id) AS ID FROM transactions;").then((response)=>{
+            transaction_id = response[0][0].ID + 1;
+            const acc_balance = sequelize.query(
+              "SELECT acc_balance FROM accounts WHERE username = '" +
+                buyer_username +
+                "';"
+            ).then((response0)=>{
+              console.log(response0);
+              if (response0[0][0].acc_balance >= price) {
+                const responseDB = sequelize.query(
+                  "INSERT INTO transactions SET transaction_id = " +
+                    transaction_id +
+                    ", post_id = " +
+                    post_id +
+                    ", buyer_username = '" +
+                    buyer_username +
+                    "', seller_username = '" +
+                    seller_username +
+                    "', date_purchased = '" +
+                    date_purchased +
+                    "';"
+                ).then(()=>{
+                  const responseDB2 = sequelize.query(
+                    "UPDATE item_catalog SET been_purchased = 1 WHERE post_id = " +
+                      post_id +
+                      ";"
+                  ).then(()=>{
+                    const responseDB3 = sequelize.query(
+                      "UPDATE accounts SET acc_balance = acc_balance - " +
+                        price +
+                        " WHERE username = '" +
+                        buyer_username +
+                        "';"
+                    ).then(()=>{
+                      const responseDB4 = sequelize.query(
+                        "UPDATE accounts SET acc_balance = acc_balance + " +
+                          price +
+                          " WHERE username = '" +
+                          seller_username +
+                          "';"
+                      ).then(()=>{
+                        res.send("success");
+                      });
+              
+                    });
+                  });
+                });
+              }
+              else {
+                  res.send('no-money');
+              }
 
-app.post("/prod_update_user_buy", async (req, res) => {
-  //A. Collect data from body of request received
-  const post_id = req.body.post_id;
-  res.send("success");
+            });
+        });
+
+        
+
+
+        
+
+        
+  
+          
+  
+          
+  
+          
+          
+  
+      
+
+        
+        
+      }
+
+      else {
+        res.send('bad format for /buy');
+      }
+
+      
+  
   //const userid = req.body.postUserID;
   //B. Send to database
   //replace with my stuff
@@ -136,23 +177,93 @@ app.post("/prod_update_user_buy", async (req, res) => {
   //C. Send response to react
 });
 
-app.post("/currency_update_user_buy", async (req, res) => {
-  //A. Collect data from body of request received
-  const username = req.body.username;
-  const price = req.body.price;
-  res.send("success");
-  //const userid = req.body.postUserID;
-  //B. Send to database
-  //replace with my stuff
-  const responseDB = await sequelize.query(
-    "UPDATE accounts SET acc_balance = acc_balance - " +
-      price +
-      " WHERE username = '" +
-      username +
-      "';"
-  );
-  //C. Send response to react
+app.post("/chatdata", async (req, res) => {
+    const username = req.body.username;
+    const arr = [];
+    const responseDB0 = sequelize.query("SELECT * FROM messages WHERE users like '%" + username  + "%';")
+    .then((response)=>{
+       for (let i = 0 ; i < response[0].length; i++) {
+        usersInContactSplit = response[0][i].users.split(',');
+        if (usersInContactSplit[0] === username) {
+          arr.push({id: response[0][i].message_id, username: usersInContactSplit[1]});
+        }
+        else {
+          arr.push({id: response[0][i].message_id, username: usersInContactSplit[0]});
+        }
+      }
+       res.send(arr);
+    });
+   
 });
+
+app.post("/chatthread", async (req, res) => {
+  const id = req.body.id;
+  const thread_arr = [];
+  const responseDB0 = sequelize.query("SELECT sender,message FROM messages_streams WHERE message_id = " + id +  " ORDER BY time_sent ASC;")
+  .then((response)=>{
+     for (let i = 0 ; i < response[0].length; i++) {
+        thread_arr.push({user: response[0][i].sender, message: response[0][i].message});
+     }
+     res.send(thread_arr);
+  });
+ 
+});
+
+app.post("/sendmessage", async (req, res) => {
+  const id = req.body.id;
+  const sender = req.body.sender;
+  const time_sent = req.body.time_sent;
+  const message = req.body.message; 
+  
+  const responseDB = sequelize.query(
+    "INSERT INTO messages_streams SET message_id = " +
+      id +
+      ", sender = '" +
+      sender +
+      "', time_sent = '" +
+      time_sent +
+      "', message = '" +
+      message +
+      "';");
+
+      res.send('success');
+ 
+});
+
+app.post("/newmessage", async (req, res) => {
+  const sender = req.body.sender;
+  const reciever = req.body.reciever;
+  let message_id;
+ 
+  const responseDB0 = sequelize.query("SELECT MAX(message_id) AS ID FROM messages;")
+  .then((response)=>{
+    message_id = response[0][0].ID + 1
+    const responseDB = sequelize.query(
+      "INSERT INTO messages SET message_id = " +
+        message_id +
+        ", users = '" +
+        sender + "," + reciever + 
+        "';")
+        .then(()=>{
+          res.send({message_id:message_id});
+        });
+    
+  });
+
+      
+ 
+});
+
+
+app.post("/check_currency", async (req, res) => {
+  
+  const response_to_send = { transaction_possible: true };
+  
+});
+
+
+
+
 
 app.get("/transactionID", async (req, res) => {
   sequelize
