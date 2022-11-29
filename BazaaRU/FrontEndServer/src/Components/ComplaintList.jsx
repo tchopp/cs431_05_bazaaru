@@ -18,7 +18,7 @@ export const ComplaintList = (props) => {
 
   function deleteComplaint(comID) {
     const complaintData = { cID: comID };
-    axios.post("https://cs431-05.cs.rutgers.edu:5000/deleteComplaint", complaintData);
+    axios.post("http://cs431-05.cs.rutgers.edu:5000/deleteComplaint", complaintData);
   }
 
   return (
