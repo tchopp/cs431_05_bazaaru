@@ -21,7 +21,7 @@ const ProfileTest = () => {
        console.log(reviewee);
        
        //C4. Direct to a different page
-         navigate("/homepage/publicprofile"+reviewee);
+         navigate("/homepage/publicprofile/"+reviewee);
 
      };
 

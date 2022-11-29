@@ -668,7 +668,7 @@ app.post("/get_reviews", async (req,res)=>{
   const username = req.body.username;
   console.log("username we are looking for is" + username);
   const response = await sequelize.query(
-    "SELECT rid, FROM reviews WHERE subject_usnm = '" + username + "';"
+    "SELECT rid FROM reviews WHERE subject_usnm = '" + username + "';"
   ); 
   res.send(response);
 });

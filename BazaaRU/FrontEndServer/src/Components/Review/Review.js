@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Post.css";
+//import "./Post.css";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 
