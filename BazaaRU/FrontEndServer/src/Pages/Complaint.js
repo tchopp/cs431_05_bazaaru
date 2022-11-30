@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 import "./Complaint.css";
 import axios from "axios";
 
-//This is the default view/ Login page to get into the actual BazaaRU Homepage
 function Complaint() {
   const navigate = useNavigate();
   const name = Cookies.get("userName");
@@ -14,12 +13,11 @@ function Complaint() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(type);
-    console.log(description);
-    console.log(name);
-    const complaintInfo = { uName:name, cType:type, cDesc:description }
-    axios.post("http://cs431-05.cs.rutgers.edu:5000/addComplaint", complaintInfo)
+    const complaintInfo = { uName: name, cType: type, cDesc: description };
+    axios.post(
+      "http://cs431-05.cs.rutgers.edu:5000/addComplaint",
+      complaintInfo
+    );
     navigate("/homepage");
   };
 

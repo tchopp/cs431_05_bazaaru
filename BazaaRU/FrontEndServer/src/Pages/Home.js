@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 import "./Home.css";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
 import SearchBar from "../Components/Search/SearchBar";
@@ -10,14 +9,11 @@ import ACSearchBar from "../Components/Accounts/ACSearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-//import { useHistory } from "react-router-dom";
-
 function Home() {
   const styles = {
     fontSize: 20,
     marginRight: "20px",
   };
-  //const [isLoading, setLoading] = useState(true);
   const [permID, setPermID] = useState("");
   const username = Cookies.get("userName");
   const reqData = { username: username };
@@ -25,30 +21,23 @@ function Home() {
     axios
       .post("http://cs431-05.cs.rutgers.edu:5000/accountRank", reqData)
       .then((response) => {
-        //setLoading("false");
         setPermID(response.data.permID);
       });
   });
   const navigate = useNavigate();
-  //console.log(permID);
   function signOut() {
-    //console.log("pressed");
     navigate("/");
   }
   function toCatalog() {
-    //console.log("pressed");
     navigate("/homepage/catalog");
   }
   function toMessages() {
-    //console.log("pressed");
     navigate("/homepage/messages");
   }
   function toAbout() {
-    //console.log("pressed");
     navigate("/homepage/about");
   }
   function toPost() {
-    //console.log("pressed");
     navigate("/homepage/createpost");
   }
   function toProfile() {
@@ -60,9 +49,7 @@ function Home() {
   function toContactList() {
     navigate("/homepage/userContacts");
   }
-  // if (isLoading) {
-  //   return <div className="App">Loading...</div>;
-  // }
+
   return (
     <div>
       <header className="App-header">
@@ -79,15 +66,14 @@ function Home() {
           Product Catalog
         </button>
         <button style={styles} onClick={toMessages}>
-            Messages
-          </button>
+          Messages
+        </button>
         <button style={styles} onClick={toPost}>
           Create Posting
         </button>
         <button style={styles} onClick={toProfile}>
           Account Profile
         </button>
-        {/*if admin/mod account, render the admin view account button and user contacts/requests */}
         {(permID === 3 || permID === 2) && (
           <button style={styles} onClick={toAccountList}>
             Account List
@@ -95,7 +81,7 @@ function Home() {
         )}
         {(permID === 3 || permID === 2) && (
           <button style={styles} onClick={toContactList}>
-            User Contacts
+            User Feedback
           </button>
         )}
         <button style={styles} onClick={signOut}>

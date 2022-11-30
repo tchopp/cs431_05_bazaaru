@@ -1,12 +1,10 @@
 import React from "react";
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 import "./Transactions.css";
 import TransactionList from "../Components/TransactionList";
 import Cookies from "js-cookie";
 
 function Transactions() {
-  //const username = Cookies.get("userName");
-  //   console.log("userId:", username);
   return (
     <div>
       <header className="App-header">

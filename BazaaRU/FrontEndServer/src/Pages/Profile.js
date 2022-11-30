@@ -1,15 +1,10 @@
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import Account from "../Components/Account";
-import Cookies from "js-cookie";
 
 function Profile() {
   const navigate = useNavigate();
-  const username = Cookies.get("userName");
-
-  //console.log("userId:", username);
-
   const styles = {
     fontSize: 20,
     marginRight: "20px",
@@ -20,7 +15,7 @@ function Profile() {
   function toAddBalance() {
     navigate("/homepage/profile/updatebalance");
   }
-  function toProfileTest(){
+  function toProfileTest() {
     navigate("/homepage/profile/profiletest");
   }
   return (

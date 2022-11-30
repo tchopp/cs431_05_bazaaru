@@ -4,7 +4,12 @@ import axios from "axios";
 
 export const ComplaintList = (props) => {
   const [complaintsData, setComplaintsData] = useState([
-    { username: "default", complaintID: "1", type: "Complaint", description:"desc" },
+    {
+      username: "default",
+      complaintID: "1",
+      type: "Complaint",
+      description: "desc",
+    },
   ]);
 
   useEffect(() => {
@@ -18,7 +23,10 @@ export const ComplaintList = (props) => {
 
   function deleteComplaint(comID) {
     const complaintData = { cID: comID };
-    axios.post("http://cs431-05.cs.rutgers.edu:5000/deleteComplaint", complaintData);
+    axios.post(
+      "http://cs431-05.cs.rutgers.edu:5000/deleteComplaint",
+      complaintData
+    );
   }
 
   return (
@@ -26,10 +34,16 @@ export const ComplaintList = (props) => {
       {complaintsData.map((item) => (
         <li key={item.complaintID}>
           <div>Username: {item.username}</div>
-	  <div>Complaint ID: {item.complaintID}</div>
+          <div>Complaint ID: {item.complaintID}</div>
           <div>Complaint Type: {item.type}</div>
           <div>Complaint Description: {item.description}</div>
-          <button class="delete complaint" type="button" onClick={() => deleteComplaint(item.complaintID)}>Delete Complaint</button>
+          <button
+            class="delete complaint"
+            type="button"
+            onClick={() => deleteComplaint(item.complaintID)}
+          >
+            Delete Complaint
+          </button>
           <div>---</div>
         </li>
       ))}

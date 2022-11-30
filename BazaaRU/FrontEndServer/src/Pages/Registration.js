@@ -1,10 +1,8 @@
 import React from "react";
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 import "./Registration.css";
 import RegistrationForm from "../Components/RegistrationForm";
 import { useState } from "react";
-
-//import { useHistory } from "react-router-dom";
 
 function Registration() {
   const [url, setUrl] = useState("/");
