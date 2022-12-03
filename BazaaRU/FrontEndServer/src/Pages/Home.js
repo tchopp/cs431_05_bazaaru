@@ -57,7 +57,6 @@ function Home() {
         <p>Rutgers BazaaRU</p>
       </header>
       <SearchBar></SearchBar>
-      <ACSearchBar></ACSearchBar>
       <header className="Service-bar">
         <button style={styles} onClick={toAbout}>
           About
