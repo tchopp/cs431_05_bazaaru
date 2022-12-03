@@ -4,23 +4,19 @@ import { useLocation } from "react-router-dom";
 import logo from "./profile.png";
 import { useNavigate } from "react-router-dom";
 import {SearchPost} from '../Components/Post/SearchPost.js'
+import {SearchAC} from '../Components/Accounts/SearchAC.js'
 import SearchBar from '../Components/Search/SearchBar'
 
 
 const SearchResults = (props) => {
 
-  const {state} = useLocation(); //grabs inputted information
+  const {state} = useLocation();
   const {passkeyword} = state;
 
   const navigate = useNavigate();
   
   const handleSubmit = (e) => {
      e.preventDefault();
-     
-
-    //C2. Send the object to express server via axios
-
-    //C3. Direct to a different page
     navigate("/homepage/results");
   };
   return (<div>
@@ -28,6 +24,7 @@ const SearchResults = (props) => {
       <img src={logo} className="App-logo" alt="logo" />
       <p>Rutgers BazaaRU</p>
       <SearchBar></SearchBar>
+      <SearchAC ac_KW = {passkeyword}></SearchAC>
       <SearchPost post_KW = {passkeyword}></SearchPost>
       </header>
   
