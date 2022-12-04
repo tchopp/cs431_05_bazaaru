@@ -5,10 +5,13 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 export const AC = (props) => {
   const [ACData, setACData] = useState({
-    username: "user",
-    //rating: 0,
+    username: "user"
     });
   const navigate = useNavigate();
+
+  const [reviewee, setReviewee] = useState({
+    reviewee: "user"
+    });
 
   useEffect(() => {
     axios
@@ -17,8 +20,10 @@ export const AC = (props) => {
         console.log(response.data[0]);
         if (response.data[0].length !== 0) {
           setACData({
-            username: response.data[0][0].username,
-            //rating: response.data[0][0].rating,
+            username: response.data[0][0].username
+          });
+          setReviewee({
+            reviewee: response.data[0][0].username
           });
         }
       });
@@ -26,7 +31,7 @@ export const AC = (props) => {
 
 
 const toACDetails = () => {
-    navigate('/homepage/ACdets/'+ACData.username);
+    navigate('/homepage/publicprofile/' + reviewee.reviewee);
 }
 
 return (<div className="Account"><ul onClick={toACDetails}>

@@ -8,7 +8,6 @@ import Registration from "./Pages/Registration";
 import About from "./Pages/About";
 import Catalog from "./Components/Catalog/Catalog";
 import Results from "./Pages/searchResults";
-import ACResults from "./Pages/ACSearchResults";
 import Profile from "./Pages/Profile";
 import AccountList from "./Pages/AccountList";
 import CreatePost from "./Pages/CreatePost";
@@ -33,7 +32,6 @@ root.render(
         <Route path="/homepage/about" element={<About />} />
         <Route path="/homepage/catalog" element={<Catalog />} />
         <Route path="/homepage/results" element={<Results />} />
-        <Route path="/homepage/ACresults" element={<ACResults />} />
         <Route path="/homepage/profile" element={<Profile />} />
         <Route path="/homepage/profile/profiletest" element={<ProfileTest />} />
         <Route
