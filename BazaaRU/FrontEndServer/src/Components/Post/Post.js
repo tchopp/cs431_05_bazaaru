@@ -50,7 +50,7 @@ export const Post = (props) => {
 
 return (
   <div>
-  {!isLoading && <Link href={"/homepage/postdets/"+props.post_id} underline="none"><Card>
+  {!isLoading && <Link href={"/homepage/postdets/"+props.post_id} underline="none"><Card >
       <Box sx={{ pt: '100%', position: 'relative' }}>
        
       

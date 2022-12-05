@@ -9,6 +9,7 @@ import SearchBar from "../Components/Search/SearchBar";
 import ACSearchBar from "../Components/Accounts/ACSearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { Container } from "@mui/system";
 
 //import { useHistory } from "react-router-dom";
 
@@ -103,7 +104,9 @@ function Home() {
         </button>
       </header>
       <h3>Featured Items/Services From This Week</h3>
+      <Container>
       <CatalogWeekly></CatalogWeekly>
+      </Container>
       <a className="Contact-link" href="/homepage/contact">
         Issues? Complaints? Contact an administrator.
       </a>

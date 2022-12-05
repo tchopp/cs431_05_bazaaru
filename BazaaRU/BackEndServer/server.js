@@ -177,6 +177,25 @@ app.post("/buy", async (req, res) => {
   //C. Send response to react
 });
 
+app.post("/users", async (req, res) => {
+  // This is currently missing input sanitization and case checking
+  // Need to add case for missing username, missing password (may be better done in front end code)
+
+  const username = req.body.username;
+  
+   sequelize.query(
+    "SELECT username FROM accounts WHERE username!='" + username + "'"
+  )
+  .then((response)=>{
+    let arr = [];
+    for (let i = 0; i < response[0].length; i++) {
+      arr.push(response[0][i].username);
+    }
+    res.send(arr);
+  });
+
+});
+
 app.post("/chatdata", async (req, res) => {
     const username = req.body.username;
     const arr = [];
@@ -249,6 +268,20 @@ app.post("/newmessage", async (req, res) => {
         });
     
   });
+  
+
+      
+ 
+});
+
+app.post("/delmessage", async (req, res) => {
+  const message_id = req.body.id;
+ 
+  sequelize.query("DELETE FROM messages_streams WHERE message_id = " + message_id + ";")
+  .then(()=>{
+    sequelize.query("DELETE FROM messages WHERE message_id = " + message_id + ";");
+  });
+  
 
       
  
