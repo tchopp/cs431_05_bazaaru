@@ -9,10 +9,6 @@ export const AC = (props) => {
     });
   const navigate = useNavigate();
 
-  const [reviewee, setReviewee] = useState({
-    reviewee: "user"
-    });
-
   useEffect(() => {
     axios
       .get("http://cs431-05.cs.rutgers.edu:5000/getAccount/" + props.ac_id)
@@ -22,16 +18,20 @@ export const AC = (props) => {
           setACData({
             username: response.data[0][0].username
           });
-          setReviewee({
-            reviewee: response.data[0][0].username
-          });
         }
       });
   }, [props.ac_id]);
 
+  function getRating(username) {
+    // send in user name
+    // get the number of reviews about the person
+    // get what their current average is
+    //(((current average * number of reviews) + new rating )/ number of reviews +1)
+  }
+
 
 const toACDetails = () => {
-    navigate('/homepage/publicprofile/' + reviewee.reviewee);
+    navigate('/homepage/publicprofile/' + ACData.username);
 }
 
 return (<div className="Account"><ul onClick={toACDetails}>

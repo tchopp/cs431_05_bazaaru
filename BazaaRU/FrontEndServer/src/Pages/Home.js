@@ -5,7 +5,6 @@ import logo from "./profile.png";
 import "./Home.css";
 import { CatalogWeekly } from "../Components/WeeklyProducts";
 import SearchBar from "../Components/Search/SearchBar";
-import ACSearchBar from "../Components/Accounts/ACSearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { Container } from "@mui/system";
