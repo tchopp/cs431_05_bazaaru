@@ -358,6 +358,14 @@ app.post("/findBalance", async(req,res)=>{
   res.send({acc_balance: results[0][0].acc_balance});
 });
 
+app.post("/passwordChange", async (req, res) => {
+  console.log("password change req");
+  const userInputUsername = req.body.uName;
+  const userInputPassword = req.body.pWord;
+  const results = await sequelize.query("UPDATE accounts SET password=" + '"' + userInputPassword + '" WHERE username=' + '"' + userInputUsername + '";');
+  res.send({received: true});
+})
+
 app.put("/createAccount", async (req, res) => {
   // Needs input sanitization and checking
   // Currently does not check for existing account
