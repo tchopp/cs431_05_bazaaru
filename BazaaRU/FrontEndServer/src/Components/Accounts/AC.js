@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AC.css";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
-import Rating from './Components/Review/Rating';
+import Rating from "../Review/Rating";
 
 export const AC = (props) => {
   const [ACData, setACData] = useState({
