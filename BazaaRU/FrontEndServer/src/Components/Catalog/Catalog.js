@@ -4,8 +4,6 @@ import axios from "axios";
 import './Catalog.css'
 import Cookies from "js-cookie";
 import { Grid, Typography } from '@mui/material';
-import {NavBar} from "../NavBar.js";
-import {TopHalf} from "../TopHalf.js";
 
 export const Catalog = () => {
   // 10 (-1) post_ids for first render
@@ -33,7 +31,7 @@ export const Catalog = () => {
   return (
     <div>
 
-    <TopHalf/>
+    
     <Typography variant="h3">Products</Typography>
    
       <div>{isEmpty && <p>Sorry, looks like there are no results</p>}</div>
