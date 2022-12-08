@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-//import "./Post.css";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Review = (props) => {
   const [reviewData, setReviewData] = useState({
-    writer: "writer",
-    rating: 5,
+    writer: "",
+    rating: "",
     actualReview:
-      "This person has too many chickens, it is baffling.",
+      "There are no reviews yet!",
   });
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (props.rid !== 0) {
@@ -34,6 +33,8 @@ return (<div className="review">
             <li>{reviewData.writer}</li>
             <li>{reviewData.rating}</li>
             <li>{reviewData.actualReview}</li>
+            <li>   </li>
         </div>);
 };
 export default Review;
+

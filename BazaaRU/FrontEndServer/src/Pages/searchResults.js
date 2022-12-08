@@ -28,7 +28,7 @@ const SearchResults = (props) => {
       <SearchPost post_KW = {passkeyword}></SearchPost>
       </header>
   
-      </div>)
-  
+      </div>
+    )  
   };
   export default SearchResults;

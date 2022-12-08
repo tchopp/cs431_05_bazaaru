@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./AC.css";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
+import Rating from "../Review/Rating";
 
 export const AC = (props) => {
   const [ACData, setACData] = useState({
     username: "user"
     });
   const navigate = useNavigate();
-
-  const [reviewee, setReviewee] = useState({
-    reviewee: "user"
-    });
 
   useEffect(() => {
     axios
@@ -22,21 +19,18 @@ export const AC = (props) => {
           setACData({
             username: response.data[0][0].username
           });
-          setReviewee({
-            reviewee: response.data[0][0].username
-          });
         }
       });
   }, [props.ac_id]);
 
 
 const toACDetails = () => {
-    navigate('/homepage/publicprofile/' + reviewee.reviewee);
+    navigate('/homepage/publicprofile/' + ACData.username);
 }
 
 return (<div className="Account"><ul onClick={toACDetails}>
             <li>{ACData.username}</li>
-            <li>{ACData.rating}</li>
+            <Rating reviewee = {ACData.username}></Rating>
             <li>-------------------------------</li>
         </ul>
         </div>);

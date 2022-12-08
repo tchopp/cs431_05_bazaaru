@@ -358,6 +358,14 @@ app.post("/findBalance", async(req,res)=>{
   res.send({acc_balance: results[0][0].acc_balance});
 });
 
+app.post("/passwordChange", async (req, res) => {
+  console.log("password change req");
+  const userInputUsername = req.body.uName;
+  const userInputPassword = req.body.pWord;
+  const results = await sequelize.query("UPDATE accounts SET password=" + '"' + userInputPassword + '" WHERE username=' + '"' + userInputUsername + '";');
+  res.send({received: true});
+})
+
 app.put("/createAccount", async (req, res) => {
   // Needs input sanitization and checking
   // Currently does not check for existing account
@@ -700,6 +708,7 @@ app.post("/getTransactions", async (req,res) => {
   res.send(results[0]);
 });
 
+
 //REVIEW RELATED ROUTES
 
 //1.To check if a person made a purchase with someone else
@@ -713,13 +722,14 @@ app.post("/check_for_purchase", async (req, res) => {
     "SELECT transaction_id FROM transactions WHERE buyer_username = '" + reviewer + "' AND seller_username = '" + 
     reviewee + "';"
   );
+  console.log(response);
   if (
-    !(typeof response[0][0] === "undefined")) {
-    console.log("There was a transaction");
-    res.send(true);
-  } else{
+    (typeof response[0][0] === "undefined")) {
     console.log("There were no transactions");
-    res.send(false);
+    res.send({answer: false});
+  } else{
+    console.log("There was a transaction");
+    res.send({answer: true});
   }
 });
 
@@ -769,6 +779,23 @@ app.get("/reviews/:rid", async (req, res) => {
       );
       res.send(response);
     });
+});
+
+//Get someone's rating
+app.post("/findrating", async (req,res)=>{
+  console.log("collecting the average rating for the user now");
+  //Log the username
+  const username = req.body.username;
+  console.log("username we are looking for to find a rating on is" + username);
+  const response = await sequelize.query(
+    "SELECT AVG(num_rating) AS rating FROM reviews WHERE subject_usnm = '" + username + "';"
+  );
+  console.log("Result from query is " + response); 
+  if (
+    (typeof response[0][0] === "undefined")) {
+    console.log("This person has no rating");
+    res.send("This user has no rating yet");} else{
+  res.send({rating: response[0][0].rating});}
 });
 
 

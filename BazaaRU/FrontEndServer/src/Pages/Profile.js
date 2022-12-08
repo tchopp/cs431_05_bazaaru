@@ -2,6 +2,7 @@ import logo from "./profile.png";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import Account from "../Components/Account";
+import PasswordChange from "../Components/PasswordChange";
 
 function Profile() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ function Profile() {
       <button style={styles} onClick={toProfileTest}>
         Search Profile
       </button>
+      <PasswordChange></PasswordChange>
     </div>
   );
 }

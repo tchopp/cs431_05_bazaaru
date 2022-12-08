@@ -1,11 +1,10 @@
 import Cookies from "js-cookie";
 import React from "react";
-import { useState } from "react";
-import logo from "./profile.png";
+import pfp from "../img/frogpfp.jpg";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import WriteReviews from "../Components/Review/WriteReview";
 import ReadReviews from "../Components/Review/ReadReviews";
+import Rating from "../Components/Review/Rating";
 
 const PublicProfile = () => {
   //1. Get username of subject to set up page
@@ -18,25 +17,20 @@ const PublicProfile = () => {
   //3. Get subject's status
   //4. Get subject's current ranking
 
-  function getRating(username) {
-    // send in user name
-    // get the number of reviews about the person
-    // get what their current average is
-    //(((current average * number of reviews) + new rating )/ number of reviews +1)
-  }
 
   return (
     <div className="publicProfilePage">
       <img
-        src="../img/frogpfp.jpg"
+        src={pfp}
+        className= "public_profile_pfp"
         alt="Default Profile Pic"
-        width="500"
-        height="500"
       ></img>
-      <h2> Username: {username} </h2>
+      <h2> Username: {subject} </h2>
       <h2>Status: This user has not set a status</h2>
-      <h2>Rating: {getRating(subject)}</h2>
+      <Rating reviewee = {subject}></Rating>
+      <li></li>
       <WriteReviews reviewee={subject}></WriteReviews>
+      <li></li>
       <ReadReviews reviewee={subject}></ReadReviews>
     </div>
   );

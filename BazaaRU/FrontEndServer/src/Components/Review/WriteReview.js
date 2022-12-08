@@ -1,6 +1,7 @@
-import React, { useEffect, useState }  from 'react';
+import React, { useState }  from 'react';
 import axios from "axios";
 import Cookies from 'js-cookie';
+
 //needs username of writer 
 //needs username of subject
 const WriteReview = (props) =>{
@@ -9,58 +10,50 @@ const WriteReview = (props) =>{
 
   //Review holder:
   const [review, setReview] = useState("");
-
-  //Rating holder:
   const [rating, setRating] = useState("");
 
   //Atempt to write a review on someone 
   const handleSubmit = (e) =>{
-    e.preventDefault();
-    const isPurchase = purchaseCheck(reviewee, reviewer);
-    if (isPurchase = true){
-      axios
-      .post("http://cs431-05.cs.rutgers.edu:5000/make_review",{
-      writerUN: reviewer,
-      subjectUN: reviewee,
-      review: review,
-      rating: rating
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-      return ("An error has occured, cannot check for purchases at this time");
-    });
-    }
-    else{
-      return ("You are unable to write a review");
-      //let user know they have not made a purchase 
-      //cannot review
-    }
-  };
-
-  /*1. Check to see if it is possible to make a review triggered by the click submit 
-  This function will go ahead and check if a user has made a purchase with a buyer before being able to write a 
-  review, if true, it will post the */
-  function purchaseCheck(subjectUN, writerUN){
     axios
+    //Outerpost
     .post("http://cs431-05.cs.rutgers.edu:5000/check_for_purchase",{
       writerUN: reviewer,
       subjectUN: reviewee
     })
-    .then(function (response) {
-      console.log(response);
-      if(response.data.answer == true){
-        return true;
-      }else{return false;}
+    //Outerthen
+    .then((response) => {
+      console.log("In the purchase check function " + response.data.answer);
+      if(response.data.answer){
+        console.log("The answer we are getting from the DB is " + response.data.answer);
+        console.log("The DB can cofirm that a purchase was made");
+        axios
+          //innerpost
+          .post("http://cs431-05.cs.rutgers.edu:5000/make_review",{
+            writerUN: reviewer,
+            subjectUN: reviewee,
+            review: review,
+            rating: rating
+          })
+          //innerthen
+          .then(function (response) {
+            console.log(response);
+            console.log("review has been sent");
+          })
+          //innercatch
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      else{
+        console.log("There was no purchase made " + response.data.answer);
+        return alert("Sorry! You can only write a review for someone you have purchased from. ");
+      }
     })
     .catch(function (error) {
       console.log(error);
       return "An error has occured, cannot check for purchases at this time";
     });
-    return true;
-  }
+  };
 
   
     return(
@@ -81,12 +74,14 @@ const WriteReview = (props) =>{
         <label>Rating</label>
         <input
           type="number"
-          min="0"
+          min="1"
           max = "5"
           required
           value={rating}
           onChange={(e) => setRating(e.target.value)}
         />
+        <button>Submit</button>
+
         </form>
       </div>  
     )

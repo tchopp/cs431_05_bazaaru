@@ -7,7 +7,6 @@ import axios from 'axios';
 
 export const SearchAC = (props) => {
 const [ACData, setACData] = useState({username: 'user', 
-//rating: 0
 });
 
 const [Account,setAccount] = useState([0,0]);
@@ -23,7 +22,6 @@ useEffect(()=>{axios.get('http://cs431-05.cs.rutgers.edu:5000/ACresults/' + prop
     console.log(Account);
     console.log(response.data[0]);
     setACData({username: response.data[0][0].username
-    //rating: response.data[0][0].rating
 });
 
 });},[props.ac_KW])
