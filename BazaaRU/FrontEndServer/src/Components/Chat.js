@@ -44,7 +44,7 @@ export function Chat() {
     // what we need to do 
     // 1. list of users on the chat side
     const listChatUsers = chatUsers.map((userData, index) => 
-       <ListItem>
+       <ListItem key={index}>
         <ListItemButton onClick={()=>{
             setMessageThread(userData.id);
             axios.post('http://cs431-05.cs.rutgers.edu:5000/chatthread',{id: userData.id})
@@ -192,7 +192,13 @@ export function Chat() {
         })
     },[])
 
-
+const handleKeyDown = (event) => {
+    const btn = document.getElementById('send');
+    console.log(btn);
+    if (event.keyCode === 13 && !btn.disabled) {
+        sendMessage();
+    }
+}
     
 
     useEffect(()=>{
@@ -286,7 +292,7 @@ export function Chat() {
                             </Grid>
                             <Grid xs={5} item>
                                 <FormControl>
-                                    <TextField onChange={handleChange}
+                                    <TextField onChange={handleChange} onKeyDown={handleKeyDown}
                                     value={message}
                                     label="Type your message..."
                                     variant="outlined"/>
@@ -294,6 +300,7 @@ export function Chat() {
                             </Grid>
                             <Grid xs={1} item>
                                 <IconButton
+                                id="send"
                                 disabled={message === ""} 
                                 onClick={sendMessage}
                                 aria-label="send"
