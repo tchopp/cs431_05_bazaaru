@@ -28,6 +28,9 @@ function NavBar() {
     function toSignOut() {
         navigate("/");
     }
+    function toAbout() {
+        navigate("/homepage/about");
+    }
     
     return (
         <div class="nav-container">
@@ -38,6 +41,7 @@ function NavBar() {
                     <li onClick={toMessages}>Messages</li>
                     <li onClick={toCreatePost}>Create Post</li>
                     <li onClick={toAccount}>Account</li>
+                    <li onClick={toAbout}>About</li>
                     <li onClick={toSignOut}>Sign Out</li>
                 </ul>
             </nav>
