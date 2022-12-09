@@ -4,4 +4,14 @@
 
 .postdets {
     color:aliceblue;
+    position: absolute;
+    right: 425px;
+    padding-top: 100px;
+    
+}
+
+button {
+    font-size: large;
+    height: 50px;
+    width: 150px;
 }
