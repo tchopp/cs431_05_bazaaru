@@ -1,5 +1,6 @@
 import logo from "./profile.png";
 import ComplaintList from "../Components/ComplaintList";
+import NavBar from "../Components/NavBar.jsx";
 
 function UserContacts() {
   return (
@@ -7,6 +8,7 @@ function UserContacts() {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo"  />
+          <NavBar></NavBar>
           <p>User Feedback Listed Below</p>
         </header>
       </div>
