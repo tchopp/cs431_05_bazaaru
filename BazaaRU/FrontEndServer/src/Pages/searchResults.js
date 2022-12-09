@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {SearchPost} from '../Components/Post/SearchPost.js'
 import {SearchAC} from '../Components/Accounts/SearchAC.js'
 import SearchBar from '../Components/Search/SearchBar'
+import NavBar from '../Components/NavBar'
 
 
 const SearchResults = (props) => {
@@ -22,6 +23,7 @@ const SearchResults = (props) => {
   return (<div>
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
+      <NavBar></NavBar>
       <p>Rutgers BazaaRU</p>
       <SearchBar></SearchBar>
       <SearchAC ac_KW = {passkeyword}></SearchAC>
