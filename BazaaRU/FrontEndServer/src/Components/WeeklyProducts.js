@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import  {Post} from './Post/Post.js';
 import axios from "axios";
 import Cookies from 'js-cookie';
-
+import './WeeklyProducts.css'
 
 export const CatalogWeekly = () => {
 
@@ -33,5 +33,5 @@ useEffect(()=>{axios.post('http://cs431-05.cs.rutgers.edu:5000/catalogweek',{use
 
 
 
-return (<div>{isEmpty && <p>Sorry, looks like there are no results</p>}<ul>{posts.map(id => <li key={id}><Post post_id={id}/></li>)}</ul></div>);
+return (<div className="weekly-products">{isEmpty && <p>Sorry, looks like there are no results</p>}<ul>{posts.map(id => <li key={id}><Post post_id={id}/></li>)}</ul></div>);
 };
