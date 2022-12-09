@@ -1,11 +1,13 @@
 import React from "react";
 import logo from "./profile.png";
+import NavBar from "../Components/NavBar.jsx";
 
 function About() {
   return (
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <NavBar></NavBar>
         <p>About Us</p>
       </header>
       <div className="Text">
