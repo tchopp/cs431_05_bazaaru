@@ -55,7 +55,6 @@ function Home() {
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo-home"  />
-        <p>Rutgers BazaaRU</p>
       </header>
       <div className="Nav-container">
       <NavBar></NavBar>

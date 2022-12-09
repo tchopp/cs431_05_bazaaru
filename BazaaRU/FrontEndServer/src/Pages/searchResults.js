@@ -24,7 +24,6 @@ const SearchResults = (props) => {
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <NavBar></NavBar>
-      <p>Rutgers BazaaRU</p>
       <SearchBar></SearchBar>
       <SearchAC ac_KW = {passkeyword}></SearchAC>
       <SearchPost post_KW = {passkeyword}></SearchPost>

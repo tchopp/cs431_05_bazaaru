@@ -10,9 +10,9 @@ function AccountList() {
     <div className="App-list">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>User Account Listing</p>
       </header>
       <NavBar></NavBar>
+      <p>User Account Listing</p>
       <AccountsList></AccountsList>
     </div>
   );
