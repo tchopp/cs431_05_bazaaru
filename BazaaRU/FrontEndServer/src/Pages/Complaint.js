@@ -24,7 +24,7 @@ function Complaint() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo"  />
         <p>Please complete the form below</p>
       </header>
       <div className="Contact-Information">
