@@ -74,14 +74,14 @@ function LoginForm(url) {
           {renderErrorMessage("password")}
         </div>
         <div className="button-container">
-          <input type="submit" />
+          <input type="submit" value="Submit"/>
         </div>
       </form>
     </div>
   );
 
   return (
-    <div className="app">
+    <div className="app_login">
       <div className="login-form">
         <div className="title">Sign In</div>
         {renderForm}
