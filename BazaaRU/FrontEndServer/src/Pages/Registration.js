@@ -9,7 +9,7 @@ function Registration() {
   return (
     <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo"  />
         <p>Account Registration</p>
       </header>
       <RegistrationForm name={url}></RegistrationForm>
