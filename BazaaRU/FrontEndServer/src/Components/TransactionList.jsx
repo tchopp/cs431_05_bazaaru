@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Transaction from "./Transaction";
+import NavBar from "./NavBar.jsx";
 
 export const TransactionList = (props) => {
   const [transactionData, setTransactionData] = useState([
@@ -42,8 +43,10 @@ export const TransactionList = (props) => {
   }
 
   return (
-    <div className="app">
+    <div className="app-transactions">
+      <NavBar></NavBar>
       <div className="transaction_item">
+        <p>Purchase History</p>
         <ul>
 	  {transactionData.map((item) => (
 	    <li key={item.transaction_id}>
