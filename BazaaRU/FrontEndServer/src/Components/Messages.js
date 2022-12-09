@@ -2,6 +2,8 @@
 import {Chat} from "./Chat";
 import { Fragment } from "react";
 import NavBar from "../Components/NavBar.jsx"
+
+import logo from "./profile.png";
 const Messages = () => { 
     return (
         <div>

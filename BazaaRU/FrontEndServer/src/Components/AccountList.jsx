@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import './AccountList.css';
+import NavBar from "../Components/NavBar.jsx"
+
+import logo from "./profile.png";
 
 export const AccountList = (props) => {
   const [accountsData, setAccountsData] = useState([

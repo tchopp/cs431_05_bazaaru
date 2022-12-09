@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
+import logo from "./profile.png";
 import "./CreatePost.css";
 import { useState } from "react";
 import axios from "axios";
