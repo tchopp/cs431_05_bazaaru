@@ -8,6 +8,7 @@ import SearchBar from "../Components/Search/SearchBar";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { Container } from "@mui/system";
+import NavBar from "../Components/NavBar.jsx"
 
 function Home() {
   const styles = {
@@ -53,42 +54,60 @@ function Home() {
   return (
     <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo-home"  />
         <p>Rutgers BazaaRU</p>
       </header>
+      <div className="Nav-container">
+      <NavBar></NavBar>
+      </div>
+      <div className="Search-container">
       <SearchBar></SearchBar>
-      <header className="Service-bar">
-        <button style={styles} onClick={toAbout}>
-          About
-        </button>
-        <button style={styles} onClick={toCatalog}>
-          Product Catalog
-        </button>
-        <button style={styles} onClick={toMessages}>
-          Messages
-        </button>
-        <button style={styles} onClick={toPost}>
-          Create Posting
-        </button>
-        <button style={styles} onClick={toProfile}>
-          Account Profile
-        </button>
-        {(permID === 3 || permID === 2) && (
-          <button style={styles} onClick={toAccountList}>
-            Account List
-          </button>
-        )}
-        {(permID === 3 || permID === 2) && (
-          <button style={styles} onClick={toContactList}>
-            User Feedback
-          </button>
-        )}
-        <button style={styles} onClick={signOut}>
-          Sign Out
-        </button>
-      </header>
+      </div>
+      
+      <div className="bubble_container">
+        <div className="bubbles">
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"6"}}></span>
+            <span style={{"--t":"14"}}></span>
+            <span style={{"--t":"25"}}></span>
+            <span style={{"--t":"7"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"31"}}></span>
+            <span style={{"--t":"20"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"19"}}></span>
+            <span style={{"--t":"9"}}></span>
+            <span style={{"--t":"24"}}></span>
+            <span style={{"--t":"12"}}></span>
+            <span style={{"--t":"19"}}></span>
+            <span style={{"--t":"13"}}></span>
+            <span style={{"--t":"35"}}></span>
+            <span style={{"--t":"24"}}></span>
+            <span style={{"--t":"12"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"15"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"27"}}></span>
+            <span style={{"--t":"14"}}></span>
+            <span style={{"--t":"31"}}></span>
+            <span style={{"--t":"12"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"26"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"7"}}></span>
+            <span style={{"--t":"29"}}></span>
+            <span style={{"--t":"35"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"4"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"27"}}></span>
+            <span style={{"--t":"30"}}></span>
+          </div>
+        </div>
+
       <h3>Featured Items/Services From This Week</h3>
-      <Container>
+      <Container maxWidth={'xs'} maxHeight={'xs'} spacing={30} gap={30}>
       <CatalogWeekly></CatalogWeekly>
       </Container>
       <a className="Contact-link" href="/homepage/contact">
