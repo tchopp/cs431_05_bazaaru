@@ -366,6 +366,27 @@ app.post("/passwordChange", async (req, res) => {
   res.send({received: true});
 })
 
+function checkRutgersEmail(str) {
+  return str.endsWith("rutgers.edu");
+}
+
+app.get("/accountCreation/:key", async (req,res) => {
+  const key = req.params.key;
+  const response = await sequelize.query(
+    "SELECT MAX(userID) AS MAX_IND FROM accounts;"
+  );
+  console.log(response);
+  const curMax = response[0][0].MAX_IND;
+  console.log(curMax);
+  var nextMax = curMax + 1;
+  const newAccData = await sequelize.query("SELECT * FROM pending_accounts WHERE rand_string='" + key + "';");
+  const newUser = newAccData[0][0].username;
+  const newPass = newAccData[0][0].password;
+  const newAcc = await sequelize.query("INSERT INTO accounts (username, password, userID, permID, acc_balance) VALUES ('" + newUser + "','" + newPass + "'," + nextMax + ", 1, 0);");
+  const removeFrom = await sequelize.query("DELETE FROM pending_accounts WHERE rand_string='" + key + "';");
+  res.send("Account created! Please go to cs431-05.cs.rutgers.edu:3000 to sign in!");
+});
+
 app.put("/createAccount", async (req, res) => {
   // Needs input sanitization and checking
   // Currently does not check for existing account
@@ -374,6 +395,38 @@ app.put("/createAccount", async (req, res) => {
   const userInputUsername = req.body.uName;
   const userInputPassword = req.body.pWord;
   const userInputEmail = req.body.email;
+  const check = await sequelize.query("SELECT username FROM accounts WHERE username='" + userInputUsername + "';" );
+  if (!(checkRutgersEmail(userInputEmail))) {
+    const mailOptions = {
+      from: 'bazaaru.proj@gmail.com',
+      to: userInputEmail,
+      subject: 'Bazaaru Account Creation - Email error',
+      text: 'You must use a Rutgers email to register for BazaaRu!'
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  }
+  else if (check[0].length !== 0) {
+    const mailOptions = {
+      from: 'bazaaru.proj@gmail.com',
+      to: userInputEmail,
+      subject: 'Bazaaru Account Creation - Username taken',
+      text: 'This username is already taken!'
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  }
+  else {
   var result = '';
   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
@@ -393,11 +446,12 @@ app.put("/createAccount", async (req, res) => {
       '");'
   );
   console.log(results);
+  var resultLink = "http://cs431-05.cs.rutgers.edu:5000/accountCreation/"+result;
   const mailOptions = {
     from: 'bazaaru.proj@gmail.com',
     to: userInputEmail,
-    subject: 'Bazaaru Account Create Dev Test Email',
-    text: result
+    subject: 'Bazaaru Account Creation - Please verify your account',
+    text: resultLink
   };
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
@@ -407,6 +461,7 @@ app.put("/createAccount", async (req, res) => {
     }
   });
   res.send({ received: "true" });
+  }
 });
 
 app.put("/deleteAccount", async (req, res) => {
