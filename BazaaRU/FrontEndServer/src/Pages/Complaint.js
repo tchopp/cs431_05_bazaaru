@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./Complaint.css";
 import axios from "axios";
+import NavBar from "../Components/NavBar.jsx";
 
 function Complaint() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function Complaint() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo"  />
+        <NavBar></NavBar>
         <p>Please complete the form below</p>
       </header>
       <div className="Contact-Information">
