@@ -31,7 +31,6 @@ const toACDetails = () => {
 return (<div className="Account"><ul onClick={toACDetails}>
             <li>{ACData.username}</li>
             <Rating reviewee = {ACData.username}></Rating>
-            <li>-------------------------------</li>
         </ul>
         </div>);
 };
