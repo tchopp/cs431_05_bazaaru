@@ -33,9 +33,6 @@ function Profile() {
   function toAddBalance() {
     navigate("/homepage/profile/updatebalance");
   }
-  function toProfileTest() {
-    navigate("/homepage/profile/profiletest");
-  }
   function toAccountList() {
     navigate("/homepage/accountList");
   }
@@ -56,9 +53,6 @@ function Profile() {
       </button>
       <button style={styles} onClick={toAddBalance}>
         Update Balance
-      </button>
-      <button style={styles} onClick={toProfileTest}>
-        Search Profile
       </button>
       {(permID === 3 || permID === 2) && (
         <button style={styles} onClick={toAccountList}>

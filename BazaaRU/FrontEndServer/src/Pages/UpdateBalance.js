@@ -5,6 +5,7 @@ import "./UpdateBalance.css";
 import logo from "./profile.png"; //Need to replace image with project image
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import NavBar from "../Components/NavBar.jsx"
 //Un tiempo mas
 const UpdateBalance = () => {
     const navigate = useNavigate();
@@ -40,6 +41,14 @@ const UpdateBalance = () => {
      };
 
     return(
+      <div>
+      <header className="App-header">
+        <img src={logo} className="App-logo-home"  />
+        <p>Rutgers BazaaRU</p>
+      </header>
+      <div className="Nav-container">
+      <NavBar></NavBar>
+      </div>
         <div className = "balanceUpdate"> 
         <h2>Update Your Balance Below</h2>
             <form onSubmit={handleSubmit}>
@@ -54,7 +63,7 @@ const UpdateBalance = () => {
                 <button>Submit</button>
             </form>
         </div>
-        
+      </div>
          
 
     );
