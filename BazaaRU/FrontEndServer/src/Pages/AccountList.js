@@ -1,12 +1,12 @@
 import logo from "./profile.png";
 import Account from "../Components/Account";
-import AccountDelete from "../Components/AccountDelete";
+//import AccountDelete from "../Components/AccountDelete";
 import Cookies from "js-cookie";
 import AccountsList from "../Components/AccountList";
 
 function AccountList() {
   return (
-    <div className="App">
+    <div className="App-list">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>User Account Listing</p>
