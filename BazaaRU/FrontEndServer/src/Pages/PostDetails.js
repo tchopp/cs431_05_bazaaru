@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import './PostDetails.css';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { Card } from '@mui/material';
 
 const PostDetails = () => {
     const params = useParams();
@@ -88,6 +89,7 @@ const PostDetails = () => {
       {!isLoading && <div className='postdets'>
         {purchased && <p>Purchase successful! Redirecting you back to the Catalog...</p>}
         {!buyable && <p>Do not have the funds.</p>}
+    <Card>
     <ul>
         <li>{postData.username}</li>
         <li>{postData.product}</li>
@@ -97,6 +99,7 @@ const PostDetails = () => {
         <li>{postData.description}</li>
         {postData.price != -1 && <button onClick={handleClick}>Buy it</button>}
     </ul>
+    </Card>
     </div>}
     {isLoading && <Stack spacing={1}>
       <Skeleton variant="circular" width={40} height={40} />
