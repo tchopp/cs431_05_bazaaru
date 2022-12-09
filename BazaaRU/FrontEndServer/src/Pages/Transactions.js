@@ -8,7 +8,7 @@ function Transactions() {
   return (
     <div>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" />
         <p>Purchase History</p>
       </header>
       <TransactionList></TransactionList>
