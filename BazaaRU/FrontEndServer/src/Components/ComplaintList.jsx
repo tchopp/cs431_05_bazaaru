@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import './ComplaintList.css';
 
 export const ComplaintList = (props) => {
   const [complaintsData, setComplaintsData] = useState([
@@ -30,6 +31,7 @@ export const ComplaintList = (props) => {
   }
 
   return (
+    <div className="app-complaints">
     <ul>
       {complaintsData.map((item) => (
         <li key={item.complaintID}>
@@ -48,6 +50,7 @@ export const ComplaintList = (props) => {
         </li>
       ))}
     </ul>
+    </div>
   );
 };
 
