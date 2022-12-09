@@ -9,7 +9,6 @@ function Transactions() {
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo" />
-        <p>Purchase History</p>
       </header>
       <TransactionList></TransactionList>
     </div>
