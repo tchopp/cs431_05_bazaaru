@@ -2,25 +2,59 @@ import logo from "./profile.png";
 import "./App.css";
 import LoginForm from "../Components/LoginForm";
 import { useState } from "react";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 function App() {
   const [url, setUrl] = useState("/homepage");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Welcome to BazaaRU. Please sign in with your account below.</p>
-      </header>
-      <LoginForm name={url}></LoginForm>
-      <a className="Registration-link" href="/registration">
-        Don't have an account? Register one now!
-      </a>
+    <div className="App_LoginPage">
+      <div className="bubble_container">
+        <div className="bubbles">
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"6"}}></span>
+            <span style={{"--t":"14"}}></span>
+            <span style={{"--t":"25"}}></span>
+            <span style={{"--t":"7"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"31"}}></span>
+            <span style={{"--t":"20"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"19"}}></span>
+            <span style={{"--t":"9"}}></span>
+            <span style={{"--t":"24"}}></span>
+            <span style={{"--t":"12"}}></span>
+            <span style={{"--t":"19"}}></span>
+            <span style={{"--t":"13"}}></span>
+            <span style={{"--t":"35"}}></span>
+            <span style={{"--t":"24"}}></span>
+            <span style={{"--t":"12"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"15"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"27"}}></span>
+            <span style={{"--t":"14"}}></span>
+            <span style={{"--t":"31"}}></span>
+            <span style={{"--t":"12"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"26"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"7"}}></span>
+            <span style={{"--t":"29"}}></span>
+            <span style={{"--t":"35"}}></span>
+            <span style={{"--t":"10"}}></span>
+            <span style={{"--t":"4"}}></span>
+            <span style={{"--t":"16"}}></span>
+            <span style={{"--t":"27"}}></span>
+            <span style={{"--t":"30"}}></span>
+        </div>
+        <div className="logo">
+            <img src={logo}></img>
+        </div>
+        <LoginForm name={url}></LoginForm>
+        <a className="Registration-link" href="/registration">
+          Don't have an account? Register one now!
+        </a>
+      </div>     
     </div>
   );
 }
