@@ -72,7 +72,6 @@ const Post = () => {
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo-home"  />
-        <p>Rutgers BazaaRU</p>
       </header>
       <div>
         <NavBar></NavBar>
