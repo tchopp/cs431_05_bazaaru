@@ -4,6 +4,8 @@ import axios from "axios";
 import './Catalog.css'
 import Cookies from "js-cookie";
 import { Grid, Typography } from '@mui/material';
+import NavBar from "../NavBar.jsx";
+import logo from "../../Pages/profile.png";
 
 export const Catalog = () => {
   // 10 (-1) post_ids for first render
@@ -31,6 +33,8 @@ export const Catalog = () => {
   return (
     <div>
 
+    <img src={logo} className="App-logo" alt="logo" />
+    <NavBar></NavBar>
     
     <Typography variant="h3">Products</Typography>
    
