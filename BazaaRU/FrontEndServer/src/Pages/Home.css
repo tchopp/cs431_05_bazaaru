@@ -1,7 +1,29 @@
-.App-logo {
-    height: 30vmin;
+.App-logo-home {
+    display: block;
+    margin: 0 auto;
+    height: 50vmin;
+    position: relative;
+    top: -60px;
     pointer-events: none;
   }
+
+.Nav-container {
+  position: relative;
+  top: -150px;
+}
+
+.Search-container {
+  position: relative;
+  margin: 0 auto;
+  top: -130px;
+}
+
+.SearchBar {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .Service-bar{
   background-color: #778aae;
   height: 40px;
@@ -15,8 +37,66 @@
   margin-top: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   color: #0e85a7;
+}
+
+p {
+  color:aliceblue;
+}
+
+h3 {
+  color:aliceblue;
+}
+
+.bubbles_container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bubbles {
+  position: relative;
+  display: flex;
+}
+
+.bubbles span {
+  z-index: -100;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: #e93810;
+  margin: 0 4px;
+  /*border-radius: 50%;*/
+  box-shadow: 0 0 0 10px #e9381044, 0 0 50px #e93810, 0 0 100px #e93810;
+  animation: animate 15s linear infinite;
+  animation-duration: calc(500s/var(--t));
+  /*animation:spin 4s linear infinite;*/
+}
+
+.bubbles span:nth-child(3n+1) {
+  background: #e93810;
+  box-shadow: 0 0 0 10px #e9381044, 0 0 50px #e93810, 0 0 100px #e93810;
+}
+
+.bubbles span:nth-child(3n+2) {
+  background: #d2d2d2;
+  box-shadow: 0 0 0 10px #a0a0a0e4, 0 0 50px #d2d2d2, 0 0 100px #d2d2d2;
+}
+
+.bubbles span:nth-child(3n+3) {
+  background: #26950f;
+  box-shadow: 0 0 0 10px #26950f44, 0 0 50px #26950f, 0 0 100px #26950f;
+}
+
+@keyframes animate {
+  0% {
+      transform: translateY(100vh) scale(0)
+  }
+  100% {
+      transform: translateY(-10vh) scale(0.6) rotate(360deg);
+  }
 }
