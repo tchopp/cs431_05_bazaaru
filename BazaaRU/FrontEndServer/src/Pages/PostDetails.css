@@ -1,3 +1,7 @@
 .postdets:hover {
     cursor: default;
 }
+
+.postdets {
+    color:aliceblue;
+}
