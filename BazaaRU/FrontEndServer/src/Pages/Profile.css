@@ -1,5 +1,22 @@
+.App-profile {
+  position: relative;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  content: block;
+}
+
+.App-header {
+  justify-content: center;
+}
+
 .App-logo {
-    scale: 1;
-    pointer-events: none;
-  }
+  display: block;
+  margin: 0 auto;
+  height: 50vmin;
+  position: relative;
+  top: -60px;
+  pointer-events: none;
+}
+
 
