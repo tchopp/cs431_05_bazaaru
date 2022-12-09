@@ -1,37 +1,48 @@
-.app {
+.app_search {
+    position: relative;
     font-family: sans-serif;
     display: flex;
     align-items: center;
-    justify-content: normal;
+    justify-content: center;
     flex-direction: row;
     margin-top: 0px;
     margin-bottom: 0px;
     gap: 5px;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    background-color: #f8f9fd;
+    background-color: #f8f9fd00;
 }
   
-input[type="text"] {
-    height: 25px;
+.app_search form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.app_search input[type="text"] {
+    height: 30px;
+    width: 50vh;
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
   
-input[type="submit"] {
+.app_search input[type="submit"] {
     margin-top: 0px;
     margin-bottom: 0px;
     cursor: pointer;
     font-size: 20px;
+    width: 18vh;
+    height: 40px;
     background: #852ebe;
     border: 1px solid #852ebe;
     color: #fff;
     padding: 0px;
 }
   
-input[type="submit"]:hover {
+.app_search input[type="submit"]:hover {
     background: #dfcb16;
 }
   
-.button-container {
+.search-button-container {
     display: inline-block;
     justify-content: center;
 }
@@ -39,6 +50,7 @@ input[type="submit"]:hover {
 .search-form {
     background-color: white;
     padding: 1rem;
+    border-radius: 50px;
 }
   
 .list-container {
