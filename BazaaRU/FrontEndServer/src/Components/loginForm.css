@@ -1,14 +1,16 @@
-.app {
+.app_login {
     font-family: sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
+    top: -300px;
     margin-top: 0px;
     margin-bottom: 5px;
     gap: 20px;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-    background-color: #f8f9fd;
+    background-color: #f8f9fd00;
   }
   
   input[type="text"],
@@ -17,18 +19,18 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
   
-  input[type="submit"] {
+  .app_login input[type="submit"] {
     margin-top: 10px;
     cursor: pointer;
     font-size: 25px;
-    background: #01d28e;
-    border: 1px solid #01d28e;
+    background: #db2511;
+    border: 1px solid #db2511;
     color: #fff;
     padding: 10px 20px;
   }
   
-  input[type="submit"]:hover {
-    background: #6cf0c2;
+  .app_login input[type="submit"]:hover {
+    background: #e3a11e;
   }
   
   .button-container {
