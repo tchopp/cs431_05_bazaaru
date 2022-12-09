@@ -6,7 +6,7 @@ function UserContacts() {
     <div>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo"  />
           <p>User Feedback Listed Below</p>
         </header>
       </div>
