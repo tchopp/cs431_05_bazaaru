@@ -4,7 +4,7 @@ import axios from "axios";
 import './AccountList.css';
 import NavBar from "../Components/NavBar.jsx"
 
-import logo from "./profile.png";
+import logo from "../Pages/profile.png";
 
 export const AccountList = (props) => {
   const [accountsData, setAccountsData] = useState([
