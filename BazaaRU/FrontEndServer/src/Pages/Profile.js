@@ -7,6 +7,7 @@ import PasswordChange from "../Components/PasswordChange";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import NavBar from "../Components/NavBar.jsx";
 
 function Profile() {
   const navigate = useNavigate();
@@ -43,9 +44,10 @@ function Profile() {
   }
 
   return (
-    <div className="App">
+    <div className="App-profile">
       <header className="App-header">
         <img src={logo} className="App-logo"  />
+        <NavBar></NavBar>
         <p>Account Profile</p>
       </header>
       <Account></Account>
@@ -53,7 +55,7 @@ function Profile() {
         Purchase History
       </button>
       <button style={styles} onClick={toAddBalance}>
-        Update Account Balance
+        Update Balance
       </button>
       <button style={styles} onClick={toProfileTest}>
         Search Profile
