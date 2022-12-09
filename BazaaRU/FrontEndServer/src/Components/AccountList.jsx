@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import './AccountList.css';
-import NavBar from "../Components/NavBar.jsx"
-
-import logo from "../Pages/profile.png";
 
 export const AccountList = (props) => {
   const [accountsData, setAccountsData] = useState([
@@ -39,14 +36,6 @@ export const AccountList = (props) => {
   }
 
   return (
-    <div>
-        <header className="App-header">
-        <img src={logo} className="App-logo-home"  />
-        <p>Rutgers BazaaRU</p>
-      </header>
-      <div>
-        <NavBar></NavBar>
-    </div>
     <div className="App-list2">
     <ul>
       {accountsData.map((item) => (
@@ -60,7 +49,6 @@ export const AccountList = (props) => {
 	 </li>
       ))}
     </ul>
-    </div>
     </div>
   );
 };

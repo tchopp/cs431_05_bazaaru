@@ -69,7 +69,7 @@ const Post = () => {
   };
 
   return (
-    <div className="postInformation">
+    <div>
       <header className="App-header">
         <img src={logo} className="App-logo-home"  />
         <p>Rutgers BazaaRU</p>
@@ -77,6 +77,8 @@ const Post = () => {
       <div>
         <NavBar></NavBar>
       </div>
+    <div className="postInformation">
+      
       <h2>Fill out the information below to create a post. </h2>
       <form onSubmit={handleSubmit}>
         <label>Post Title</label>
@@ -114,6 +116,7 @@ const Post = () => {
 
         <button>Submit</button>
       </form>
+    </div>
     </div>
   );
 };
