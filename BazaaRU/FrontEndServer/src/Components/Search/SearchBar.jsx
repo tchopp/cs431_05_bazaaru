@@ -24,7 +24,7 @@ const renderForm = (
 </div>
 );
 return (
-<div className="app">
+<div className="app_search">
     <div className="search-form">
         {renderForm}
     </div>
