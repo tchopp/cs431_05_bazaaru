@@ -36,6 +36,14 @@ export const AccountList = (props) => {
   }
 
   return (
+    <div>
+        <header className="App-header">
+        <img src={logo} className="App-logo-home"  />
+        <p>Rutgers BazaaRU</p>
+      </header>
+      <div>
+        <NavBar></NavBar>
+    </div>
     <div className="App-list2">
     <ul>
       {accountsData.map((item) => (
@@ -49,6 +57,7 @@ export const AccountList = (props) => {
 	 </li>
       ))}
     </ul>
+    </div>
     </div>
   );
 };

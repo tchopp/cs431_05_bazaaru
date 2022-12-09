@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import "./CreatePost.css";
 import { useState } from "react";
 import axios from "axios";
+import NavBar from '../Components/NavBar'
 
 const Post = () => {
   //A. Create container to hold info for each part of the post:
@@ -68,6 +69,13 @@ const Post = () => {
 
   return (
     <div className="postInformation">
+      <header className="App-header">
+        <img src={logo} className="App-logo-home"  />
+        <p>Rutgers BazaaRU</p>
+      </header>
+      <div>
+        <NavBar></NavBar>
+      </div>
       <h2>Fill out the information below to create a post. </h2>
       <form onSubmit={handleSubmit}>
         <label>Post Title</label>
