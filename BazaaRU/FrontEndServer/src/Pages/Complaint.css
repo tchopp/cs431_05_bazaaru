@@ -6,6 +6,7 @@
   .Contact-Information label {
     text-align: left;
     display: block;
+    color: aliceblue;
   }
   .Contact-Information textarea, .Contact-Information select {
     width: 100%;
