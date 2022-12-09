@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import './AccountList.css';
 
 export const AccountList = (props) => {
   const [accountsData, setAccountsData] = useState([
@@ -35,6 +36,7 @@ export const AccountList = (props) => {
   }
 
   return (
+    <div className="App-list2">
     <ul>
       {accountsData.map((item) => (
         <li key={item.username}>
@@ -47,6 +49,7 @@ export const AccountList = (props) => {
 	 </li>
       ))}
     </ul>
+    </div>
   );
 };
 
