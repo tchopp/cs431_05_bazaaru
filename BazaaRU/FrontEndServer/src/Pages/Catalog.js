@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 
 import {Catalog} from '../Components/Catalog/Catalog.js'
 
