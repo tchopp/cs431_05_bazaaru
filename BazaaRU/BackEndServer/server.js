@@ -5,6 +5,11 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 const port = 5000;
 
+/**
+ * 
+ * @param {*} props 
+ * @returns 
+ */
 const sequelize = new Sequelize("BazaaRu", "expressAccount", "bazaaru2223", {
   host: "localhost",
   dialect:
@@ -79,6 +84,9 @@ app.post("/login", async (req, res) => {
   res.send({ received: "false" });
 });
 
+/**
+ * @returns entire list of usernames and permID's in accounts table
+ */
 app.get("/accountList", async (req, res) => {
   console.log("account list requested");
   const results = await sequelize.query(
@@ -87,6 +95,10 @@ app.get("/accountList", async (req, res) => {
   res.send(results[0]);
 });
 
+/**
+ * @param username of buyer and seller, price, postID, current date and time, and new transactionID (req)
+ * @returns an indication of whether or not the transaction was successful. Updates transactions, accounts, and item_catalog tables appropriately
+ */
 app.post("/buy", async (req, res) => {
   //A. Collect data from body of request received
   const transaction_id = req.body.transaction_id;
@@ -194,6 +206,10 @@ app.post("/buy", async (req, res) => {
   //C. Send response to react
 });
 
+/**
+ * @param username of current user (req)
+ * @returns list of all usernames from accounts table, excluding the current user
+ */
 app.post("/users", async (req, res) => {
   const username = req.body.username;
   
@@ -210,6 +226,10 @@ app.post("/users", async (req, res) => {
 
 });
 
+/**
+ * @param username of current user (req)
+ * @returns all data from messages table relating to the current user
+ */
 app.post("/chatdata", async (req, res) => {
     const username = req.body.username;
     const arr = [];
@@ -229,6 +249,10 @@ app.post("/chatdata", async (req, res) => {
    
 });
 
+/**
+ * @param message_id (req)
+ * @returns sender and the message from messages table corresponding to the current message_id
+ */
 app.post("/chatthread", async (req, res) => {
   const id = req.body.id;
   const thread_arr = [];
@@ -242,6 +266,10 @@ app.post("/chatthread", async (req, res) => {
  
 });
 
+/**
+ * @param message_id, sender of the message, the current time, and the message (req)
+ * @returns an indicator of whether the message was inserted into the table or not. The message is inserted into the messages_streams table
+ */
 app.post("/sendmessage", async (req, res) => {
   const id = req.body.id;
   const sender = req.body.sender;
@@ -263,6 +291,10 @@ app.post("/sendmessage", async (req, res) => {
  
 });
 
+/**
+ * @param sender and reciever of message (req)
+ * @returns an indicator of whether the new message_id was inserted into the table or not. The message_id is inserted into the messages table
+ */
 app.post("/newmessage", async (req, res) => {
   const sender = req.body.sender;
   const reciever = req.body.reciever;
@@ -288,6 +320,10 @@ app.post("/newmessage", async (req, res) => {
  
 });
 
+/**
+ * @param message_id (req)
+ * @returns nothing. The message is deleted from the messages and messages_stresms tables
+ */
 app.post("/delmessage", async (req, res) => {
   const message_id = req.body.id;
  
@@ -302,16 +338,18 @@ app.post("/delmessage", async (req, res) => {
 });
 
 
+/**
+ * @returns whether or not a user can purchase an item from the item_catalog
+ */
 app.post("/check_currency", async (req, res) => {
   
   const response_to_send = { transaction_possible: true };
   
 });
 
-
-
-
-
+/**
+ * @returns most recent transactionID
+ */
 app.get("/transactionID", async (req, res) => {
   sequelize
     .query("SELECT MAX(transaction_id) AS ID FROM transactions;")
@@ -320,6 +358,10 @@ app.get("/transactionID", async (req, res) => {
     });
 });
 
+/**
+ * @param user_id and price (req)
+ * @returns ??
+ */
 app.post("/currency_update", async (req, res) => {
   //A. Collect data from body of request received
   const user_id = req.body.user_id;
@@ -331,6 +373,7 @@ app.post("/currency_update", async (req, res) => {
   );
   //C. Send response to react
 });
+
 
 app.post("/findBalance", async(req,res)=>{
   //A. Get username from request received
