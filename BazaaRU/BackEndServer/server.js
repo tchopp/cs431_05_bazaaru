@@ -1,9 +1,8 @@
 const express = require("express");
 const Sequelize = require("sequelize");
-const app = express(); //creates an express application called app
+const app = express(); 
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-//const cookieParser = require('cookie-parser');
 const port = 5000;
 
 const sequelize = new Sequelize("BazaaRu", "expressAccount", "bazaaru2223", {
@@ -57,13 +56,11 @@ const pool = mariadb.createPool({
 
 app.use(cors());
 app.use(express.json());
-//app.use(cookieParser());
+
 
 // ACCOUNT-RELATED ROUTES
 // NEEDS: ROUTE FOR LOGOUT, DELETING ACCOUNTS
 app.post("/login", async (req, res) => {
-  // This is currently missing input sanitization and case checking
-  // Need to add case for missing username, missing password (may be better done in front end code)
   console.log("login requested");
   console.log(req.body);
   const userInputUsername = req.body.uName;
@@ -76,7 +73,6 @@ app.post("/login", async (req, res) => {
     !(typeof results[0][0] === "undefined") &&
     results[0][0].password === req.body.pWord
   ) {
-    //res.cookie('userData', req.body.uName);
     res.send({ received: "true" });
     return;
   }
@@ -88,7 +84,6 @@ app.get("/accountList", async (req, res) => {
   const results = await sequelize.query(
     "SELECT username, permID FROM accounts;"
   );
-  //console.log(results[0]);
   res.send(results[0]);
 });
 
@@ -190,9 +185,7 @@ app.post("/buy", async (req, res) => {
 
       
   
-  //const userid = req.body.postUserID;
   //B. Send to database
-  //replace with my stuff
   const responseDB = await sequelize.query(
     "UPDATE item_catalog SET been_purchased = 1 WHERE post_id = " +
       post_id +
@@ -202,9 +195,6 @@ app.post("/buy", async (req, res) => {
 });
 
 app.post("/users", async (req, res) => {
-  // This is currently missing input sanitization and case checking
-  // Need to add case for missing username, missing password (may be better done in front end code)
-
   const username = req.body.username;
   
    sequelize.query(
@@ -335,9 +325,7 @@ app.post("/currency_update", async (req, res) => {
   const user_id = req.body.user_id;
   const price = req.body.price;
   res.send("success");
-  //const userid = req.body.postUserID;
   //B. Send to database
-  //replace with my stuff
   const responseDB = await sequelize.query(
     "UPDATE accounts SET acc_balance = 1 WHERE post_id = " + post_id + ";"
   );
@@ -388,8 +376,6 @@ app.get("/accountCreation/:key", async (req,res) => {
 });
 
 app.put("/createAccount", async (req, res) => {
-  // Needs input sanitization and checking
-  // Currently does not check for existing account
   console.log("account creation requested");
   console.log(req.body);
   const userInputUsername = req.body.uName;
@@ -552,17 +538,6 @@ app.get("/ACresults/:acKW", async (req, res) => {
 
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
-/*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
-	console.log(req.params);
-	const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";");
-	res.send(results[0][0]);
-})
-
-app.get('/catalog/:keyword-:rowID', async (req,res) => {    // The query needs to be updated so that it sorts as above, and searches for items LIKE the keyword. 
-        console.log(req.params);
-        const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";"); //get cs431-05.cs.rutgers.edu:5000/catalog/apple-1
-        res.send(results[0][0]);
-})*/
 
 //SHAJIA
 //1. app.post is asking express to send some information to our database
@@ -577,7 +552,6 @@ app.post("/createPost", async (req, res) => {
   res.send("success");
   const userid = req.body.postUserID;
   //B. Send to database
-  //replace with my stuff
   console.log("create post requested");
   const response = await sequelize.query(
     "SELECT MAX(post_id) AS MAX_IND FROM item_catalog;"
@@ -587,7 +561,6 @@ app.post("/createPost", async (req, res) => {
   console.log(curMax);
   const nextMax = curMax + 1;
   console.log(nextMax);
-  //const response2 = await sequelize.query("SELECT CURRENT_TIMESTAMP AS CURDATE;");
   const response2 = await sequelize.query("SELECT NOW() AS CURTIME;");
   console.log(response2);
   const currentTime = response2[0][0].CURTIME;
@@ -739,11 +712,9 @@ app.post("/addComplaint", async (req,res) => {
 });
 
 app.get("/complaintList", async (req,res) => {
-  //console.log("complaint list requested");
   const results = await sequelize.query(
     "SELECT * FROM complaints;"
   );
-  //console.log(results[0]);
   res.send(results[0]);
 });
 
@@ -819,7 +790,6 @@ app.post("/get_reviews", async (req,res)=>{
   res.send(response);
 });
 
-//Get all the damn reviews 
 app.get("/reviews/:rid", async (req, res) => {
   console.log(req.params);
   sequelize
