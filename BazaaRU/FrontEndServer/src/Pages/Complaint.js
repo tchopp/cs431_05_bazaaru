@@ -1,4 +1,4 @@
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png"; 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
