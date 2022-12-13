@@ -4,6 +4,10 @@ import "./Transactions.css";
 import TransactionList from "../Components/TransactionList";
 import Cookies from "js-cookie";
 
+/**
+ * 
+ * @returns a page that displays all of the transactions for a user
+ */
 function Transactions() {
   return (
     <div>
