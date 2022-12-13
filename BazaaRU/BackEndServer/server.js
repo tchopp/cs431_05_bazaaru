@@ -8,7 +8,7 @@ const port = 5000;
 /**
  * 
  * @param {*} props 
- * @returns 
+ * @returns new instance of sequelize with connection to datbase
  */
 const sequelize = new Sequelize("BazaaRu", "expressAccount", "bazaaru2223", {
   host: "localhost",
@@ -65,6 +65,10 @@ app.use(express.json());
 
 // ACCOUNT-RELATED ROUTES
 // NEEDS: ROUTE FOR LOGOUT, DELETING ACCOUNTS
+/**
+ * @params username, password
+ * @returns true for a good login, false otherwise 
+ */
 app.post("/login", async (req, res) => {
   console.log("login requested");
   console.log(req.body);
@@ -360,7 +364,7 @@ app.get("/transactionID", async (req, res) => {
 
 /**
  * @param user_id and price (req)
- * @returns ??
+ * @returns nothing, updates currency
  */
 app.post("/currency_update", async (req, res) => {
   //A. Collect data from body of request received
@@ -405,6 +409,11 @@ app.post("/passwordChange", async (req, res) => {
   res.send({received: true});
 })
 
+/**
+ * 
+ * @param {*} str (req) takes an email as a string
+ * @returns true if email ends in rutgers.edu
+ */
 function checkRutgersEmail(str) {
   return str.endsWith("rutgers.edu");
 }
@@ -634,7 +643,8 @@ app.get("/ACresults/:acKW", async (req, res) => {
 //3. (req, res) is saying that the server is listening for a request (that I will send) and responding
 
 /**
- * 
+ * @param title, description, price, type, userid (all data for creating a post)
+ * @return nothing, updates datbase with new post
  */
 app.post("/createPost", async (req, res) => {
   //A. Collect data from body of request received
@@ -729,7 +739,7 @@ app.get("/catalog/:postID", async (req, res) => {
 });
 
 /**
- * 
+ * @returns sets the port for the application to listen on
  */
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
@@ -785,7 +795,7 @@ app.post("/transactionCancel", async (req, res) => {
 
 /**
  * @param postID (req)
- * @returns ?
+ * @returns a database update
  */
 app.post("/transactionRefund", async (req, res) => {
   console.log("refund requested");
