@@ -4,6 +4,10 @@ import "./Registration.css";
 import RegistrationForm from "../Components/RegistrationForm";
 import { useState } from "react";
 
+/**
+ * 
+ * @returns a page that allows a user to register for a new account
+ */
 function Registration() {
   const [url, setUrl] = useState("/");
   return (

@@ -2,6 +2,10 @@ import logo from "./profile.png";
 import ComplaintList from "../Components/ComplaintList";
 import NavBar from "../Components/NavBar.jsx";
 
+/**
+ * 
+ * @returns a page that displays all of the user complaints and feedback to admin and moderators
+ */
 function UserContacts() {
   return (
     <div>

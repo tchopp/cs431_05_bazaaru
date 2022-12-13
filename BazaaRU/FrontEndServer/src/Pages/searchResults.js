@@ -9,7 +9,11 @@ import SearchBar from '../Components/Search/SearchBar'
 import NavBar from '../Components/NavBar'
 import { Container } from '@mui/system';
 
-
+/**
+ * 
+ * @param {*} props 
+ * @returns a page that displays all of the users and posts that match the search term
+ */
 const SearchResults = (props) => {
 
   const {state} = useLocation();

@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import NavBar from "../Components/NavBar.jsx"
 
+/**
+ * 
+ * @returns a page that allows users to update their account currency balance
+ */
 const UpdateBalance = () => {
     const navigate = useNavigate();
     const username = Cookies.get("userName");

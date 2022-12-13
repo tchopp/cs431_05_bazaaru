@@ -9,6 +9,10 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import NavBar from "../Components/NavBar.jsx";
 
+/**
+ * 
+ * @returns a page that displays information about the signed in account and displays functions for admins and moderators
+ */
 function Profile() {
   const navigate = useNavigate();
   const styles = {
@@ -27,15 +31,27 @@ function Profile() {
       });
   });
 
+  /**
+   * Navigates to the purchase history page
+   */
   function toPurchaseHistory() {
     navigate("/homepage/profile/transactions");
   }
+  /**
+   * Navigates to the update balance page
+   */
   function toAddBalance() {
     navigate("/homepage/profile/updatebalance");
   }
+  /**
+   * Navigates to the account list page (for admins and moderators)
+   */
   function toAccountList() {
     navigate("/homepage/accountList");
   }
+  /**
+   * Navigates to the user complaints page (for admins and moderators)
+   */
   function toContactList() {
     navigate("/homepage/userContacts");
   }
