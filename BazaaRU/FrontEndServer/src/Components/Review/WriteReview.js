@@ -2,8 +2,12 @@ import React, { useState }  from 'react';
 import axios from "axios";
 import Cookies from 'js-cookie';
 import './Review.css';
-//needs username of writer 
-//needs username of subject
+
+/**
+ * Allows a user to write a review on another only if they have made a purchase for them
+ * @param {*} props username of subject
+ * @returns A text area and a submit button for the user to write a review
+ */
 const WriteReview = (props) =>{
   const reviewer = Cookies.get("userName");
   const reviewee = props.reviewee;

@@ -3,7 +3,10 @@ import logo from "./profile.png";
 
 import {Catalog} from '../Components/Catalog/Catalog.js'
 
-
+/**
+ * Creates the catalog page for users to interact with using catalog component
+ * @returns A list of all products
+ */
 function CatalogPage() {
   return (
     <div>

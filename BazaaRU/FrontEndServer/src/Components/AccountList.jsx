@@ -3,6 +3,12 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import './AccountList.css';
 
+/**
+ * This is a component only available to admins and allows them to view and make changes to the users of the 
+ * website.
+ * @param {*} props permission ID
+ * @returns A list of all users in the database and buttons to change their position in the databse
+ */
 export const AccountList = (props) => {
   const [accountsData, setAccountsData] = useState([
     { username: "default", permID: "1" },
@@ -16,19 +22,28 @@ export const AccountList = (props) => {
         setAccountsData(response.data);
       });
   });
-
+  /**
+   * Allows admin to delete an account form the database
+   * @param {*} username 
+   */
   function deleteUser(username) {
     const userInfo = { uName: username };
     axios
       .put("http://cs431-05.cs.rutgers.edu:5000/deleteAccount", userInfo);   
   }
-
+  /**
+   * Allows admin to promote an account in the database
+   * @param {*} username 
+   */
   function promoteUser(username) {
     const userInfo = { uName: username };
     axios
       .post("http://cs431-05.cs.rutgers.edu:5000/promoteAccount", userInfo);
   }
-
+  /**
+   * Allows admin to demote a user in the database
+   * @param {*} username 
+   */
   function demoteUser(username) {
     const userInfo = { uName: username };
     axios

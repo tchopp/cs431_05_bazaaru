@@ -3,8 +3,12 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 
 import "./registrationForm.css"; //Style of login form
-
-//takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
+/**
+ * Allows user to create an account to access the website and makes the confirmations necessary 
+ * @param {*} url takes url to direct user after successful login. 
+ * Can be used for re-authentication later on in addition to login page
+ * @returns A form to input information required to make a user account 
+ */
 function RegistrationForm(url) {
   // React States
   const [errorMessages, setErrorMessages] = useState({});

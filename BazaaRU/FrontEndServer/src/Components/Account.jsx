@@ -5,6 +5,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
+/**
+ * This is the account component that allows a user to see their account information based on the information
+ * in the database.
+ * @returns Visual representation of a user's account
+ */
 function Account() {
   const username = Cookies.get("userName");
   //console.log("username: ", username);
@@ -35,9 +40,12 @@ function Account() {
         return "An error has occured, cannot load balance at this time";
       });
   });
-
+  /**
+   * This function allows a user to see what kind of account they have
+   * @param {*} permID  Permission ID of a user
+   * @returns a string to reflect the type of user account someone has
+   */
   function returnString(permID) {
-    //console.log("permID: ", permID);
     if (permID == 1) {
       return "User";
     }

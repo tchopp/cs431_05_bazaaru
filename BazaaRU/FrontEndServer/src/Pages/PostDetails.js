@@ -8,7 +8,10 @@ import './PostDetails.css';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import { Card } from '@mui/material';
-
+/**
+ * Shows the page for the details of any individual post
+ * @returns visual representation of what a post is in the DB
+ */
 const PostDetails = () => {
     const params = useParams();
     const [isLoading, setIsLoading] = useState(true);

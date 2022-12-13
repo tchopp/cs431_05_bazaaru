@@ -5,7 +5,10 @@ import Cookies from "js-cookie";
 import "./Complaint.css";
 import axios from "axios";
 import NavBar from "../Components/NavBar.jsx";
-
+/**
+ * Complaint page to allow users to make complaints of the website
+ * @returns Form to create a complaint
+ */
 function Complaint() {
   const navigate = useNavigate();
   const name = Cookies.get("userName");

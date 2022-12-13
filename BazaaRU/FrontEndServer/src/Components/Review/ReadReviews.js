@@ -1,13 +1,14 @@
 import React, { useEffect, useState }  from 'react';
 import axios from "axios";
 import { Review } from "../Review/Review.js";
-//needs username of writer 
-//needs username of subject
+
+/**
+ * @param {*} props username of subject
+ * @returns Returns a grid of all review components assicated with a username
+ */
 const ReadReviews = (props) =>{
-    //Get the name of the user whose reviews are being viewed 
     const reviewee = props.reviewee;
-    console.log(reviewee)
-    //use effect for a requests to get all reviews and put them in an object 
+    console.log(reviewee);
     const[review, setReviews] = useState([0]);
     const [isEmpty, setIsEmpty] = useState(false);
     

@@ -4,13 +4,17 @@ import './Post.css';
 import  {Post} from '../Post/Post.js';
 import axios from 'axios';
 
-
+/**
+ * This function is what allows a person to search for posts of any kind in the databse 
+ * to be bought. It calls on the Post component.
+ * @param {*} props The Keyword put into the search bar
+ * @returns - A list of all posts with the inserted keyword in a grid setting 
+ */
 export const SearchPost = (props) => {
 const [postData,setPostData] = useState({username: 'user', product: 'product' , image_url: 'https://trackmobile.com/wp-content/uploads/2021/04/photo-unavailable.png',
     price: -1, category: 'category', description: 'description'});
 
 const [posts,setPosts] = useState([0,0]);
-
 
 useEffect(()=>{axios.get('http://cs431-05.cs.rutgers.edu:5000/results/' + props.post_KW).then((response) => {
     //const data = [];

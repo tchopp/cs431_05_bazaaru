@@ -4,7 +4,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Transaction from "./Transaction";
 import NavBar from "./NavBar.jsx";
-
+/**
+ * Allows user to see all their transactions with ability to cancel and refund products
+ * @param {*} props Transaction information
+ * @returns A list of transactions related to the user and buttons to make changes
+ */
 export const TransactionList = (props) => {
   const [transactionData, setTransactionData] = useState([
     { transaction_id: "1", post_id: "1", buyer_username: "default", seller_username: "default", transaction_date: "00-00-00" },
@@ -20,7 +24,10 @@ export const TransactionList = (props) => {
         setTransactionData(response.data);
     });
   });
-	
+	/**
+   * Allows user to cancel a product they are buying
+   * @param {*} pID Post ID
+   */
   function cancelProduct(pID) {
     console.log("pressed");
     axios
@@ -34,7 +41,10 @@ export const TransactionList = (props) => {
         console.log(error);
       });
   }
-
+  /**
+   * Allows user to refund the money for a product they are selling
+   * @param {*} pID post ID
+   */
   function refundProduct(pID) {
     console.log("pressed");
     axios.post("http://cs431-05.cs.rutgers.edu:5000/transactionRefund", {

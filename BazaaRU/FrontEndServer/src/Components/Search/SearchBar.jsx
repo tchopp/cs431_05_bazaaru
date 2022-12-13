@@ -2,6 +2,10 @@ import React from "react";//import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./SearchBar.css";
+/**
+ * Search bar component that allows a user to look up a user or a post
+ * @returns the visual representation of a search bar
+ */
 function SearchBar() {
 const navigate = useNavigate();
 const handleSubmit = (event) => {

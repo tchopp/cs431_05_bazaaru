@@ -18,7 +18,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-
+/**
+ * Creates the entire chat feature of the website.
+ * @returns UI for the chate feature
+ */
 
 export function Chat() {
     const user = Cookies.get('userName');

@@ -7,6 +7,9 @@ import Stack from '@mui/material/Stack';
 import { Box, Card, Link, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
+/**
+ * This is the styling for the image used 
+ */
 const StyledProductImg = styled('img')({
   top: 0,
   width: '100%',
@@ -15,6 +18,11 @@ const StyledProductImg = styled('img')({
   position: 'absolute',
 });
 
+/**
+ * 
+ * @param {*} props - post identification from the databse
+ * @returns - Visual representation of a singular post for a user to interact with
+ */
 export const Post = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [postData, setPostData] = useState({});

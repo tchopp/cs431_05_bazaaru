@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
 import "./Transaction.css";
-
+/**
+ * Provides visual information to the front end about any given transaction in the DB
+ * @param {*} props Information of a given transaaction including the seller's and buyer's username
+ * the transaction and post ID
+ * @returns Information about any individual transaction to the Transaction list component
+ */
 function Transaction(props) {
   const username = Cookies.get("userName");
   const styles = {
@@ -14,9 +19,7 @@ function Transaction(props) {
   const buyer_username = props.transactionInformation.buyer_username;
   const seller_username = props.transactionInformation.seller_username;
   const transaction_date = props.transactionInformation.date_purchased;
-  //console.log("props", props);
-  //   console.log("TransInfo", props.transactionInformation);
-  //   console.log("TransID", props.transactionInformation.transactionID);
+
 
   return (
     <div className="items">

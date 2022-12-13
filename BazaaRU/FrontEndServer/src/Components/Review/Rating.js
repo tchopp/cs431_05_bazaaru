@@ -2,7 +2,11 @@ import React, { useState, useEffect }  from 'react';
 import axios from "axios";
 import './Rating.css';
 
-//needs username of subject
+/**
+ * This component with get the rating of any user in the databse
+ * @param {*} props Username of the subject 
+ * @returns The current rating of the user
+ */
 const Rating = (props) =>{
   
   console.log("In the rating component");

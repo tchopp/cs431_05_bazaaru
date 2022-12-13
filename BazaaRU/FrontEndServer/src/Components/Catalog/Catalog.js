@@ -7,12 +7,14 @@ import { Grid, Typography } from '@mui/material';
 import NavBar from "../NavBar.jsx";
 import logo from "../../Pages/profile.png";
 
+/**
+ * 
+ * @returns This will visually return the catalog for the user to be able to view all posts in a grid setting
+ */
 export const Catalog = () => {
-  // 10 (-1) post_ids for first render
   const [posts, setPosts] = useState([0]);
   const [isEmpty, setIsEmpty] = useState(false);
     useEffect(() => {
-    console.log('useeffect ran!! yes!!');
     axios
       .post('http://cs431-05.cs.rutgers.edu:5000/catalog',{username:Cookies.get('userName')})
       .then((response) => {

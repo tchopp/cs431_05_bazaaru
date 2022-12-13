@@ -5,7 +5,10 @@ import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
 import "./PasswordChange.css"; //Style of login form
 
-//takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
+/**
+ * Allows a user to change their own password
+ * @returns A form to input new password to be changed
+ */
 function PasswordChange() {
 
   const username = Cookies.get("userName");

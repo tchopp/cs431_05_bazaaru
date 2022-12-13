@@ -4,6 +4,10 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 import './WeeklyProducts.css'
 
+/**
+ * Allows users to see any new products made in the past week
+ * @returns List of posts made by others in the current week
+ */
 export const CatalogWeekly = () => {
 
 // 10 (-1) post_ids for first render

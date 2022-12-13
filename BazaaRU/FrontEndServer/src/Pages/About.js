@@ -1,7 +1,10 @@
 import React from "react";
 import logo from "./profile.png";
 import NavBar from "../Components/NavBar.jsx";
-
+/**
+ * This is the about page of our website
+ * @returns Information about the project
+ */
 function About() {
   return (
     <div>

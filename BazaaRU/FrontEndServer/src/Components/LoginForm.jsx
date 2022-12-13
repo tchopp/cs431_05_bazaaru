@@ -5,6 +5,12 @@ import ReactDOM from "react-dom";
 import Cookies from "js-cookie";
 import "./loginForm.css";
 
+/**
+ * Takes url to direct user after successful login.
+ * Can be used for re-authentication later on in addition to login page
+ * @param {*} url 
+ * @returns Login Form so the user can log in 
+ */
 //takes url to direct user after successful login. Can be used for re-authentication later on in addition to login page
 function LoginForm(url) {
   // React States

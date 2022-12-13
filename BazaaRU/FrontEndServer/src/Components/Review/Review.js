@@ -3,6 +3,10 @@ import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 import './Review.css';
 
+/**
+ * @param {*} props username
+ * @returns Individual review component of a particular user to ReadReviews
+ */
 export const Review = (props) => {
   const [reviewData, setReviewData] = useState({
     writer: "",

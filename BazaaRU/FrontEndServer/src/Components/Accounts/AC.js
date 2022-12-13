@@ -4,6 +4,11 @@ import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
 import Rating from "../Review/Rating";
 
+/**
+ * 
+ * @param {*} props - which is the username of the person who is the possible subject of the search
+ * @returns This will return a snippet to the user displaying the account and their rating.
+ */
 export const AC = (props) => {
   const [ACData, setACData] = useState({
     username: "user"

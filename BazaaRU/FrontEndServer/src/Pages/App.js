@@ -2,7 +2,10 @@ import logo from "./profile.png";
 import "./App.css";
 import LoginForm from "../Components/LoginForm";
 import { useState } from "react";
-
+/**
+ * Front page of the website
+ * @returns A form to log in and a link to make a new account 
+ */
 function App() {
   const [url, setUrl] = useState("/homepage");
   return (

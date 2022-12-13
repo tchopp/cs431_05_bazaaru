@@ -5,6 +5,11 @@ import Cookies from "js-cookie";
 import AccountsList from "../Components/AccountList";
 import NavBar from "../Components/NavBar.jsx";
 
+/**
+ * The page that allows users to see a list of all accounts and calls on the Account List
+ * component 
+ * @returns A List of all accounts
+ */
 function AccountList() {
   return (
     <div className="App-list">

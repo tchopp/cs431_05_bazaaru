@@ -4,7 +4,11 @@ import './AC.css';
 import {AC} from '../Accounts/AC.js';
 import axios from 'axios';
 
-
+/**
+ * 
+ * @param {*} props - where the parameter is the keyword that was put into the search bar
+ * @returns This should return a map/compilation of all the accounts associated with the keyword
+ */
 export const SearchAC = (props) => {
 const [ACData, setACData] = useState({username: 'user', 
 });

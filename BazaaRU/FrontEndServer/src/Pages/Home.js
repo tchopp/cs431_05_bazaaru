@@ -9,7 +9,10 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { Container } from "@mui/system";
 import NavBar from "../Components/NavBar.jsx"
-
+/**
+ * Creates the home page of the website
+ * @returns The navigation bar for users to travel and the weekly catalog
+ */
 function Home() {
   const styles = {
     fontSize: 20,

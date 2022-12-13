@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import './ComplaintList.css';
 
+/**
+ * This function allows moderators and admins to see a list of complaints to improve the website
+ * @param {*} props permission ID
+ * @returns list of complaints made by users
+ */
 export const ComplaintList = (props) => {
   const [complaintsData, setComplaintsData] = useState([
     {

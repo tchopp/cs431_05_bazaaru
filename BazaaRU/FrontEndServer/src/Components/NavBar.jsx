@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
+/**
+ * Creates the visual representation of a navigation bar and allows for users to click to get to a 
+ * particular page
+ * @returns Multiple buttons in a formatted manner to redirect a user to desired page
+ */
 function NavBar() {
-
-    //need to implement search bar still, will leave searchbar component until 
-    //that is complete. 
-
-    //need to update post and account page
 
     const navigate = useNavigate();
     function toHomepage() {

@@ -7,7 +7,10 @@ import "./CreatePost.css";
 import { useState } from "react";
 import axios from "axios";
 import NavBar from '../Components/NavBar'
-
+/**
+ * Page that allows users to create a post
+ * @returns A form for the user to fill out in order to record post in DB
+ */
 const Post = () => {
   const userID = Cookies.get("userName");
   const [title, setTitle] = useState("");
