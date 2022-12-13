@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import axios from "axios";
+import './Rating.css';
 
 //needs username of subject
 const Rating = (props) =>{
@@ -15,7 +16,7 @@ const Rating = (props) =>{
   useEffect(() => {
     console.log("making a request for rating");
     axios
-      .post("http://cs431-05.cs.rutgers.edu:5000/findrating", {username: username})
+      .post("http://localhost:5000/findrating", {username: username})
       .then((response) => {
         setrating(response.data.rating);
         console.log(rating);

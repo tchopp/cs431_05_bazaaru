@@ -7,6 +7,7 @@ import {SearchPost} from '../Components/Post/SearchPost.js'
 import {SearchAC} from '../Components/Accounts/SearchAC.js'
 import SearchBar from '../Components/Search/SearchBar'
 import NavBar from '../Components/NavBar'
+import { Container } from '@mui/system';
 
 
 const SearchResults = (props) => {
@@ -26,7 +27,9 @@ const SearchResults = (props) => {
       <NavBar></NavBar>
       <SearchBar></SearchBar>
       <SearchAC ac_KW = {passkeyword}></SearchAC>
+      <Container>
       <SearchPost post_KW = {passkeyword}></SearchPost>
+      </Container>
       </header>
   
       </div>

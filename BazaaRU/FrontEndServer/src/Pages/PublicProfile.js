@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import WriteReviews from "../Components/Review/WriteReview";
 import ReadReviews from "../Components/Review/ReadReviews";
 import Rating from "../Components/Review/Rating";
+import './PublicProfile.css';
 
 const PublicProfile = () => {
   //1. Get username of subject to set up page
