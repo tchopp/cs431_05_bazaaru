@@ -9,39 +9,14 @@ import axios from "axios";
 import NavBar from '../Components/NavBar'
 
 const Post = () => {
-  //A. Create container to hold info for each part of the post:
-
-  //A1: extract user id
-  // console.log("userid is: ", userID);
   const userID = Cookies.get("userName");
-  //console.log(userID);
-
-  //A2: Title holder:
   const [title, setTitle] = useState("");
-
-  //A3: Description holder:
   const [description, setDescription] = useState("");
-
-  //A4: Price holder:
   const [price, setPrice] = useState("");
-
-  //A5: Type holder:
   const [type, setType] = useState("Miscellaneous");
-
-  //B. Allow for the page to be navigated elsewhere upon submission
-  const navigate = useNavigate(); //To be able to move on to the next page once everything is submitted.
-
-  //C. Handle the events that take place once a submission has been made
+  const navigate = useNavigate(); 
   const handleSubmit = (e) => {
-    //What to do when someone hits the submit button
     e.preventDefault();
-    //C1. Set up an object to be sent
-
-    //C1.1 if the value of type is not one of the types send an error to the user
-    // if(type != 'misc' || type != 'shoes' || type != 'accessories' ||
-    //  type != 'clothing' || type != 'service' || type != 'household')
-
-    //C2. Send the object to express server via axios
     axios
       .post("http://cs431-05.cs.rutgers.edu:5000/createPost", {
         postTitle: title,
@@ -56,14 +31,10 @@ const Post = () => {
       .catch(function (error) {
         console.log(error);
       });
-
-    //C3. Make sure variables were captured
     console.log(price);
     console.log(title);
     console.log(description);
     console.log(type);
-
-    //C4. Direct to a different page
     navigate("/homepage", { state: { permID: 3 } });
     return <p1>You have sucessfully created a post!</p1>;
   };

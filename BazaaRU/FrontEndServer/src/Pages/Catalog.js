@@ -1,7 +1,6 @@
 import React from "react";
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 
-//import { useHistory } from "react-router-dom";
 import {Catalog} from '../Components/Catalog/Catalog.js'
 
 

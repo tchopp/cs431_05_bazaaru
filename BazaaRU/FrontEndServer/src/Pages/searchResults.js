@@ -27,7 +27,7 @@ const SearchResults = (props) => {
       <NavBar></NavBar>
       <SearchBar></SearchBar>
       <SearchAC ac_KW = {passkeyword}></SearchAC>
-      <Container>
+      <Container maxWidth={'xs'} maxHeight={'xs'} spacing={30} gap={30}>
       <SearchPost post_KW = {passkeyword}></SearchPost>
       </Container>
       </header>

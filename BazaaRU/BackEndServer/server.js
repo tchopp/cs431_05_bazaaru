@@ -1,11 +1,15 @@
 const express = require("express");
 const Sequelize = require("sequelize");
-const app = express(); //creates an express application called app
+const app = express(); 
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-//const cookieParser = require('cookie-parser');
 const port = 5000;
 
+/**
+ * 
+ * @param {*} props 
+ * @returns 
+ */
 const sequelize = new Sequelize("BazaaRu", "expressAccount", "bazaaru2223", {
   host: "localhost",
   dialect:
@@ -57,13 +61,11 @@ const pool = mariadb.createPool({
 
 app.use(cors());
 app.use(express.json());
-//app.use(cookieParser());
+
 
 // ACCOUNT-RELATED ROUTES
 // NEEDS: ROUTE FOR LOGOUT, DELETING ACCOUNTS
 app.post("/login", async (req, res) => {
-  // This is currently missing input sanitization and case checking
-  // Need to add case for missing username, missing password (may be better done in front end code)
   console.log("login requested");
   console.log(req.body);
   const userInputUsername = req.body.uName;
@@ -76,22 +78,27 @@ app.post("/login", async (req, res) => {
     !(typeof results[0][0] === "undefined") &&
     results[0][0].password === req.body.pWord
   ) {
-    //res.cookie('userData', req.body.uName);
     res.send({ received: "true" });
     return;
   }
   res.send({ received: "false" });
 });
 
+/**
+ * @returns entire list of usernames and permID's in accounts table
+ */
 app.get("/accountList", async (req, res) => {
   console.log("account list requested");
   const results = await sequelize.query(
     "SELECT username, permID FROM accounts;"
   );
-  //console.log(results[0]);
   res.send(results[0]);
 });
 
+/**
+ * @param username of buyer and seller, price, postID, current date and time, and new transactionID (req)
+ * @returns an indication of whether or not the transaction was successful. Updates transactions, accounts, and item_catalog tables appropriately
+ */
 app.post("/buy", async (req, res) => {
   //A. Collect data from body of request received
   const transaction_id = req.body.transaction_id;
@@ -190,9 +197,7 @@ app.post("/buy", async (req, res) => {
 
       
   
-  //const userid = req.body.postUserID;
   //B. Send to database
-  //replace with my stuff
   const responseDB = await sequelize.query(
     "UPDATE item_catalog SET been_purchased = 1 WHERE post_id = " +
       post_id +
@@ -201,10 +206,11 @@ app.post("/buy", async (req, res) => {
   //C. Send response to react
 });
 
+/**
+ * @param username of current user (req)
+ * @returns list of all usernames from accounts table, excluding the current user
+ */
 app.post("/users", async (req, res) => {
-  // This is currently missing input sanitization and case checking
-  // Need to add case for missing username, missing password (may be better done in front end code)
-
   const username = req.body.username;
   
    sequelize.query(
@@ -220,6 +226,10 @@ app.post("/users", async (req, res) => {
 
 });
 
+/**
+ * @param username of current user (req)
+ * @returns all data from messages table relating to the current user
+ */
 app.post("/chatdata", async (req, res) => {
     const username = req.body.username;
     const arr = [];
@@ -239,6 +249,10 @@ app.post("/chatdata", async (req, res) => {
    
 });
 
+/**
+ * @param message_id (req)
+ * @returns sender and the message from messages table corresponding to the current message_id
+ */
 app.post("/chatthread", async (req, res) => {
   const id = req.body.id;
   const thread_arr = [];
@@ -252,6 +266,10 @@ app.post("/chatthread", async (req, res) => {
  
 });
 
+/**
+ * @param message_id, sender of the message, the current time, and the message (req)
+ * @returns an indicator of whether the message was inserted into the table or not. The message is inserted into the messages_streams table
+ */
 app.post("/sendmessage", async (req, res) => {
   const id = req.body.id;
   const sender = req.body.sender;
@@ -273,6 +291,10 @@ app.post("/sendmessage", async (req, res) => {
  
 });
 
+/**
+ * @param sender and reciever of message (req)
+ * @returns an indicator of whether the new message_id was inserted into the table or not. The message_id is inserted into the messages table
+ */
 app.post("/newmessage", async (req, res) => {
   const sender = req.body.sender;
   const reciever = req.body.reciever;
@@ -298,6 +320,10 @@ app.post("/newmessage", async (req, res) => {
  
 });
 
+/**
+ * @param message_id (req)
+ * @returns nothing. The message is deleted from the messages and messages_stresms tables
+ */
 app.post("/delmessage", async (req, res) => {
   const message_id = req.body.id;
  
@@ -312,16 +338,18 @@ app.post("/delmessage", async (req, res) => {
 });
 
 
+/**
+ * @returns whether or not a user can purchase an item from the item_catalog
+ */
 app.post("/check_currency", async (req, res) => {
   
   const response_to_send = { transaction_possible: true };
   
 });
 
-
-
-
-
+/**
+ * @returns most recent transactionID
+ */
 app.get("/transactionID", async (req, res) => {
   sequelize
     .query("SELECT MAX(transaction_id) AS ID FROM transactions;")
@@ -330,20 +358,27 @@ app.get("/transactionID", async (req, res) => {
     });
 });
 
+/**
+ * @param user_id and price (req)
+ * @returns ??
+ */
 app.post("/currency_update", async (req, res) => {
   //A. Collect data from body of request received
   const user_id = req.body.user_id;
   const price = req.body.price;
   res.send("success");
-  //const userid = req.body.postUserID;
   //B. Send to database
-  //replace with my stuff
   const responseDB = await sequelize.query(
     "UPDATE accounts SET acc_balance = 1 WHERE post_id = " + post_id + ";"
   );
   //C. Send response to react
 });
 
+
+/**
+ * @param username (req)
+ * @returns acc_balance of the username
+*/
 app.post("/findBalance", async(req,res)=>{
   //A. Get username from request received
   const username = req.body.username;
@@ -358,6 +393,10 @@ app.post("/findBalance", async(req,res)=>{
   res.send({acc_balance: results[0][0].acc_balance});
 });
 
+/**
+ * @param username, newPassword (req)
+ * @returns a indicator whether or not the accounts table was updated. Updates the password of the username in the accounts table
+ */
 app.post("/passwordChange", async (req, res) => {
   console.log("password change req");
   const userInputUsername = req.body.uName;
@@ -370,6 +409,11 @@ function checkRutgersEmail(str) {
   return str.endsWith("rutgers.edu");
 }
 
+/**
+ * @param key (req)
+ * @returns that an account was created. First checks whether or not the key given was a valid key of a current pending_account.
+ * Inserts a new account into the accounts table, using the username and password corresponding to the key given
+ */
 app.get("/accountCreation/:key", async (req,res) => {
   const key = req.params.key;
   const response = await sequelize.query(
@@ -387,9 +431,11 @@ app.get("/accountCreation/:key", async (req,res) => {
   res.send("Account created! Please go to cs431-05.cs.rutgers.edu:3000 to sign in!");
 });
 
+/**
+ * @param newUser, newPassword (req)
+ * 
+ */
 app.put("/createAccount", async (req, res) => {
-  // Needs input sanitization and checking
-  // Currently does not check for existing account
   console.log("account creation requested");
   console.log(req.body);
   const userInputUsername = req.body.uName;
@@ -464,6 +510,11 @@ app.put("/createAccount", async (req, res) => {
   }
 });
 
+/**
+ * @param username (req)
+ * @returns nothing. Deletes account from accounts table corresponding to username
+ */
+
 app.put("/deleteAccount", async (req, res) => {
   console.log("account deletion requested");
   console.log(req.body);
@@ -472,6 +523,10 @@ app.put("/deleteAccount", async (req, res) => {
   const results = await sequelize.query("DELETE FROM accounts WHERE username=" + '"' + userInputUsername + '";' );
 });
 
+/**
+ * @param username (req)
+ * @returns nothing. Sets Username's permID = 2 in the accounts table
+ */
 app.post("/promoteAccount", async (req,res) => {
   console.log("account promote req");
   console.log(req.body);
@@ -479,6 +534,10 @@ app.post("/promoteAccount", async (req,res) => {
   const results = await sequelize.query("UPDATE accounts SET permID=2 WHERE username=" + '"' + userInputUsername + '";');
 });
 
+/**
+ * @param username (req)
+ * @returns nothing. Sets username's permID = 1 in the accounts table
+ */
 app.post("/demoteAccount", async (req,res) => {
   console.log("account demote req");
   console.log(req.body);
@@ -486,6 +545,10 @@ app.post("/demoteAccount", async (req,res) => {
   const results = await sequelize.query("UPDATE accounts SET permID=1 WHERE username=" + '"' + userInputUsername + '";');
 });
 
+/**
+ * @param username (req)
+ * @returns permID of username from accounts table
+ */
 app.post("/accountRank", async (req, res) => {
   console.log("rank requested");
   console.log(req.body);
@@ -498,6 +561,10 @@ app.post("/accountRank", async (req, res) => {
   res.send({ permID: results[0][0].permID });
 });
 
+/**
+ * @param updateAmount, username (req)
+ * @returns an indicator of whether or not the update was successful. Updates the acc_balance of username by updateAmount in the accounts table
+ */
 app.post("/updateBalance", async (req, res) => {
   //Collect informationneeded to update account balance
   const update = req.body.updateAmount;
@@ -514,6 +581,10 @@ app.post("/updateBalance", async (req, res) => {
   res.send(DBResponse);
 });
 
+/**
+ * @param acID (req)
+ * @returns entire account information of acID from accounts table
+ */
 app.get("/getAccount/:acID", async (req, res) => {
   console.log(req.params);
   sequelize
@@ -532,6 +603,10 @@ app.get("/getAccount/:acID", async (req, res) => {
     });
 });
 
+/**
+ * @param acKW (req)
+ * @returns entire account information from accounts where acKW is contained in the username
+ */
 app.get("/ACresults/:acKW", async (req, res) => {
   console.log(req.params);
   sequelize
@@ -552,22 +627,15 @@ app.get("/ACresults/:acKW", async (req, res) => {
 
 // CATALOG-RELATED ROUTES
 // NEEDS: ROUTES FOR LOADING A SPECIFIC USERS ITEMS
-/*(app.get('/catalog/:rowID', async (req,res) => {    // The query needs to be updated so that it returns the proper results. We will sort posts by chronological order, meaning that posts with the greatest post ID will be shown first. We can use row_number SQL function to order the rows based on post ID in desc order. 
-	console.log(req.params);
-	const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";");
-	res.send(results[0][0]);
-})
-
-app.get('/catalog/:keyword-:rowID', async (req,res) => {    // The query needs to be updated so that it sorts as above, and searches for items LIKE the keyword. 
-        console.log(req.params);
-        const results = await sequelize.query("SELECT * FROM item_catalog WHERE post_id=" + req.params.rowID + ";"); //get cs431-05.cs.rutgers.edu:5000/catalog/apple-1
-        res.send(results[0][0]);
-})*/
 
 //SHAJIA
 //1. app.post is asking express to send some information to our database
 //2. '/createPost' the path that I chose to identify my request
 //3. (req, res) is saying that the server is listening for a request (that I will send) and responding
+
+/**
+ * 
+ */
 app.post("/createPost", async (req, res) => {
   //A. Collect data from body of request received
   const title = req.body.postTitle;
@@ -577,7 +645,6 @@ app.post("/createPost", async (req, res) => {
   res.send("success");
   const userid = req.body.postUserID;
   //B. Send to database
-  //replace with my stuff
   console.log("create post requested");
   const response = await sequelize.query(
     "SELECT MAX(post_id) AS MAX_IND FROM item_catalog;"
@@ -587,7 +654,6 @@ app.post("/createPost", async (req, res) => {
   console.log(curMax);
   const nextMax = curMax + 1;
   console.log(nextMax);
-  //const response2 = await sequelize.query("SELECT CURRENT_TIMESTAMP AS CURDATE;");
   const response2 = await sequelize.query("SELECT NOW() AS CURTIME;");
   console.log(response2);
   const currentTime = response2[0][0].CURTIME;
@@ -608,6 +674,10 @@ app.post("/createPost", async (req, res) => {
   );
 });
 
+/**
+ * @param username (req)
+ * @returns post_id of all posts from item_catalog that have not been purchased and are not made by username
+ */
 app.post("/catalog", async (req, res) => {
   sequelize
     .query(
@@ -620,6 +690,10 @@ app.post("/catalog", async (req, res) => {
     });
 });
 
+/**
+ * @param username (req)
+ * @returns post_id of all posts from item_catalog from this week that have not been purchased and are not made by username
+ */
 app.post("/catalogweek", async (req, res) => {
   sequelize
     .query(
@@ -632,6 +706,10 @@ app.post("/catalogweek", async (req, res) => {
     });
 });
 
+/**
+ * @param postID (req)
+ * @returns entire post information of postID from item_catalog that has not been purchased
+ */
 app.get("/catalog/:postID", async (req, res) => {
   console.log(req.params);
   sequelize
@@ -650,10 +728,17 @@ app.get("/catalog/:postID", async (req, res) => {
     });
 });
 
+/**
+ * 
+ */
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
 });
 
+/**
+ * @param postKW (req)
+ * @returns entire post information from item_catalog that has not been purchaes where postKW is contained in the title or description 
+ */
 app.get("/results/:postKW", async (req, res) => {
   console.log(req.params);
   sequelize
@@ -676,6 +761,10 @@ app.get("/results/:postKW", async (req, res) => {
     });
 });
 
+/**
+ * @param postID (req)
+ * @returns nothing. Deletes postID from item_catalog if it has not been purchased
+ */
 app.post("/transactionCancel", async (req, res) => {
   console.log(req.params);
   sequelize
@@ -694,6 +783,10 @@ app.post("/transactionCancel", async (req, res) => {
     });
 });
 
+/**
+ * @param postID (req)
+ * @returns ?
+ */
 app.post("/transactionRefund", async (req, res) => {
   console.log("refund requested");
   const postID = req.body.postID;
@@ -728,6 +821,10 @@ app.post("/transactionRefund", async (req, res) => {
   sequelize.query("DELETE FROM transactions WHERE post_id = " + postID + ";");
 });
 
+/**
+ * @param username, complaintType, complaintDescription (req)
+ * @returns nothing. Inserts new complaint with username, complaintType and complaintDescription into complaints table
+ */
 app.post("/addComplaint", async (req,res) => {
   console.log("complaint req");
   console.log(req.body);
@@ -738,15 +835,20 @@ app.post("/addComplaint", async (req,res) => {
   console.log(result[0]);
 });
 
+/**
+ * @returns entire complaint information from complaints table
+ */
 app.get("/complaintList", async (req,res) => {
-  //console.log("complaint list requested");
   const results = await sequelize.query(
     "SELECT * FROM complaints;"
   );
-  //console.log(results[0]);
   res.send(results[0]);
 });
 
+/**
+ * @param complaintID (req)
+ * @returns nothing. Deletes complaintID from complaints table
+ */
 app.post("/deleteComplaint", async (req,res) => {
   console.log("complaint delete req");
   console.log(req.body);
@@ -754,6 +856,10 @@ app.post("/deleteComplaint", async (req,res) => {
   const results = sequelize.query("DELETE FROM complaints WHERE complaintID=" + '"' + complaintID + '";');
 });
 
+/**
+ * @param username (req)
+ * @returns entire transaction information of username from transaction table
+ */
 app.post("/getTransactions", async (req,res) => {
   console.log("transactions requested");
   console.log(req.body);
@@ -767,6 +873,11 @@ app.post("/getTransactions", async (req,res) => {
 //REVIEW RELATED ROUTES
 
 //1.To check if a person made a purchase with someone else
+/**
+ * @param authorUsername, subjectUsername (req)
+ * @returns an indicator of whether or not the author and subject had a transaction occur between them.
+ * Also returns transaction_id from transactions table where author is the buyer and subject is the sender
+ */
 app.post("/check_for_purchase", async (req, res) => {
   console.log("Checking to see if the person tyring to write a review made a purchase...");
   const reviewer = req.body.writerUN;
@@ -789,6 +900,10 @@ app.post("/check_for_purchase", async (req, res) => {
 });
 
 //2. Write the damn review 
+/**
+ * @param authorUsername, subjectUsername, review, rating (req)
+ * @returns success. Creates new review into reviews table using authorUsername, subjectUsername, review and rating
+ */
 app.post("/make_review", async (req, res) => {
   console.log("Working on making a review now!");
   const reviewer = req.body.writerUN;
@@ -808,6 +923,10 @@ app.post("/make_review", async (req, res) => {
 });
 
 //Get RID for All the reviews
+/**
+ * @param username (req)
+ * @returns rid from reviews related to username
+ */
 app.post("/get_reviews", async (req,res)=>{
   console.log("Getting all the reviews for the given username now");
   //Log the username
@@ -819,7 +938,10 @@ app.post("/get_reviews", async (req,res)=>{
   res.send(response);
 });
 
-//Get all the damn reviews 
+/**
+ * @param rid (req)
+ * @returns all review information of rid from reviews table
+ */
 app.get("/reviews/:rid", async (req, res) => {
   console.log(req.params);
   sequelize
@@ -837,6 +959,11 @@ app.get("/reviews/:rid", async (req, res) => {
 });
 
 //Get someone's rating
+/**
+ * @param username (req)
+ * @returns an indicator of whether or not username contains a rating
+ * Also returns average rating of username from all of username's ratings in the reviews table
+ */
 app.post("/findrating", async (req,res)=>{
   console.log("collecting the average rating for the user now");
   //Log the username

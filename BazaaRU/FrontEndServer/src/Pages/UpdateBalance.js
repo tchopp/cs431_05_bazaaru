@@ -2,26 +2,18 @@ import Cookies from "js-cookie";
 import React from "react";
 import{ useState } from "react";
 import "./UpdateBalance.css";
-import logo from "./profile.png"; //Need to replace image with project image
+import logo from "./profile.png";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import NavBar from "../Components/NavBar.jsx"
-//Un tiempo mas
+
 const UpdateBalance = () => {
     const navigate = useNavigate();
-    //Username holder
     const username = Cookies.get("userName");
-
     console.log("userId:", username);
-
-    //Balance holder 
     const[balance, setBalance] = useState('');
-
-    //What to do when someone hits the submit button 
     const handleSubmit = (e) => { 
         e.preventDefault();
-
-        //Send info to backend
          axios.post('http://cs431-05.cs.rutgers.edu:5000/updateBalance',{ 
          userName: username,
          updateAmount: balance  })
@@ -31,12 +23,8 @@ const UpdateBalance = () => {
        .catch(function (error) {
          console.log(error);
        });
-   
-       //C3. Make sure variables were captured
        console.log(balance);
-       
-       //C4. Direct to a different page
-         navigate("/homepage", { state: { permID: 3 } });
+       navigate("/homepage", { state: { permID: 3 } });
 
      };
 
