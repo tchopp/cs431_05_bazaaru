@@ -70,7 +70,6 @@ h3 {
   height: 30px;
   background: #e93810;
   margin: 0 4px;
-  /*border-radius: 50%;*/
   box-shadow: 0 0 0 10px #e9381044, 0 0 50px #e93810, 0 0 100px #e93810;
   animation: animate 15s linear infinite;
   animation-duration: calc(500s/var(--t));
