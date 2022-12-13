@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from 'react-router-dom';
+import './Review.css';
 
 export const Review = (props) => {
   const [reviewData, setReviewData] = useState({
@@ -14,7 +15,7 @@ export const Review = (props) => {
   useEffect(() => {
     if (props.rid !== 0) {
       axios
-        .get("http://cs431-05.cs.rutgers.edu:5000/reviews/" + props.rid)
+        .get("http://localhost:5000/reviews/" + props.rid)
         .then((response) => {
           console.log(response.data[0]);
         

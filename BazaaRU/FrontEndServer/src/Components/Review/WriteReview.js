@@ -1,7 +1,7 @@
 import React, { useState }  from 'react';
 import axios from "axios";
 import Cookies from 'js-cookie';
-
+import './Review.css';
 //needs username of writer 
 //needs username of subject
 const WriteReview = (props) =>{
@@ -16,7 +16,7 @@ const WriteReview = (props) =>{
   const handleSubmit = (e) =>{
     axios
     //Outerpost
-    .post("http://cs431-05.cs.rutgers.edu:5000/check_for_purchase",{
+    .post("http://localhost:5000/check_for_purchase",{
       writerUN: reviewer,
       subjectUN: reviewee
     })
@@ -28,7 +28,7 @@ const WriteReview = (props) =>{
         console.log("The DB can cofirm that a purchase was made");
         axios
           //innerpost
-          .post("http://cs431-05.cs.rutgers.edu:5000/make_review",{
+          .post("http://localhost:5000/make_review",{
             writerUN: reviewer,
             subjectUN: reviewee,
             review: review,
